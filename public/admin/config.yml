@@ -1,0 +1,62 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "homepage"
+    label: "Homepage"
+    files:
+      - label: "Homepage Settings"
+        name: "homepage-settings"
+        file: "src/data/homepage-settings.yaml"
+        fields:
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false, hint: "Upload a hero photo of the hut. Leave blank to use the gradient placeholder." }
+          - { label: "Hero Image Alt Text", name: "heroImageAlt", widget: "string", required: false, default: "Millie The Hut shepherd's hut exterior" }
+          - { label: "Hero Headline", name: "headline", widget: "string", required: false, default: "Your Countryside Escape Awaits" }
+          - { label: "Hero Subheadline", name: "subheadline", widget: "text", required: false }
+
+  - name: "gallery"
+    label: "Gallery"
+    folder: "src/data/gallery"
+    create: true
+    slug: "{{fields.order}}-{{fields.title | slugify}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Alt Text", name: "alt", widget: "text" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int" }
+
+  - name: "testimonials"
+    label: "Guest Reviews"
+    folder: "src/data/testimonials"
+    create: true
+    slug: "{{fields.name | slugify}}"
+    fields:
+      - { label: "Guest Name", name: "name", widget: "string" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Rating (1-5)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 5 }
+      - { label: "Review", name: "body", widget: "markdown" }
+
+  - name: "amenities"
+    label: "Amenities"
+    folder: "src/data/amenities"
+    create: true
+    slug: "{{fields.order}}-{{fields.title | slugify}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Icon Name", name: "icon", widget: "string", hint: "e.g. flame, bed, shower" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int" }
+
+  - name: "faqs"
+    label: "FAQs"
+    folder: "src/data/faqs"
+    create: true
+    slug: "{{fields.order}}-{{fields.question | slugify}}"
+    fields:
+      - { label: "Question", name: "question", widget: "string" }
+      - { label: "Answer", name: "answer", widget: "text" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int" }

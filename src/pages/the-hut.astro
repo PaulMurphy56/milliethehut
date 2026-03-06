@@ -1,0 +1,323 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Container from "../components/ui/Container.astro";
+import Button from "../components/ui/Button.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import { siteConfig } from "../lib/siteConfig";
+import { getCollection } from "astro:content";
+
+const allAmenities = await getCollection("amenities");
+const sortedAmenities = allAmenities.sort((a, b) => a.data.order - b.data.order);
+
+const allGallery = await getCollection("gallery");
+const sortedGallery = allGallery.sort((a, b) => a.data.order - b.data.order);
+---
+
+<PageLayout
+  title={`The Hut | ${siteConfig.name}`}
+  description="Discover Millie The Hut — a beautifully restored shepherd's hut with luxury amenities, double bed, wood-burning stove, and private deck near Presteigne."
+>
+  <!-- Page Header -->
+  <section class="page-header">
+    <Container>
+      <div class="page-header__content" data-reveal="slide-up">
+        <p class="page-header__eyebrow">The Hut</p>
+        <h1 class="page-header__title">Meet Millie</h1>
+        <p class="page-header__desc">A beautifully restored shepherd's hut built for those who understand that the best things in life are small, slow, and surrounded by countryside.</p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Description -->
+  <section class="section">
+    <Container>
+      <div class="description-grid">
+        <div class="description__text" data-reveal="slide-up">
+          <h2 class="description__title">Built for two. Made for memory.</h2>
+          <p>Millie sits quietly on a private plot on the England/Wales border, looking out over the gentle hills of the Welsh Marches. She's a traditional shepherd's hut — iron wheels, corrugated roof, timber clad — but inside she's thoroughly modern and utterly comfortable.</p>
+          <p>The hut sleeps two in a handmade double bed dressed with crisp white linen. A cast-iron wood-burning stove takes the edge off cool evenings. A small but perfectly formed kitchen means you can self-cater to your heart's content, or simply head into Presteigne for supper at one of the local pubs.</p>
+          <p>Outside, the private deck is yours alone — a quiet place for morning coffee, afternoon reading, or evening wine beneath a sky unpolluted by light.</p>
+          <Button href="/book/" size="lg">Check Availability</Button>
+        </div>
+        <aside class="description__details" data-reveal="fade">
+          <div class="detail-card">
+            <h3 class="detail-card__title">At a Glance</h3>
+            <ul class="detail-card__list" role="list">
+              <li>Sleeps 2 guests</li>
+              <li>1 double bed</li>
+              <li>Private shower room</li>
+              <li>Wood-burning stove</li>
+              <li>Private deck with countryside views</li>
+              <li>Full mains electricity</li>
+              <li>Hot and cold running water</li>
+              <li>WiFi included</li>
+              <li>Welcome hamper on arrival</li>
+              <li>Dogs welcome</li>
+            </ul>
+          </div>
+          <div class="detail-card">
+            <h3 class="detail-card__title">Nearby</h3>
+            <ul class="detail-card__list" role="list">
+              <li>Presteigne town centre — 2 miles</li>
+              <li>Offa's Dyke Path — on the doorstep</li>
+              <li>Hay-on-Wye — 20 minutes</li>
+              <li>Knighton — 10 minutes</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Amenities grid -->
+  <section class="section section--surface" aria-labelledby="amenities-heading">
+    <Container>
+      <SectionHeading
+        label="Amenities"
+        title="Everything you need, nothing you don't"
+        align="center"
+      />
+      <div class="amenities-full-grid" data-reveal-stagger>
+        {sortedAmenities.map((amenity) => (
+          <div class="amenity-full-card">
+            <h3 class="amenity-full-card__title">{amenity.data.title}</h3>
+            <p class="amenity-full-card__desc">{amenity.data.description}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section" aria-labelledby="gallery-heading">
+    <Container>
+      <SectionHeading
+        label="Photos"
+        title="See inside Millie"
+        align="center"
+      />
+      <div class="photo-grid" data-reveal-stagger>
+        {sortedGallery.map((img) => (
+          <div class="photo-card" role="img" aria-label={img.data.alt}>
+            <span class="photo-card__label">{img.data.title}</span>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <Container>
+      <div class="cta-banner__inner" data-reveal="slide-up">
+        <h2 class="cta-banner__title">Sounds like your kind of place?</h2>
+        <p class="cta-banner__desc">Book your stay at Millie The Hut or get in touch to ask a question.</p>
+        <div class="cta-banner__actions">
+          <Button href="/book/" size="lg">Book Your Stay</Button>
+          <Button href="/location/" variant="outline" size="lg">Explore the Area</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>
+
+<style>
+  .page-header {
+    background: var(--color-surface);
+    padding: var(--space-5xl) 0 var(--section-padding);
+  }
+
+  .page-header__eyebrow {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+    max-width: none;
+  }
+
+  .page-header__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    font-size: var(--text-xl);
+    color: var(--color-text-muted);
+    max-width: 52ch;
+    font-style: italic;
+    font-family: var(--font-serif);
+    line-height: var(--leading-relaxed);
+  }
+
+  .section {
+    padding: var(--section-padding) 0;
+  }
+
+  .section--surface {
+    background: var(--color-surface);
+  }
+
+  .description-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+
+  .description__title {
+    margin-bottom: var(--space-lg);
+  }
+
+  .description__text p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+    line-height: var(--leading-relaxed);
+    max-width: 52ch;
+  }
+
+  .detail-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .detail-card__title {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .detail-card__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .detail-card__list li {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    padding-left: var(--space-md);
+    position: relative;
+  }
+
+  .detail-card__list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: var(--weight-bold);
+  }
+
+  .amenities-full-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .amenity-full-card {
+    padding: var(--space-xl);
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-light);
+  }
+
+  .amenity-full-card__title {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-sans);
+  }
+
+  .amenity-full-card__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: none;
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .photo-card {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--color-surface-alt) 0%, var(--color-surface) 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-md);
+  }
+
+  .photo-card__label {
+    font-family: var(--font-serif);
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  .cta-banner {
+    background: var(--color-text);
+    color: var(--color-text-inverse);
+    padding: var(--section-padding) 0;
+  }
+
+  .cta-banner__inner {
+    text-align: center;
+  }
+
+  .cta-banner__title {
+    color: var(--color-text-inverse);
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-banner__desc {
+    font-size: var(--text-lg);
+    opacity: 0.8;
+    margin-inline: auto;
+    margin-bottom: var(--space-2xl);
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  .cta-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: center;
+  }
+
+  .cta-banner__actions :global(.btn--outline) {
+    border-color: rgba(250, 247, 242, 0.4);
+    color: var(--color-text-inverse);
+  }
+
+  .cta-banner__actions :global(.btn--outline:hover) {
+    border-color: var(--color-text-inverse);
+  }
+
+  @media (min-width: 48rem) {
+    .photo-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .description-grid {
+      grid-template-columns: 1.3fr 1fr;
+    }
+
+    .amenities-full-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

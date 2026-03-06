@@ -1,0 +1,101 @@
+---
+import "../styles/fonts.css";
+import "../styles/theme.css";
+import "../styles/global.css";
+import "../styles/animations.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "Millie The Hut — a beautifully restored shepherd's hut retreat near Presteigne on the England/Wales border. Book your countryside escape today.",
+  canonicalUrl,
+  ogImage,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" is:inline></script>
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      // Reveal on scroll
+      (function () {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target;
+              el.classList.add("is-revealed");
+
+              if (el.hasAttribute("data-reveal-stagger")) {
+                const children = el.children;
+                Array.from(children).forEach((child, i) => {
+                  child.style.transitionDelay = `${i * 80}ms`;
+                });
+              }
+
+              if (el.getAttribute("data-reveal") === "words") {
+                const words = el.querySelectorAll(".reveal-word");
+                words.forEach((word, i) => {
+                  word.style.transitionDelay = `${i * 60}ms`;
+                });
+              }
+
+              observer.unobserve(el);
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+        );
+
+        document.querySelectorAll("[data-reveal], [data-reveal-stagger]").forEach((el) => {
+          observer.observe(el);
+        });
+      })();
+    </script>
+    <script is:inline>
+      // Netlify Identity redirect
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

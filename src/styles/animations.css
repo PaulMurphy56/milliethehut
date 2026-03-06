@@ -1,0 +1,77 @@
+/* Reveal animations */
+[data-reveal] {
+  opacity: 0;
+  will-change: opacity, transform, filter;
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out),
+    filter var(--duration-slow) var(--ease-out);
+}
+
+[data-reveal="fade"] {
+  opacity: 0;
+}
+
+[data-reveal="slide-up"] {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+[data-reveal="blur"] {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(1rem);
+}
+
+[data-reveal="words"] .reveal-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+/* Revealed state */
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+[data-reveal="words"].is-revealed .reveal-word {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+[data-reveal-stagger].is-revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
+
+  [data-reveal="words"] .reveal-word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

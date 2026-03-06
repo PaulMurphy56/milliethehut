@@ -1,0 +1,91 @@
+:root {
+  /* Colors */
+  --color-primary: #b5533c;
+  --color-primary-light: #c96648;
+  --color-primary-dark: #9a4232;
+  --color-accent: #7a9e7e;
+  --color-accent-light: #91b595;
+  --color-bg: #faf7f2;
+  --color-surface: #f4efe8;
+  --color-surface-alt: #ede8e0;
+  --color-text: #2c2018;
+  --color-text-muted: #6b5b4e;
+  --color-text-inverse: #faf7f2;
+  --color-border: #d9d0c5;
+  --color-border-light: #ebe4da;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-button: #b5533c;
+  --color-button-hover: #9a4232;
+  --color-error: #dc2626;
+  --color-success: #16a34a;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Lora", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --text-sm: clamp(0.8125rem, 0.775rem + 0.25vw, 0.875rem);
+  --text-base: clamp(0.9375rem, 0.875rem + 0.3125vw, 1.0625rem);
+  --text-lg: clamp(1.0625rem, 0.975rem + 0.4375vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+  --text-3xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem);
+  --text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3.25rem);
+  --text-5xl: clamp(2.75rem, 2rem + 3.75vw, 4.25rem);
+
+  --leading-none: 1;
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.06em;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  --section-padding: clamp(3rem, 5vw, 6rem);
+
+  /* Layout */
+  --container-max: 72rem;
+  --container-narrow: 56rem;
+  --container-padding: clamp(1rem, 3vw, 2rem);
+
+  /* Borders */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(44, 32, 24, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(44, 32, 24, 0.08);
+  --shadow-lg: 0 10px 25px -3px rgba(44, 32, 24, 0.1);
+  --shadow-xl: 0 20px 50px -5px rgba(44, 32, 24, 0.12);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+}

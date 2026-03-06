@@ -1,0 +1,110 @@
+---
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "outline" | "ghost";
+  size?: "sm" | "md" | "lg";
+  class?: string;
+  type?: "button" | "submit";
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  class: className = "",
+  type = "button",
+  ariaLabel,
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  class:list={["btn", `btn--${variant}`, `btn--${size}`, className]}
+  href={href || undefined}
+  type={!href ? type : undefined}
+  aria-label={ariaLabel}
+>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-weight: var(--weight-semibold);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  /* Sizes */
+  .btn--sm {
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--text-xs);
+  }
+
+  .btn--md {
+    padding: var(--space-sm) var(--space-xl);
+    font-size: var(--text-sm);
+  }
+
+  .btn--lg {
+    padding: var(--space-md) var(--space-2xl);
+    font-size: var(--text-base);
+  }
+
+  /* Variants */
+  .btn--primary {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+  }
+
+  .btn--primary:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn--secondary {
+    background: var(--color-accent);
+    color: var(--color-text-inverse);
+  }
+
+  .btn--secondary:hover {
+    background: var(--color-accent-light);
+  }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--color-text);
+    border: 1.5px solid var(--color-border);
+  }
+
+  .btn--outline:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+  }
+
+  .btn--ghost:hover {
+    background: var(--color-surface);
+  }
+</style>

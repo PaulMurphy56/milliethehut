@@ -1,0 +1,394 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Container from "../components/ui/Container.astro";
+import Button from "../components/ui/Button.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import { siteConfig } from "../lib/siteConfig";
+
+const attractions = [
+  {
+    name: "Presteigne",
+    distance: "2 miles",
+    desc: "A charming market town with independent shops, welcoming pubs, the Judge's Lodging museum, and the Radnorshire Arms. Perfect for an evening meal.",
+  },
+  {
+    name: "Hay-on-Wye",
+    distance: "20 minutes",
+    desc: "The world-famous town of books. Browse the secondhand bookshops, visit the castle, or time your trip to coincide with the Hay Festival.",
+  },
+  {
+    name: "Offa's Dyke Path",
+    distance: "On the doorstep",
+    desc: "Walk directly from the hut onto one of Britain's great long-distance paths, following the ancient earthwork that once marked the England/Wales border.",
+  },
+  {
+    name: "Knighton",
+    distance: "10 minutes",
+    desc: "A characterful market town straddling the border, home to the Offa's Dyke Centre and some of the best walking in the Marches.",
+  },
+  {
+    name: "Brecon Beacons",
+    distance: "45 minutes",
+    desc: "A stunning national park offering hiking, wild swimming, stargazing, and some of the darkest skies in Southern Britain.",
+  },
+  {
+    name: "Ludlow",
+    distance: "30 minutes",
+    desc: "A handsome market town famous for its food scene, castle, and independent character. Great for a day trip or a special dinner.",
+  },
+];
+---
+
+<PageLayout
+  title={`Location | ${siteConfig.name}`}
+  description="Millie The Hut is nestled on the England/Wales border near Presteigne, Powys. Discover the Welsh Marches — walks, towns, and countryside in every direction."
+>
+  <!-- Page Header -->
+  <section class="page-header">
+    <Container>
+      <div class="page-header__content" data-reveal="slide-up">
+        <p class="page-header__eyebrow">Location</p>
+        <h1 class="page-header__title">On the edge of two worlds</h1>
+        <p class="page-header__desc">Millie The Hut sits quietly on the England/Wales border, tucked into the hills above Presteigne. Ancient countryside, small towns, and open skies in every direction.</p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Getting there -->
+  <section class="section">
+    <Container>
+      <div class="getting-there-grid">
+        <div data-reveal="slide-up">
+          <SectionHeading
+            label="Getting Here"
+            title="Finding your way to Millie"
+          />
+          <p>The hut is located near Presteigne on the England/Wales border in Powys. It's a beautiful drive from most of the UK, through the rolling hills of the Marches.</p>
+          <p>We're about 2.5 hours from London, 1.5 hours from Birmingham, and 1 hour from Cardiff. Full directions — including a what3words location — are sent with your booking confirmation.</p>
+          <p>We recommend travelling by car. The nearest train stations are at Knighton (Cambrian Line) and Leominster (Hereford/Shrewsbury line), both about 10–15 miles away.</p>
+          <div class="getting-there__actions">
+            <Button href="/book/" size="md">Book Your Stay</Button>
+          </div>
+        </div>
+        <aside class="distances-card" data-reveal="fade">
+          <h2 class="distances-card__title">Journey times</h2>
+          <ul class="distances-list" role="list">
+            <li class="distances-list__item">
+              <span class="distances-list__place">London</span>
+              <span class="distances-list__time">~2.5 hrs</span>
+            </li>
+            <li class="distances-list__item">
+              <span class="distances-list__place">Birmingham</span>
+              <span class="distances-list__time">~1.5 hrs</span>
+            </li>
+            <li class="distances-list__item">
+              <span class="distances-list__place">Cardiff</span>
+              <span class="distances-list__time">~1 hr</span>
+            </li>
+            <li class="distances-list__item">
+              <span class="distances-list__place">Bristol</span>
+              <span class="distances-list__time">~1.5 hrs</span>
+            </li>
+            <li class="distances-list__item">
+              <span class="distances-list__place">Manchester</span>
+              <span class="distances-list__time">~2.5 hrs</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Map placeholder -->
+  <section class="map-section" aria-label="Map location">
+    <div class="map-placeholder">
+      <Container>
+        <div class="map-placeholder__inner">
+          <p class="map-placeholder__text">Interactive map coming soon</p>
+          <p class="map-placeholder__sub">Presteigne, Powys, LD8 — England/Wales border</p>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <!-- Attractions -->
+  <section class="section" aria-labelledby="attractions-heading">
+    <Container>
+      <SectionHeading
+        label="Explore"
+        title="What's nearby"
+        description="The Welsh Marches is one of Britain's best-kept secrets — rich in history, landscape, and local character."
+        align="center"
+      />
+      <div class="attractions-grid" data-reveal-stagger>
+        {attractions.map((attraction) => (
+          <article class="attraction-card">
+            <div class="attraction-card__header">
+              <h3 class="attraction-card__name">{attraction.name}</h3>
+              <span class="attraction-card__distance">{attraction.distance}</span>
+            </div>
+            <p class="attraction-card__desc">{attraction.desc}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- The landscape -->
+  <section class="section section--surface" aria-labelledby="landscape-heading">
+    <Container narrow>
+      <SectionHeading
+        label="The Landscape"
+        title="The Welsh Marches"
+        align="center"
+      />
+      <div class="prose" data-reveal="slide-up">
+        <p>The Welsh Marches is the borderland where England blurs into Wales — a region of deep valleys, ancient hills, and scattered settlements that has remained largely unchanged for centuries. It's the kind of place where you might walk all day and see no one, where the light shifts across the hills in ways that make you reach for your phone to photograph it, then put it away and just watch instead.</p>
+        <p>Presteigne is at the heart of it — a market town that has retained its independent character, with a weekly market, independent bookshops, galleries, and several excellent pubs. It was once the county town of Radnorshire, and a certain quiet pride persists in its streets.</p>
+        <p>Walking directly from the hut, you can join Offa's Dyke Path — the long-distance route that traces the ancient earthwork built by King Offa of Mercia in the 8th century to mark the boundary between England and Wales. Or simply wander the country lanes, through farmland and woodland, following your nose.</p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <Container>
+      <div class="cta-banner__inner" data-reveal="slide-up">
+        <h2 class="cta-banner__title">Ready to explore?</h2>
+        <p class="cta-banner__desc">Book your stay at Millie The Hut and discover the Welsh Marches for yourself.</p>
+        <Button href="/book/" size="lg">Book Now</Button>
+      </div>
+    </Container>
+  </section>
+</PageLayout>
+
+<style>
+  .page-header {
+    background: var(--color-surface);
+    padding: var(--space-5xl) 0 var(--section-padding);
+  }
+
+  .page-header__eyebrow {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+    max-width: none;
+  }
+
+  .page-header__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    font-size: var(--text-xl);
+    color: var(--color-text-muted);
+    max-width: 52ch;
+    font-style: italic;
+    font-family: var(--font-serif);
+    line-height: var(--leading-relaxed);
+  }
+
+  .section {
+    padding: var(--section-padding) 0;
+  }
+
+  .section--surface {
+    background: var(--color-surface);
+  }
+
+  .getting-there-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+
+  .getting-there-grid p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+    line-height: var(--leading-relaxed);
+    max-width: 52ch;
+  }
+
+  .getting-there__actions {
+    margin-top: var(--space-xl);
+  }
+
+  .distances-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+  }
+
+  .distances-card__title {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .distances-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .distances-list__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border-light);
+    font-size: var(--text-sm);
+  }
+
+  .distances-list__item:last-child {
+    border-bottom: none;
+  }
+
+  .distances-list__place {
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+  }
+
+  .distances-list__time {
+    color: var(--color-text-muted);
+  }
+
+  /* Map */
+  .map-section {
+    background: var(--color-surface-alt);
+  }
+
+  .map-placeholder {
+    height: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map-placeholder__inner {
+    text-align: center;
+  }
+
+  .map-placeholder__text {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+    font-style: italic;
+    max-width: none;
+  }
+
+  .map-placeholder__sub {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    opacity: 0.6;
+    max-width: none;
+  }
+
+  /* Attractions */
+  .attractions-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .attraction-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .attraction-card:hover {
+    border-color: var(--color-primary);
+  }
+
+  .attraction-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-sm);
+    gap: var(--space-md);
+  }
+
+  .attraction-card__name {
+    font-size: var(--text-lg);
+  }
+
+  .attraction-card__distance {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .attraction-card__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: none;
+  }
+
+  /* Prose */
+  .prose p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+    line-height: var(--leading-relaxed);
+    font-size: var(--text-lg);
+    max-width: none;
+  }
+
+  /* CTA */
+  .cta-banner {
+    background: var(--color-text);
+    color: var(--color-text-inverse);
+    padding: var(--section-padding) 0;
+  }
+
+  .cta-banner__inner {
+    text-align: center;
+  }
+
+  .cta-banner__title {
+    color: var(--color-text-inverse);
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-banner__desc {
+    font-size: var(--text-lg);
+    opacity: 0.8;
+    margin-inline: auto;
+    margin-bottom: var(--space-2xl);
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  @media (min-width: 48rem) {
+    .attractions-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .getting-there-grid {
+      grid-template-columns: 1.3fr 1fr;
+    }
+
+    .attractions-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,39 @@
+---
+import { siteConfig } from "../../lib/siteConfig";
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    telephone: siteConfig.phone,
+    email: siteConfig.email,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: siteConfig.address.locality,
+      addressRegion: siteConfig.address.region,
+      postalCode: siteConfig.address.postalCode,
+      addressCountry: siteConfig.address.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: siteConfig.geo.latitude,
+      longitude: siteConfig.geo.longitude,
+    },
+    checkinTime: "15:00",
+    checkoutTime: "10:00",
+    amenityFeature: [
+      { "@type": "LocationFeatureSpecification", name: "Wood-burning stove", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Private deck", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Hot tub", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Countryside views", value: true },
+    ],
+    sameAs: Object.values(siteConfig.socials),
+    priceRange: "££",
+    touristType: "Couples, Nature Lovers, Glampers",
+  })}
+/>

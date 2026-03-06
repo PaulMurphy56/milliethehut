@@ -1,0 +1,72 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Container from "../components/ui/Container.astro";
+import Button from "../components/ui/Button.astro";
+---
+
+<PageLayout
+  title="Page Not Found | Millie The Hut"
+  description="Sorry, the page you're looking for doesn't exist."
+>
+  <section class="not-found">
+    <Container>
+      <div class="not-found__inner" data-reveal="slide-up">
+        <p class="not-found__code">404</p>
+        <h1 class="not-found__title">Lost in the hills?</h1>
+        <p class="not-found__desc">The page you're looking for seems to have wandered off. Perhaps it's out walking Offa's Dyke.</p>
+        <div class="not-found__actions">
+          <Button href="/" size="lg">Back to Home</Button>
+          <Button href="/book/" variant="outline" size="lg">Book a Stay</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>
+
+<style>
+  .not-found {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: var(--section-padding) 0;
+    background: var(--color-surface);
+  }
+
+  .not-found__inner {
+    text-align: center;
+    max-width: 40rem;
+    margin-inline: auto;
+  }
+
+  .not-found__code {
+    font-family: var(--font-serif);
+    font-size: clamp(5rem, 15vw, 10rem);
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: var(--space-md);
+    max-width: none;
+  }
+
+  .not-found__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .not-found__desc {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2xl);
+    font-style: italic;
+    font-family: var(--font-serif);
+    margin-inline: auto;
+    line-height: var(--leading-relaxed);
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: center;
+  }
+</style>

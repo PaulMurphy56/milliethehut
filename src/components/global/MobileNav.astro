@@ -1,0 +1,100 @@
+---
+import { siteConfig } from "../../lib/siteConfig";
+---
+
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
+  <nav aria-label="Mobile navigation">
+    <ul class="mobile-nav__list" role="list">
+      {siteConfig.nav.map((item) => (
+        <li class="mobile-nav__item">
+          <a href={item.href} class="mobile-nav__link">{item.label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="mobile-nav__footer">
+    <a href={siteConfig.bookingUrl} class="mobile-nav__cta">Book Your Stay</a>
+    <a href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`} class="mobile-nav__phone">
+      {siteConfig.phone}
+    </a>
+  </div>
+</div>
+
+<style>
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    top: 4.5rem;
+    z-index: 99;
+    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-2xl) var(--container-padding);
+    transform: translateX(100%);
+    transition: transform var(--duration-normal) var(--ease-out);
+    overflow-y: auto;
+  }
+
+  .mobile-nav.is-open {
+    transform: translateX(0);
+  }
+
+  .mobile-nav__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .mobile-nav__link {
+    display: block;
+    padding: var(--space-md) 0;
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border-light);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .mobile-nav__link:hover {
+    color: var(--color-primary);
+  }
+
+  .mobile-nav__footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding-top: var(--space-2xl);
+  }
+
+  .mobile-nav__cta {
+    display: block;
+    padding: var(--space-md) var(--space-xl);
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    font-weight: var(--weight-semibold);
+    text-align: center;
+    border-radius: var(--radius-full);
+    font-size: var(--text-base);
+    transition: background var(--duration-fast) var(--ease-out);
+  }
+
+  .mobile-nav__cta:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .mobile-nav__phone {
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  @media (min-width: 64rem) {
+    .mobile-nav {
+      display: none;
+    }
+  }
+</style>

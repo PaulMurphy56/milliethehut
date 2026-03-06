@@ -1,0 +1,53 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  description?: string;
+  align?: "left" | "center";
+  class?: string;
+}
+
+const { label, title, description, align = "left", class: className = "" } = Astro.props;
+---
+
+<div class:list={["section-heading", `section-heading--${align}`, className]}>
+  {label && <span class="section-heading__label">{label}</span>}
+  <h2 class="section-heading__title">{title}</h2>
+  {description && <p class="section-heading__desc">{description}</p>}
+</div>
+
+<style>
+  .section-heading {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section-heading--center {
+    text-align: center;
+  }
+
+  .section-heading--center .section-heading__desc {
+    margin-inline: auto;
+  }
+
+  .section-heading__label {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .section-heading__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .section-heading__desc {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 52ch;
+    line-height: var(--leading-snug);
+  }
+</style>
