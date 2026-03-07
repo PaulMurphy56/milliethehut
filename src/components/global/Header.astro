@@ -28,16 +28,13 @@ const nav = [
             </li>
           ))}
         </ul>
-      </nav>
-
-      <div class="header__actions">
         <a href={site?.bookingUrl ?? "/book/"} class="header__book-btn" aria-label="Book Now">
           <span>Book Now</span>
-          <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-            <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/>
+          <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/>
           </svg>
         </a>
-      </div>
+      </nav>
 
       <button
         class="header__menu-btn"
@@ -63,15 +60,17 @@ const nav = [
                 box-shadow var(--duration-normal) var(--ease-out);
   }
 
-  /* Transparent over hero */
+  .header.is-hidden-home {
+    display: none;
+  }
+
   .header.is-transparent {
     background: transparent;
   }
 
-  /* Scrolled / non-hero pages */
   .header.is-solid,
   .header:not(.is-transparent) {
-    background: rgba(244, 243, 239, 0.85);
+    background: rgba(253, 206, 136, 0.85);
     backdrop-filter: blur(16px) saturate(1.8);
     -webkit-backdrop-filter: blur(16px) saturate(1.8);
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
@@ -95,19 +94,16 @@ const nav = [
   .header__logo-text {
     font-family: var(--font-serif);
     font-size: var(--text-lg);
-    font-weight: var(--weight-bold);
-    color: var(--color-white);
-    letter-spacing: -0.01em;
-    transition: color var(--duration-fast) var(--ease-out);
-  }
-
-  .header.is-solid .header__logo-text,
-  .header:not(.is-transparent) .header__logo-text {
+    font-weight: var(--weight-black);
     color: var(--color-text);
+    letter-spacing: var(--tracking-tighter);
+    transition: color var(--duration-fast) var(--ease-out);
   }
 
   .header__nav {
     display: none;
+    align-items: center;
+    gap: var(--space-xl);
   }
 
   .header__nav-list {
@@ -122,7 +118,7 @@ const nav = [
     font-weight: 700;
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--color-text);
     padding: var(--space-sm) 0;
     display: inline-block;
     transition: color var(--duration-fast) var(--ease-out);
@@ -136,7 +132,7 @@ const nav = [
     left: 0;
     right: 0;
     height: 1px;
-    background: var(--color-white);
+    background: var(--color-text);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--duration-normal) var(--ease-out);
@@ -144,21 +140,6 @@ const nav = [
 
   .header__nav-link:hover::after {
     transform: scaleX(1);
-  }
-
-  .header.is-solid .header__nav-link,
-  .header:not(.is-transparent) .header__nav-link {
-    color: var(--color-text);
-  }
-
-  .header.is-solid .header__nav-link::after,
-  .header:not(.is-transparent) .header__nav-link::after {
-    background: var(--color-text);
-  }
-
-  .header__actions {
-    display: none;
-    align-items: center;
   }
 
   .header__book-btn {
@@ -192,7 +173,7 @@ const nav = [
   }
 
   .header__book-btn:hover svg {
-    transform: translateX(3px);
+    transform: translate(2px, -2px);
   }
 
   .header__menu-btn {
@@ -213,19 +194,10 @@ const nav = [
     display: block;
     width: 1.25rem;
     height: 2px;
-    background: var(--color-white);
+    background: var(--color-text);
     border-radius: 1px;
     transition: all var(--duration-normal) var(--ease-out);
     position: relative;
-  }
-
-  .header.is-solid .header__menu-icon,
-  .header.is-solid .header__menu-icon::before,
-  .header.is-solid .header__menu-icon::after,
-  .header:not(.is-transparent) .header__menu-icon,
-  .header:not(.is-transparent) .header__menu-icon::before,
-  .header:not(.is-transparent) .header__menu-icon::after {
-    background: var(--color-text);
   }
 
   .header__menu-icon::before,
@@ -251,8 +223,7 @@ const nav = [
   }
 
   @media (min-width: 64rem) {
-    .header__nav { display: block; }
-    .header__actions { display: flex; }
+    .header__nav { display: flex; }
     .header__menu-btn { display: none; }
   }
 </style>
@@ -263,26 +234,14 @@ const nav = [
     var hero = document.querySelector(".hero");
     if (!header) return;
 
-    function update() {
-      var scrolled = window.scrollY > 20;
-      if (hero) {
-        // On hero page: transparent over hero, solid once scrolled past
-        var heroBottom = hero.offsetHeight;
-        if (window.scrollY > heroBottom - 80) {
-          header.classList.remove("is-transparent");
-          header.classList.add("is-solid");
-        } else {
-          header.classList.add("is-transparent");
-          header.classList.remove("is-solid");
-        }
-      } else {
-        header.classList.remove("is-transparent");
-        header.classList.add("is-solid");
-      }
+    // Hide global header on homepage (hero has its own nav)
+    if (hero) {
+      header.classList.add("is-hidden-home");
+      return;
     }
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
+    // Non-homepage: solid header
+    header.classList.add("is-solid");
 
     // Mobile menu
     var btn = document.querySelector(".header__menu-btn");

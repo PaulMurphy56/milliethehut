@@ -8,40 +8,31 @@ const allTestimonials = await getCollection("testimonials");
 const allFaqs = await getCollection("faqs");
 const sortedFaqs = allFaqs.sort((a, b) => a.data.order - b.data.order);
 
+const siteSettingsCollection = await getCollection("siteSettings");
+const site = siteSettingsCollection[0]?.data;
+
 const facilities = [
-  { icon: "shower",    label: "En suite shower & flushing toilet" },
-  { icon: "bed",       label: "Bedding, towels & toiletries" },
-  { icon: "egg",       label: "Eggs, milk, tea, coffee, oils & more" },
-  { icon: "cooking",   label: "Induction hob, microwave, toaster & kettle" },
-  { icon: "fridge",    label: "Fridge with ice box" },
-  { icon: "usb",       label: "USB charging points" },
-  { icon: "fire",      label: "Cosy wood burner" },
-  { icon: "firepit",   label: "Kadai fire pit & barbecue" },
-  { icon: "music",     label: "Bluetooth radio & board games" },
+  { icon: "shower",  label: "En suite shower & flushing toilet" },
+  { icon: "bed",     label: "Bedding, towels & toiletries" },
+  { icon: "egg",     label: "Eggs, milk, tea, coffee, oils etc" },
+  { icon: "cooking", label: "Induction hob, microwave, toaster, kettle" },
+  { icon: "fridge",  label: "Fridge with ice box" },
+  { icon: "usb",     label: "USB points" },
+  { icon: "fire",    label: "Wood burner" },
+  { icon: "firepit", label: "Kadai fire pit & barbecue" },
+  { icon: "music",   label: "Bluetooth radio & board games" },
 ];
 
 const importantBits = [
-  {
-    icon: "people",
-    title: "Sleeps Two",
-    note: "No babies or children",
-  },
-  {
-    icon: "clock",
-    title: "Check-in 3pm / Check-out 10am",
-    note: "Flexible by arrangement",
-  },
-  {
-    icon: "nopets",
-    title: "No Pets",
-    note: "Sorry, no exceptions",
-  },
+  { icon: "people", title: "Sleeps Two",                        note: "No babies or children" },
+  { icon: "clock",  title: "Check-in 3pm / Check-out 10am",    note: "Flexible by arrangement" },
+  { icon: "nopets", title: "No Pets",                           note: "Sorry, no exceptions" },
 ];
 
-const galleryImages = [
-  { src: "/images/gallery-placeholder-1.jpg", alt: "Interior of Millie The Hut shepherd's hut" },
-  { src: "/images/gallery-placeholder-2.jpg", alt: "Countryside views from the private deck" },
-  { src: "/images/gallery-placeholder-3.jpg", alt: "Kadai fire pit at dusk" },
+const reviews = allTestimonials.length > 0 ? allTestimonials : [
+  { data: { name: "Sarah & James", location: "Hereford", rating: 5, body: "Millie The Hut is simply magical. We arrived to a perfectly set hut, lit the fire pit as the sun went down, and didn't want to leave. The most restorative weekend we've had in years. If you're looking for somewhere to truly switch off, this is it." }},
+  { data: { name: "Tom & Emily",   location: "Birmingham", rating: 5, body: "The perfect escape. Waking up to birdsong and the most incredible views of the countryside. The hut has everything you need and more. We've already booked our next stay." }},
+  { data: { name: "Rachel D.",     location: "London", rating: 5, body: "Absolutely wonderful. The attention to detail is second to none. From the welcome hamper to the cosy wood burner, every moment felt special. A true hidden gem in the Welsh Marches — we told everyone about it when we got home." }},
 ];
 
 const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
@@ -62,11 +53,9 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     <LocalBusinessSchema />
   </Fragment>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 1: HERO
-  ═══════════════════════════════════════════════ -->
+  <!-- ═══ SECTION 1: HERO ═══════════════════════ -->
   <section class="hero" aria-label="Welcome to Millie The Hut">
-    <div class="hero__bg" aria-hidden="true">
+    <div class="hero__card">
       <img
         src="/images/hero.avif"
         alt="Millie The Hut shepherd's hut at golden hour in the Welsh Marches countryside"
@@ -75,101 +64,110 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
         decoding="async"
       />
       <div class="hero__overlay"></div>
-    </div>
-    <div class="hero__body">
+
+      <!-- Nav inside the image card -->
+      <nav class="hero-nav" aria-label="Main navigation">
+        <ul class="hero-nav__list" role="list">
+          <li><a href="/gallery/" class="hero-nav__link">Gallery</a></li>
+          <li><a href="/location/" class="hero-nav__link">Local Area</a></li>
+          <li><a href="/your-hosts/" class="hero-nav__link">Your Hosts</a></li>
+          <li><a href="/contact/" class="hero-nav__link">Contact</a></li>
+        </ul>
+        <a href={site?.bookingUrl ?? "/book/"} class="hero-nav__book">
+          <span>Book Now</span>
+          <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/>
+          </svg>
+        </a>
+      </nav>
+
+      <!-- Mobile hamburger inside hero -->
+      <button class="hero-menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="hero-menu-icon"></span>
+      </button>
+
+      <!-- Brand overlay -->
+      <h1 class="hero__brand">Millie<br/>The Hut</h1>
+
+      <!-- Tagline bottom-right -->
       <p class="hero__tagline">Escape to the Welsh Marches.</p>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 2: INTRODUCTION
-  ═══════════════════════════════════════════════ -->
+  <!-- ═══ SECTION 2: INTRODUCTION ═══════════════ -->
   <section class="intro section" aria-labelledby="intro-heading">
     <Container>
       <h2 class="intro__heading" id="intro-heading">
-        Millie The Hut,<br />Presteigne, Herefordshire.
+        Millie The Hut,<br/>Presteigne, Herefordshire.
       </h2>
 
-      <p class="intro__text" id="intro-animated-text" aria-label="Tucked away on the England Wales border, Millie The Hut is a lovingly restored shepherd's hut offering a genuine escape from the everyday. Slow mornings with birdsong. Evenings by the fire pit under a sky full of stars. No itinerary. No agenda. Just the kind of rest you've been meaning to have.">
-        Tucked away on the England&#8202;/&#8202;Wales border, Millie The Hut is a lovingly restored shepherd's hut offering a genuine escape from the everyday. Slow mornings with birdsong. Evenings by the fire pit under a sky full of stars. No itinerary. No agenda. Just the kind of rest you've been meaning to have.
-      </p>
+      <div class="intro__text-wrap">
+        <p class="intro__text" id="intro-animated-text">Down a leafy lane, where steam trains once ran, across a Victorian railway bridge that takes you from Wales to England, you'll find a meadow where sheep graze, and what else, but a traditional-style Shepherds Hut and Shack. On sunny days, the meadow is bathed in light from dawn to dusk, and the gin-clear Hindwell Brook that bounds it flashes silver. Whatever the weather, after dark is a special time to be here, when the log burner in the hut, the firepit by the stream and the lamps and candles in the Shack cast a magical golden glow.</p>
+      </div>
 
-      <!-- Trust Bar -->
+      <!-- Separator + Trust Bar -->
+      <hr class="intro__divider" />
       <div class="trust-bar" aria-label="Awards and features">
         <div class="trust-bar__item">
           <div class="trust-bar__logo" aria-hidden="true">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="19" stroke="#e3977b" stroke-width="1.5"/>
-              <path d="M20 10l2.9 6 6.6.96-4.75 4.63 1.12 6.54L20 25.1l-5.87 3.08 1.12-6.54L10.5 17l6.6-.96L20 10z" fill="#e3977b"/>
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="30" stroke="#e3977b" stroke-width="1.5"/>
+              <path d="M32 16l4.6 9.6 10.6 1.5-7.6 7.4 1.8 10.5L32 40.2l-9.4 4.8 1.8-10.5-7.6-7.4 10.6-1.5L32 16z" fill="#e3977b"/>
             </svg>
           </div>
-          <p class="trust-bar__label">Luxury Glamping<br /><span>Welsh Marches</span></p>
+          <p class="trust-bar__label">Luxury Glamping<br/><span>Welsh Marches</span></p>
         </div>
         <div class="trust-bar__item">
           <div class="trust-bar__logo" aria-hidden="true">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="8" width="28" height="24" rx="3" stroke="#e3977b" stroke-width="1.5"/>
-              <path d="M14 20h12M14 25h8" stroke="#e3977b" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="20" cy="15" r="3" stroke="#e3977b" stroke-width="1.5"/>
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="13" width="44" height="38" rx="4" stroke="#e3977b" stroke-width="1.5"/>
+              <path d="M22 32h20M22 40h14" stroke="#e3977b" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="32" cy="24" r="5" stroke="#e3977b" stroke-width="1.5"/>
             </svg>
           </div>
-          <p class="trust-bar__label">Guests Rate Us<br /><span>5 Stars</span></p>
+          <p class="trust-bar__label">Guests Rate Us<br/><span>5 Stars</span></p>
         </div>
         <div class="trust-bar__item">
           <div class="trust-bar__logo" aria-hidden="true">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 6C13.37 6 8 11.37 8 18c0 9 12 22 12 22s12-13 12-22c0-6.63-5.37-12-12-12z" stroke="#e3977b" stroke-width="1.5"/>
-              <circle cx="20" cy="18" r="4" stroke="#e3977b" stroke-width="1.5"/>
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 10C23.16 10 16 18.6 16 29c0 14.4 16 31 16 31s16-16.6 16-31c0-10.4-7.16-19-16-19z" stroke="#e3977b" stroke-width="1.5"/>
+              <circle cx="32" cy="29" r="6" stroke="#e3977b" stroke-width="1.5"/>
             </svg>
           </div>
-          <p class="trust-bar__label">Near Presteigne<br /><span>Powys, Wales</span></p>
+          <p class="trust-bar__label">Near Presteigne<br/><span>Powys, Wales</span></p>
         </div>
       </div>
     </Container>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 3: GALLERY PREVIEW
-  ═══════════════════════════════════════════════ -->
-  <section class="gallery-preview section" aria-labelledby="gallery-heading">
+  <!-- ═══ SECTION 3: GALLERY PREVIEW ═══════════ -->
+  <section class="gallery-preview section" aria-label="Photo gallery">
     <Container>
       <div class="gallery-collage">
-        <!-- Left: Portrait -->
         <div class="gallery-collage__left">
-          <div class="gallery-collage__img-wrap gallery-collage__img-wrap--portrait">
-            <div class="gallery-collage__placeholder" aria-label="Interior of Millie The Hut">
-              <span>Interior</span>
-            </div>
+          <div class="gallery-collage__img-wrap">
+            <div class="gallery-collage__placeholder" aria-label="Interior of Millie The Hut"><span>Interior</span></div>
           </div>
         </div>
-        <!-- Right: Two Landscape stacked -->
         <div class="gallery-collage__right">
-          <div class="gallery-collage__img-wrap gallery-collage__img-wrap--landscape">
-            <div class="gallery-collage__placeholder" aria-label="The private deck with countryside views">
-              <span>The Deck</span>
-            </div>
+          <div class="gallery-collage__img-wrap">
+            <div class="gallery-collage__placeholder" aria-label="The private deck"><span>The Deck</span></div>
           </div>
-          <div class="gallery-collage__img-wrap gallery-collage__img-wrap--landscape">
-            <div class="gallery-collage__placeholder" aria-label="Evening fire pit at Millie The Hut">
-              <span>Fire Pit</span>
-            </div>
+          <div class="gallery-collage__img-wrap">
+            <div class="gallery-collage__placeholder" aria-label="Evening fire pit"><span>Fire Pit</span></div>
           </div>
         </div>
       </div>
       <div class="gallery-preview__action">
         <a href="/gallery/" class="btn-outline-dark">
           View All Photos
-          <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-            <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
         </a>
       </div>
     </Container>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 4: FACILITIES
-  ═══════════════════════════════════════════════ -->
+  <!-- ═══ SECTION 4: FACILITIES ══════════════════ -->
   <section class="facilities section section--surface" aria-labelledby="facilities-heading">
     <Container>
       <h2 class="section-heading" id="facilities-heading">Our Facilities</h2>
@@ -178,31 +176,31 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
           <div class="facility-card">
             <div class="facility-card__icon" aria-hidden="true">
               {item.icon === "shower" && (
-                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor"><path d="M208,136H111.51l99.82-99.82a8,8,0,0,0-11.32-11.32L99.52,125.45a95.91,95.91,0,0,0-53.2-29.14,8,8,0,0,0-2.64,15.78A80,80,0,0,1,128,192v8a8,8,0,0,0,16,0v-8h64a8,8,0,0,0,0-16ZM80,200a8,8,0,1,1-8-8A8,8,0,0,1,80,200Zm-32,0a8,8,0,1,1-8-8A8,8,0,0,1,48,200Zm16-28a8,8,0,1,1-8-8A8,8,0,0,1,64,172Z"/></svg>
+                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M208,136H111.51l99.82-99.82a8,8,0,0,0-11.32-11.32L99.52,125.45a95.91,95.91,0,0,0-53.2-29.14,8,8,0,0,0-2.64,15.78A80,80,0,0,1,128,192v8a8,8,0,0,0,16,0v-8h64a8,8,0,0,0,0-16ZM80,200a8,8,0,1,1-8-8A8,8,0,0,1,80,200Zm-32,0a8,8,0,1,1-8-8A8,8,0,0,1,48,200Zm16-28a8,8,0,1,1-8-8A8,8,0,0,1,64,172Z"/></svg>
               )}
               {item.icon === "bed" && (
-                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor"><path d="M235.58,128.86,211.31,74.69A16,16,0,0,0,196.69,64H59.31A16,16,0,0,0,44.69,74.69L20.42,128.86A8.06,8.06,0,0,0,20,131.2V208a8,8,0,0,0,16,0v-8H220v8a8,8,0,0,0,16,0V131.2A8.06,8.06,0,0,0,235.58,128.86ZM59.31,80H196.69l20,45.71L59.31,80ZM220,184H36V144H220Z"/></svg>
+                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M208,72H24V48a8,8,0,0,0-16,0V208a8,8,0,0,0,16,0v-40H232v40a8,8,0,0,0,16,0V112A40,40,0,0,0,208,72ZM24,88h84v64H24Zm100,64V88h84a24,24,0,0,1,24,24v40Z"/></svg>
               )}
               {item.icon === "egg" && (
-                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24C74.82,24,32,80.1,32,148a96,96,0,0,0,192,0C224,80.1,181.18,24,128,24Zm0,176a80,80,0,0,1-80-80c0-59.71,35.75-108,80-108s80,48.29,80,108A80,80,0,0,1,128,200Z"/></svg>
+                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M186.67,123.87C179.73,82.79,158.43,40,128,40S76.27,82.79,69.33,123.87C63.44,158.49,69.21,192,89.09,211a52,52,0,0,0,77.82,0C186.79,192,192.56,158.49,186.67,123.87Z"/></svg>
               )}
               {item.icon === "cooking" && (
-                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor"><path d="M80,40a8,8,0,0,0-8,8V96a48,48,0,0,0,40,47.32V224H80a8,8,0,0,0,0,16h96a8,8,0,0,0,0-16H144V143.32A48,48,0,0,0,184,96V48a8,8,0,0,0-8-8ZM88,96V56h80V96a32,32,0,0,1-64,0ZM40,48a8,8,0,0,1,16,0v96a8,8,0,0,1-16,0Z"/></svg>
+                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M88,48V16a8,8,0,0,1,16,0V48a8,8,0,0,1-16,0Zm40,8a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,128,56Zm32,0a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,160,56Zm72,48v8a8,8,0,0,1-8,8H224v64a24,24,0,0,1-24,24H56a24,24,0,0,1-24-24V120H24a8,8,0,0,1,0-16h8V96a8,8,0,0,1,8-8H216a8,8,0,0,1,8,8v8h8A8,8,0,0,1,232,104Z"/></svg>
               )}
               {item.icon === "fridge" && (
-                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor"><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16Zm8,200a8,8,0,0,1-8,8H80a8,8,0,0,1-8-8V136H184Zm0-96H72V40a8,8,0,0,1,8-8h96a8,8,0,0,1,8,8ZM120,76V60a8,8,0,0,1,16,0V76a8,8,0,0,1-16,0Zm0,104v-16a8,8,0,0,1,16,0v16a8,8,0,0,1-16,0Z"/></svg>
+                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16Zm8,200a8,8,0,0,1-8,8H80a8,8,0,0,1-8-8V136H184Zm0-96H72V40a8,8,0,0,1,8-8h96a8,8,0,0,1,8,8ZM120,76V60a8,8,0,0,1,16,0V76a8,8,0,0,1-16,0Zm0,104v-16a8,8,0,0,1,16,0v16a8,8,0,0,1-16,0Z"/></svg>
               )}
               {item.icon === "usb" && (
-                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor"><path d="M222.59,134.59l-40,40A8,8,0,0,1,171.31,163l16.35-16.35L152,107.31V208a8,8,0,0,1-16,0V107.31L100.34,146.65,116.69,163A8,8,0,0,1,105.41,174.59l-40-40a8,8,0,0,1,0-11.32l40-40A8,8,0,0,1,116.69,95l-16.35,16.34L136,150.69V40a8,8,0,0,1,16,0V150.69l35.66-39.34L171.31,95a8,8,0,0,1,11.28-11.28l40,40A8,8,0,0,1,222.59,134.59Z"/></svg>
+                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M208,56a16,16,0,1,0-16-16A16,16,0,0,0,208,56Zm-72,48a16,16,0,1,0-16-16A16,16,0,0,0,136,104Zm88,40H136V120.27A32,32,0,0,0,160,88V56A32,32,0,0,0,96,56V88a32,32,0,0,0,24,31.12V144H32a8,8,0,0,0,0,16h88v24.88A32,32,0,0,0,96,216v32a32,32,0,0,0,64,0V216a32,32,0,0,0-24-30.91V160h88a8,8,0,0,0,0-16Z"/></svg>
               )}
               {item.icon === "fire" && (
-                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor"><path d="M173.88,103.27C169,90.66,158.26,79.42,141.57,68.43a8,8,0,0,0-11.06,2.31,76.61,76.61,0,0,1-10.68,13.15c-5.15,5.16-8.43,4-9.09,3.66-3.89-2.15-6.72-11.16-4.8-28.11a8,8,0,0,0-12.59-7.43C80.47,62.78,40,98.06,40,152a88,88,0,0,0,176,0C216,133.79,197.27,112.16,173.88,103.27Z"/></svg>
+                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M173.88,103.27C169,90.66,158.26,79.42,141.57,68.43a8,8,0,0,0-11.06,2.31,76.61,76.61,0,0,1-10.68,13.15c-5.15,5.16-8.43,4-9.09,3.66-3.89-2.15-6.72-11.16-4.8-28.11a8,8,0,0,0-12.59-7.43C80.47,62.78,40,98.06,40,152a88,88,0,0,0,176,0C216,133.79,197.27,112.16,173.88,103.27Z"/></svg>
               )}
               {item.icon === "firepit" && (
-                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor"><path d="M253.66,133.66l-16,16a8,8,0,0,1-11.32-11.32L234.69,130H175.21l-28,96H216a8,8,0,0,1,0,16H40a8,8,0,0,1,0-16H108.79l-28-96H21.31l8.35,8.34a8,8,0,0,1-11.32,11.32l-16-16a8,8,0,0,1,0-11.32l16-16a8,8,0,0,1,11.32,11.32L21.31,114H81.51L67.68,64H48a8,8,0,0,1,0-16H208a8,8,0,0,1,0,16H188.32L174.49,114h60.2l-8.35-8.34a8,8,0,0,1,11.32-11.32l16,16A8,8,0,0,1,253.66,133.66Z"/></svg>
+                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M128,16C73.86,16,28,50.59,28,96c0,22.58,12.13,43.17,34.15,58A8,8,0,0,0,72,152h0a8,8,0,0,0-1.65-11.31C52.64,127.76,44,112.31,44,96c0-37.5,37.71-64,84-64s84,26.5,84,64c0,16.31-8.64,31.76-26.35,44.69A8,8,0,0,0,184,152a8,8,0,0,0,9.85-1.95C215.87,139.17,228,118.58,228,96,228,50.59,182.14,16,128,16ZM72,176v48a8,8,0,0,0,16,0V176a8,8,0,0,0-16,0Zm40,0v48a8,8,0,0,0,16,0V176a8,8,0,0,0-16,0Zm40,0v48a8,8,0,0,0,16,0V176a8,8,0,0,0-16,0Z"/></svg>
               )}
               {item.icon === "music" && (
-                <svg width="28" height="28" viewBox="0 0 256 256" fill="currentColor"><path d="M212.92,25.55a8,8,0,0,0-6.86-1.45l-128,32A8,8,0,0,0,72,64V176a36,36,0,1,0,16,30V120.43l112-28V136a36,36,0,1,0,16,30V32A8,8,0,0,0,212.92,25.55ZM52,228a20,20,0,1,1,20-20A20,20,0,0,1,52,228Zm128-32a20,20,0,1,1,20-20A20,20,0,0,1,180,196ZM88,103.57V69.83l112-28v33.74Z"/></svg>
+                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M212.92,25.55a8,8,0,0,0-6.86-1.45l-128,32A8,8,0,0,0,72,64V176a36,36,0,1,0,16,30V120.43l112-28V136a36,36,0,1,0,16,30V32A8,8,0,0,0,212.92,25.55ZM52,228a20,20,0,1,1,20-20A20,20,0,0,1,52,228Zm128-32a20,20,0,1,1,20-20A20,20,0,0,1,180,196ZM88,103.57V69.83l112-28v33.74Z"/></svg>
               )}
             </div>
             <p class="facility-card__label">{item.label}</p>
@@ -212,24 +210,22 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     </Container>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 5: THE IMPORTANT BITS
-  ═══════════════════════════════════════════════ -->
+  <!-- ═══ SECTION 5: THE IMPORTANT BITS ══════════ -->
   <section class="important section" aria-labelledby="important-heading">
     <Container>
-      <h2 class="section-heading--small" id="important-heading">The Important Bits</h2>
+      <h2 class="section-heading" id="important-heading">The Important Bits</h2>
       <div class="important-grid">
         {importantBits.map((bit) => (
           <div class="important-item">
             <div class="important-item__icon" aria-hidden="true">
               {bit.icon === "people" && (
-                <svg width="40" height="40" viewBox="0 0 256 256" fill="currentColor"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,1.1-8.33A24,24,0,1,0,150.92,88h0a8,8,0,0,1-16,0h0a40,40,0,1,1,68.19,28.09A67.72,67.72,0,0,1,220,128,51.6,51.6,0,0,1,246.4,161.6,8,8,0,0,1,244.8,150.4ZM190,212a8,8,0,0,1-8,8H74a8,8,0,0,1-8-8,64,64,0,0,1,128,0Zm-16.33,0a48,48,0,0,0-91.34,0ZM128,152a40,40,0,1,0-40-40A40,40,0,0,0,128,152Zm0-64a24,24,0,1,1-24,24A24,24,0,0,1,128,88ZM72,128a8,8,0,0,0-8-8A51.6,51.6,0,0,0,22.4,148.8a8,8,0,1,0,12.8,9.6A35.72,35.72,0,0,1,64,144,8,8,0,0,0,72,128Z"/></svg>
+                <svg width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,1.1-8.33A24,24,0,1,0,150.92,88h0a8,8,0,0,1-16,0h0a40,40,0,1,1,68.19,28.09A67.72,67.72,0,0,1,220,128,51.6,51.6,0,0,1,246.4,161.6,8,8,0,0,1,244.8,150.4ZM190,212a8,8,0,0,1-8,8H74a8,8,0,0,1-8-8,64,64,0,0,1,128,0Zm-16.33,0a48,48,0,0,0-91.34,0ZM128,152a40,40,0,1,0-40-40A40,40,0,0,0,128,152Zm0-64a24,24,0,1,1-24,24A24,24,0,0,1,128,88ZM72,128a8,8,0,0,0-8-8A51.6,51.6,0,0,0,22.4,148.8a8,8,0,1,0,12.8,9.6A35.72,35.72,0,0,1,64,144,8,8,0,0,0,72,128Z"/></svg>
               )}
               {bit.icon === "clock" && (
-                <svg width="40" height="40" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></svg>
+                <svg width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></svg>
               )}
               {bit.icon === "nopets" && (
-                <svg width="40" height="40" viewBox="0 0 256 256" fill="currentColor"><path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L68.9,75.09A64,64,0,0,0,53.5,168.67l-9.41,18.82A8,8,0,0,0,51.29,199a7.6,7.6,0,0,0,3.6.86,8,8,0,0,0,7.18-4.43l8-16a63.49,63.49,0,0,0,58,0l8,16A8,8,0,0,0,143.11,200a7.6,7.6,0,0,0,3.6-.86,8,8,0,0,0,3.58-10.74l-9.18-18.35a64.15,64.15,0,0,0,17.48-13.15l44.49,49A8,8,0,0,0,208,208a8,8,0,0,0,5.92-13.38ZM128,184a48,48,0,0,1-47.61-54l74.62,82.15A47.75,47.75,0,0,1,128,184Zm19.07-86.85a8,8,0,1,1,3.86-15.51c8.42,2.1,15.07,7,19.79,14.61a8,8,0,0,1-13.6,8.4C155.22,101.22,152.15,98.43,147.07,97.15ZM189,66.26a8,8,0,0,1-11.13-2.15c-4.67-7-11-11.56-18.35-13.41a8,8,0,0,1,3.92-15.51C175.1,38.78,184.68,45.3,191.15,55.13A8,8,0,0,1,189,66.26ZM82.59,55.39A8,8,0,0,1,97.7,49.07c3.92,6.19,10.17,10.31,18.59,12.24A8,8,0,1,1,112.64,77C100,74.1,90.14,67.13,82.59,55.39Z"/></svg>
+                <svg width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L68.9,75.09A64,64,0,0,0,53.5,168.67l-9.41,18.82A8,8,0,0,0,51.29,199a7.6,7.6,0,0,0,3.6.86,8,8,0,0,0,7.18-4.43l8-16a63.49,63.49,0,0,0,58,0l8,16A8,8,0,0,0,143.11,200a7.6,7.6,0,0,0,3.6-.86,8,8,0,0,0,3.58-10.74l-9.18-18.35a64.15,64.15,0,0,0,17.48-13.15l44.49,49A8,8,0,0,0,208,208a8,8,0,0,0,5.92-13.38Z"/></svg>
               )}
             </div>
             <h3 class="important-item__title">{bit.title}</h3>
@@ -240,62 +236,42 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     </Container>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 6: TESTIMONIALS SLIDER
-  ═══════════════════════════════════════════════ -->
+  <!-- ═══ SECTION 6: TESTIMONIALS SLIDER ═════════ -->
   <section class="testimonials section section--surface" aria-labelledby="reviews-heading">
     <Container>
       <h2 class="section-heading" id="reviews-heading">Words From Our Guests</h2>
-
-      {allTestimonials.length > 0 ? (
-        <div class="testimonial-slider" role="region" aria-label="Guest testimonials">
-          <div class="testimonial-slider__track" id="testimonial-track">
-            {allTestimonials.map((t, i) => (
-              <article class="testimonial-slide" id={`slide-${i}`} aria-hidden={i > 0 ? "true" : "false"}>
-                <div class="testimonial-slide__stars" aria-label={`${t.data.rating} out of 5 stars`}>
-                  {"★".repeat(t.data.rating)}{"☆".repeat(5 - t.data.rating)}
-                </div>
-                <blockquote class="testimonial-slide__quote" data-full={t.data.body}>
-                  <p class="testimonial-slide__text">{t.data.body}</p>
-                </blockquote>
-                <footer class="testimonial-slide__footer">
-                  <strong class="testimonial-slide__name">{t.data.name}</strong>
-                  {t.data.location && <span class="testimonial-slide__location">{t.data.location}</span>}
-                </footer>
-              </article>
-            ))}
-          </div>
-          <div class="testimonial-slider__controls">
-            <button class="testimonial-slider__btn" id="testimonial-prev" aria-label="Previous review" type="button">
-              <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg>
-            </button>
-            <div class="testimonial-slider__dots" id="testimonial-dots" role="tablist"></div>
-            <button class="testimonial-slider__btn" id="testimonial-next" aria-label="Next review" type="button">
-              <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
-            </button>
-          </div>
+      <div class="testimonial-slider" role="region" aria-label="Guest testimonials">
+        <div class="testimonial-slider__track" id="testimonial-track">
+          {reviews.map((t, i) => (
+            <article class="testimonial-slide" id={`slide-${i}`} aria-hidden={i > 0 ? "true" : "false"}>
+              <div class="testimonial-slide__quote-mark" aria-hidden="true">&ldquo;</div>
+              <div class="testimonial-slide__stars" aria-label={`${t.data.rating} out of 5 stars`}>
+                {"★".repeat(t.data.rating)}{"☆".repeat(5 - t.data.rating)}
+              </div>
+              <blockquote class="testimonial-slide__quote">
+                <p class="testimonial-slide__text">{t.data.body}</p>
+              </blockquote>
+              <footer class="testimonial-slide__footer">
+                <strong class="testimonial-slide__name">{t.data.name}</strong>
+                {t.data.location && <span class="testimonial-slide__location">{t.data.location}</span>}
+              </footer>
+            </article>
+          ))}
         </div>
-      ) : (
-        <div class="testimonial-placeholder">
-          <div class="testimonial-slide">
-            <div class="testimonial-slide__stars" aria-label="5 out of 5 stars">★★★★★</div>
-            <blockquote class="testimonial-slide__quote">
-              <p class="testimonial-slide__text">"Millie The Hut is simply magical. We arrived to a perfectly set hut, lit the fire pit as the sun went down, and didn't want to leave. The most restorative weekend we've had in years."</p>
-            </blockquote>
-            <footer class="testimonial-slide__footer">
-              <strong class="testimonial-slide__name">Sarah & James</strong>
-              <span class="testimonial-slide__location">Hereford</span>
-            </footer>
-          </div>
-          <p class="testimonial-placeholder__cta">Add guest reviews via the CMS to display them here.</p>
+        <div class="testimonial-slider__controls">
+          <button class="testimonial-slider__btn" id="testimonial-prev" aria-label="Previous review" type="button">
+            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg>
+          </button>
+          <div class="testimonial-slider__dots" id="testimonial-dots" role="tablist"></div>
+          <button class="testimonial-slider__btn" id="testimonial-next" aria-label="Next review" type="button">
+            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
+          </button>
         </div>
-      )}
+      </div>
     </Container>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 7: LOCATION & MAP
-  ═══════════════════════════════════════════════ -->
+  <!-- ═══ SECTION 7: LOCATION & MAP ══════════════ -->
   <section class="location section" aria-labelledby="location-heading">
     <Container>
       <div class="location-grid">
@@ -303,54 +279,39 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
           <h2 class="section-heading" id="location-heading">Where to Find Us</h2>
           <div class="location-w3w">
             <div class="location-w3w__badge" aria-label="What3Words location">
-              <svg width="20" height="20" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
-                <path d="M29.9 51.5H9.7l11.1-30h20.1zM61.3 51.5H41.1l11.1-30h20.1zM92.6 51.5H72.4l11.1-30h20.1zM29.9 78.5H9.7l11.1-30h20.1zM61.3 78.5H41.1l11.1-30h20.1zM92.6 78.5H72.4l11.1-30h20.1z"/>
-              </svg>
+              <svg width="20" height="20" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M29.9 51.5H9.7l11.1-30h20.1zM61.3 51.5H41.1l11.1-30h20.1zM92.6 51.5H72.4l11.1-30h20.1zM29.9 78.5H9.7l11.1-30h20.1zM61.3 78.5H41.1l11.1-30h20.1zM92.6 78.5H72.4l11.1-30h20.1z"/></svg>
               <span class="location-w3w__words">///unwanted.passports.among</span>
             </div>
-            <p class="location-w3w__explainer">What3Words divides the world into 3m × 3m squares, each with a unique three-word address — the most precise way to navigate here.</p>
+            <p class="location-w3w__explainer">What3Words divides the world into 3m x 3m squares, each with a unique three-word address — the most precise way to navigate here.</p>
           </div>
           <address class="location-address">
-            <p>Wegnall's Mill<br />Presteigne<br />Powys, LD8 2LD</p>
+            <p>Wegnall's Mill<br/>Presteigne<br/>Powys, LD8 2LD</p>
           </address>
           <a href="/book/" class="btn-cta">
             Book Your Stay
-            <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-              <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
           </a>
         </div>
         <div class="location-map" aria-label="Map showing location of Millie The Hut near Presteigne">
           <iframe
             title="Map showing Wegnall's Mill, Presteigne, Powys"
             src="https://www.openstreetmap.org/export/embed.html?bbox=-3.05%2C52.24%2C-2.99%2C52.28&layer=mapnik&marker=52.262%2C-3.021"
-            width="100%"
-            height="100%"
-            style="border:0;"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            aria-hidden="true"
+            width="100%" height="100%" style="border:0;" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" aria-hidden="true"
           ></iframe>
         </div>
       </div>
     </Container>
   </section>
 
-  <!-- ═══════════════════════════════════════════════
-       SECTION 8: FAQ
-  ═══════════════════════════════════════════════ -->
+  <!-- ═══ SECTION 8: FAQ ═════════════════════════ -->
   <section class="faq section section--surface" aria-labelledby="faq-heading">
     <Container>
       <h2 class="section-heading" id="faq-heading">Frequently Asked Questions</h2>
       <div class="faq-list" role="list">
         {faqs.map((faq, i) => (
           <div class="faq-item" role="listitem">
-            <button
-              class="faq-item__question"
-              aria-expanded="false"
-              aria-controls={`faq-answer-${i}`}
-              type="button"
-            >
+            <button class="faq-item__question" aria-expanded="false" aria-controls={`faq-answer-${i}`} type="button">
               <span>{faq.data.question}</span>
               <span class="faq-item__icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" class="faq-icon-plus"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg>
@@ -368,35 +329,31 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
 
 </PageLayout>
 
+<style is:global>
+  /* Hide global header on homepage — hero has its own nav */
+  .hero ~ #site-header,
+  #site-header.is-hidden-home {
+    display: none !important;
+  }
+</style>
+
 <style>
   /* ── Shared ──────────────────────────────── */
   .section {
     padding: var(--section-padding) 0;
   }
-
   .section--surface {
     background: var(--color-surface);
   }
-
   .section-heading {
     font-family: var(--font-serif);
     font-size: var(--text-4xl);
-    font-weight: 700;
+    font-weight: var(--weight-black);
     color: var(--color-text);
     margin-bottom: var(--space-3xl);
     text-align: center;
     line-height: var(--leading-tight);
-  }
-
-  .section-heading--small {
-    font-family: var(--font-serif);
-    font-size: var(--text-2xl);
-    font-weight: 700;
-    color: var(--color-text);
-    text-align: center;
-    margin-bottom: var(--space-2xl);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
+    letter-spacing: var(--tracking-tighter);
   }
 
   .btn-cta {
@@ -412,25 +369,15 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     border-radius: var(--radius-sm);
-    transition:
-      background var(--duration-fast) var(--ease-out),
-      transform var(--duration-fast) var(--ease-out),
-      box-shadow var(--duration-fast) var(--ease-out);
+    transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
   }
-
   .btn-cta:hover {
     background: var(--color-cta-hover);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(171, 227, 196, 0.45);
   }
-
-  .btn-cta svg {
-    transition: transform var(--duration-fast) var(--ease-out);
-  }
-
-  .btn-cta:hover svg {
-    transform: translateX(4px);
-  }
+  .btn-cta svg { transition: transform var(--duration-fast) var(--ease-out); }
+  .btn-cta:hover svg { transform: translateX(4px); }
 
   .btn-outline-dark {
     display: inline-flex;
@@ -445,39 +392,30 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     border-radius: var(--radius-sm);
-    transition:
-      background var(--duration-fast) var(--ease-out),
-      color var(--duration-fast) var(--ease-out),
-      transform var(--duration-fast) var(--ease-out);
+    transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
   }
-
   .btn-outline-dark:hover {
     background: var(--color-text);
     color: var(--color-white);
     transform: translateY(-2px);
   }
-
-  .btn-outline-dark svg {
-    transition: transform var(--duration-fast) var(--ease-out);
-  }
-
-  .btn-outline-dark:hover svg {
-    transform: translateX(4px);
-  }
+  .btn-outline-dark svg { transition: transform var(--duration-fast) var(--ease-out); }
+  .btn-outline-dark:hover svg { transform: translateX(4px); }
 
   /* ── HERO ─────────────────────────────────── */
   .hero {
-    position: relative;
     height: 100svh;
     min-height: 560px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
+    padding: var(--hero-padding);
+    background: var(--color-bg);
   }
 
-  .hero__bg {
-    position: absolute;
-    inset: 0;
+  .hero__card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    overflow: hidden;
   }
 
   .hero__img {
@@ -485,11 +423,10 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: transform 8s ease-out;
+    transition: transform 10s ease-out;
   }
-
   .hero:hover .hero__img {
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
 
   .hero__overlay {
@@ -497,27 +434,149 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(0,0,0,0.15) 0%,
-      rgba(0,0,0,0.05) 40%,
-      rgba(0,0,0,0.55) 100%
+      rgba(0,0,0,0.2) 0%,
+      rgba(0,0,0,0.02) 40%,
+      rgba(0,0,0,0.5) 100%
     );
+    pointer-events: none;
   }
 
-  .hero__body {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    padding: var(--space-2xl) var(--container-padding);
+  /* Hero nav (glass bar, top-right of image) */
+  .hero-nav {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    z-index: 10;
+    display: none;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 0.5rem 0.6rem 0.5rem 1.2rem;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px) saturate(1.5);
+    -webkit-backdrop-filter: blur(16px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+  }
+
+  .hero-nav__list {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    gap: var(--space-lg);
   }
 
-  .hero__tagline {
+  .hero-nav__link {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+    transition: color var(--duration-fast) var(--ease-out);
+    white-space: nowrap;
+  }
+  .hero-nav__link:hover {
+    color: #fff;
+  }
+
+  .hero-nav__book {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-cta);
+    color: var(--color-black);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  }
+  .hero-nav__book:hover {
+    background: var(--color-cta-hover);
+    transform: translateY(-1px);
+  }
+  .hero-nav__book svg {
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+  .hero-nav__book:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  /* Mobile hamburger in hero */
+  .hero-menu-btn {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hero-menu-icon,
+  .hero-menu-icon::before,
+  .hero-menu-icon::after {
+    display: block;
+    width: 1.1rem;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 1px;
+    transition: all var(--duration-normal) var(--ease-out);
+    position: relative;
+  }
+  .hero-menu-icon::before,
+  .hero-menu-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+  .hero-menu-icon::before { top: -5px; }
+  .hero-menu-icon::after  { top: 5px; }
+
+  .hero-menu-btn[aria-expanded="true"] .hero-menu-icon { background: transparent; }
+  .hero-menu-btn[aria-expanded="true"] .hero-menu-icon::before { top: 0; transform: rotate(45deg); }
+  .hero-menu-btn[aria-expanded="true"] .hero-menu-icon::after  { top: 0; transform: rotate(-45deg); }
+
+  /* Brand name overlay */
+  .hero__brand {
+    position: absolute;
+    top: clamp(1.5rem, 4vw, 3rem);
+    left: clamp(1.5rem, 4vw, 3rem);
+    z-index: 5;
     font-family: var(--font-serif);
-    font-size: var(--text-3xl);
+    font-weight: var(--weight-black);
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: #fff;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.3);
+    margin: 0;
+    max-width: 10ch;
+  }
+
+  /* Tagline bottom-right */
+  .hero__tagline {
+    position: absolute;
+    bottom: clamp(1.5rem, 4vw, 3rem);
+    right: clamp(1.5rem, 4vw, 3rem);
+    z-index: 5;
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
     font-weight: 400;
     font-style: italic;
-    color: var(--color-white);
+    color: #fff;
     text-align: right;
     max-width: 16ch;
     line-height: var(--leading-snug);
@@ -525,18 +584,20 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
   }
 
   /* ── INTRO ───────────────────────────────── */
-  .intro {
-    background: var(--color-bg);
-  }
-
   .intro__heading {
     font-family: var(--font-serif);
     font-size: var(--text-4xl);
-    font-weight: 700;
+    font-weight: var(--weight-black);
     color: var(--color-text);
     margin-bottom: var(--space-2xl);
-    max-width: 18ch;
+    text-align: center;
     line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tighter);
+  }
+
+  .intro__text-wrap {
+    max-width: 56ch;
+    margin: 0 auto var(--space-3xl);
   }
 
   .intro__text {
@@ -544,31 +605,33 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     font-size: var(--text-xl);
     color: var(--color-text);
     line-height: var(--leading-relaxed);
-    max-width: 58ch;
-    margin-bottom: var(--space-3xl);
+    text-align: center;
     font-weight: 300;
+    max-width: none;
   }
 
-  /* Word-by-word scroll animation */
+  /* Line-by-line scroll animation */
   .intro__text .word {
     display: inline;
-    color: #cccccc;
-    transition: color 0.3s ease;
+    color: #c8c8c8;
+    transition: color 0.25s ease;
   }
-
   .intro__text .word.is-lit {
     color: var(--color-text);
   }
 
-  /* Trust bar */
+  /* Separator + Trust bar */
+  .intro__divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin-bottom: var(--space-3xl);
+  }
+
   .trust-bar {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
-    border-top: 1px solid var(--color-border);
-    padding-top: var(--space-2xl);
   }
-
   .trust-bar__item {
     display: flex;
     flex-direction: column;
@@ -576,10 +639,9 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     text-align: center;
     gap: var(--space-md);
   }
-
   .trust-bar__logo {
-    width: 56px;
-    height: 56px;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -588,14 +650,12 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     background: var(--color-surface);
     transition: border-color var(--duration-fast) var(--ease-out);
   }
-
   .trust-bar__item:hover .trust-bar__logo {
     border-color: var(--color-primary);
   }
-
   .trust-bar__label {
     font-family: var(--font-sans);
-    font-size: var(--text-xs);
+    font-size: var(--text-base);
     font-weight: 700;
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
@@ -603,49 +663,33 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     line-height: var(--leading-snug);
     max-width: none;
   }
-
   .trust-bar__label span {
     display: block;
     font-weight: 400;
     color: var(--color-text-muted);
     text-transform: none;
     letter-spacing: 0;
-    margin-top: 2px;
+    margin-top: 4px;
+    font-size: var(--text-sm);
   }
 
   /* ── GALLERY PREVIEW ─────────────────────── */
-  .gallery-preview {
-    background: var(--color-bg);
-  }
-
   .gallery-collage {
     display: grid;
     grid-template-columns: 45% 1fr;
-    grid-template-rows: 1fr;
     gap: var(--space-sm);
     margin-bottom: var(--space-xl);
     border-radius: var(--radius-xl);
     overflow: hidden;
     aspect-ratio: 16 / 10;
   }
-
-  .gallery-collage__left {
-    grid-row: 1 / -1;
-  }
-
-  .gallery-collage__right {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: var(--space-sm);
-  }
-
+  .gallery-collage__left { grid-row: 1 / -1; }
+  .gallery-collage__right { display: grid; grid-template-rows: 1fr 1fr; gap: var(--space-sm); }
   .gallery-collage__img-wrap {
     overflow: hidden;
     height: 100%;
-    background: var(--color-surface-alt);
     position: relative;
   }
-
   .gallery-collage__placeholder {
     width: 100%;
     height: 100%;
@@ -657,67 +701,47 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     transition: transform var(--duration-slow) var(--ease-out);
     cursor: default;
   }
-
   .gallery-collage__img-wrap:hover .gallery-collage__placeholder {
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
-
   .gallery-collage__placeholder span {
     font-family: var(--font-serif);
     font-size: var(--text-lg);
     font-style: italic;
     color: var(--color-text-muted);
-    letter-spacing: 0.02em;
     user-select: none;
   }
-
   .gallery-preview__action {
     text-align: center;
     margin-top: var(--space-xl);
   }
 
   /* ── FACILITIES ──────────────────────────── */
-  .facilities {
-    border-top: 1px solid var(--color-border-light);
-  }
-
   .facilities-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
+    gap: var(--space-2xl) var(--space-xl);
   }
-
   .facility-card {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: var(--space-md);
-    padding: var(--space-lg);
-    background: var(--color-bg);
-    border: 1px solid var(--color-border-light);
-    border-radius: var(--radius-lg);
-    transition:
-      border-color var(--duration-fast) var(--ease-out),
-      transform var(--duration-fast) var(--ease-out),
-      box-shadow var(--duration-fast) var(--ease-out);
+    transition: transform var(--duration-fast) var(--ease-out);
   }
-
   .facility-card:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
   }
-
   .facility-card__icon {
-    flex-shrink: 0;
     color: var(--color-primary);
-    width: 28px;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
-
   .facility-card__label {
     font-family: var(--font-sans);
-    font-size: var(--text-sm);
+    font-size: var(--text-lg);
     font-weight: 400;
     color: var(--color-text);
     line-height: var(--leading-snug);
@@ -725,16 +749,11 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
   }
 
   /* ── IMPORTANT BITS ──────────────────────── */
-  .important {
-    border-bottom: 1px solid var(--color-border-light);
-  }
-
   .important-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-xl);
   }
-
   .important-item {
     display: flex;
     flex-direction: column;
@@ -747,23 +766,20 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     background: var(--color-surface);
     transition: border-color var(--duration-fast) var(--ease-out);
   }
-
   .important-item:hover {
     border-color: var(--color-primary);
   }
-
   .important-item__icon {
     color: var(--color-primary);
   }
-
   .important-item__title {
     font-family: var(--font-serif);
     font-size: var(--text-xl);
-    font-weight: 700;
+    font-weight: var(--weight-black);
     color: var(--color-text);
+    letter-spacing: var(--tracking-tighter);
     margin: 0;
   }
-
   .important-item__note {
     font-family: var(--font-sans);
     font-size: var(--text-sm);
@@ -776,62 +792,67 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     max-width: 720px;
     margin: 0 auto;
   }
-
   .testimonial-slider__track {
     position: relative;
-    min-height: 240px;
+    min-height: 280px;
   }
-
   .testimonial-slide {
     display: none;
     flex-direction: column;
     gap: var(--space-lg);
     text-align: center;
-    padding: var(--space-2xl);
+    padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
     background: var(--color-bg);
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-xl);
     animation: testimonial-in 0.4s var(--ease-out);
+    position: relative;
+    overflow: visible;
   }
-
-  .testimonial-slide.is-active {
-    display: flex;
-  }
+  .testimonial-slide.is-active { display: flex; }
 
   @keyframes testimonial-in {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* Large decorative quotation mark */
+  .testimonial-slide__quote-mark {
+    position: absolute;
+    top: -0.15em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 12vw, 8rem);
+    line-height: 1;
+    color: var(--color-primary);
+    opacity: 0.2;
+    pointer-events: none;
+    user-select: none;
+  }
+
   .testimonial-slide__stars {
     font-size: var(--text-lg);
     letter-spacing: 3px;
     color: var(--color-primary);
+    position: relative;
+    z-index: 1;
   }
-
-  .testimonial-slide__quote {
-    flex: 1;
-  }
-
+  .testimonial-slide__quote { flex: 1; position: relative; z-index: 1; }
   .testimonial-slide__text {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: var(--text-lg);
     font-style: italic;
     color: var(--color-text);
     line-height: var(--leading-relaxed);
     max-width: none;
+  }
+  .testimonial-slide__text.is-truncated {
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-
-  .testimonial-slide__text.is-expanded {
-    -webkit-line-clamp: unset;
-    overflow: visible;
-    display: block;
-  }
-
   .testimonial-slide__read-more {
     background: none;
     border: none;
@@ -846,18 +867,16 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     margin-top: var(--space-sm);
     transition: opacity var(--duration-fast) var(--ease-out);
   }
-
-  .testimonial-slide__read-more:hover {
-    opacity: 0.7;
-  }
+  .testimonial-slide__read-more:hover { opacity: 0.7; }
 
   .testimonial-slide__footer {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4px;
+    position: relative;
+    z-index: 1;
   }
-
   .testimonial-slide__name {
     font-family: var(--font-sans);
     font-size: var(--text-sm);
@@ -866,7 +885,6 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
   }
-
   .testimonial-slide__location {
     font-family: var(--font-sans);
     font-size: var(--text-xs);
@@ -880,7 +898,6 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     gap: var(--space-lg);
     margin-top: var(--space-xl);
   }
-
   .testimonial-slider__btn {
     width: 2.5rem;
     height: 2.5rem;
@@ -892,44 +909,20 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition:
-      border-color var(--duration-fast) var(--ease-out),
-      background var(--duration-fast) var(--ease-out);
+    transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
   }
-
   .testimonial-slider__btn:hover {
     border-color: var(--color-primary);
     background: var(--color-primary);
     color: var(--color-white);
   }
-
-  .testimonial-slider__dots {
-    display: flex;
-    gap: var(--space-sm);
-  }
-
+  .testimonial-slider__dots { display: flex; gap: var(--space-sm); }
   .testimonial-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    border: none;
-    background: var(--color-border);
-    cursor: pointer;
-    padding: 0;
+    width: 0.5rem; height: 0.5rem; border-radius: 50%; border: none;
+    background: var(--color-border); cursor: pointer; padding: 0;
     transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
   }
-
-  .testimonial-dot.is-active {
-    background: var(--color-primary);
-    transform: scale(1.4);
-  }
-
-  .testimonial-placeholder__cta {
-    margin-top: var(--space-lg);
-    text-align: center;
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-  }
+  .testimonial-dot.is-active { background: var(--color-primary); transform: scale(1.4); }
 
   /* ── LOCATION ─────────────────────────────── */
   .location-grid {
@@ -938,24 +931,13 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     gap: var(--space-3xl);
     align-items: center;
   }
-
   .location-content {
     display: flex;
     flex-direction: column;
     gap: var(--space-xl);
   }
-
-  .location-content .section-heading {
-    text-align: left;
-    margin-bottom: 0;
-  }
-
-  .location-w3w {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
-
+  .location-content .section-heading { text-align: left; margin-bottom: 0; }
+  .location-w3w { display: flex; flex-direction: column; gap: var(--space-sm); }
   .location-w3w__badge {
     display: inline-flex;
     align-items: center;
@@ -966,33 +948,13 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     border-radius: var(--radius-md);
     width: fit-content;
   }
-
-  .location-w3w__words {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-  }
-
-  .location-w3w__explainer {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
-    max-width: 42ch;
-  }
-
+  .location-w3w__words { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 700; letter-spacing: 0.02em; }
+  .location-w3w__explainer { font-size: var(--text-sm); color: var(--color-text-muted); line-height: var(--leading-relaxed); max-width: 42ch; }
   .location-address {
-    font-style: normal;
-    font-family: var(--font-sans);
-    font-size: var(--text-base);
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
+    font-style: normal; font-family: var(--font-sans); font-size: var(--text-base);
+    color: var(--color-text-muted); line-height: var(--leading-relaxed);
   }
-
-  .location-address p {
-    max-width: none;
-  }
-
+  .location-address p { max-width: none; }
   .location-map {
     border-radius: var(--radius-xl);
     overflow: hidden;
@@ -1001,108 +963,79 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     box-shadow: var(--shadow-lg);
     background: var(--color-surface-alt);
   }
-
-  .location-map iframe {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
+  .location-map iframe { width: 100%; height: 100%; display: block; }
 
   /* ── FAQ ──────────────────────────────────── */
-  .faq-list {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  .faq-item {
-    border-bottom: 1px solid var(--color-border-light);
-  }
-
-  .faq-item:first-child {
-    border-top: 1px solid var(--color-border-light);
-  }
-
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--color-border-light); }
+  .faq-item:first-child { border-top: 1px solid var(--color-border-light); }
   .faq-item__question {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-md);
-    width: 100%;
-    padding: var(--space-lg) 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    font-weight: 700;
-    color: var(--color-text);
-    line-height: var(--leading-snug);
+    display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
+    width: 100%; padding: var(--space-lg) 0; background: none; border: none; cursor: pointer;
+    text-align: left; font-family: var(--font-serif); font-size: var(--text-lg);
+    font-weight: var(--weight-bold); color: var(--color-text); line-height: var(--leading-snug);
     transition: color var(--duration-fast) var(--ease-out);
   }
-
-  .faq-item__question:hover {
-    color: var(--color-primary);
-  }
-
+  .faq-item__question:hover { color: var(--color-primary); }
   .faq-item__icon {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    color: var(--color-primary);
-    transition: transform var(--duration-fast) var(--ease-out);
+    display: flex; align-items: center; flex-shrink: 0; width: 20px; height: 20px;
+    color: var(--color-primary); transition: transform var(--duration-fast) var(--ease-out);
   }
-
   .faq-icon-plus { display: block; }
   .faq-icon-minus { display: none; }
-
   .faq-item--open .faq-icon-plus { display: none; }
   .faq-item--open .faq-icon-minus { display: block; }
-
   .faq-item__answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height var(--duration-slow) var(--ease-out),
-                padding var(--duration-normal) var(--ease-out);
+    max-height: 0; overflow: hidden;
+    transition: max-height var(--duration-slow) var(--ease-out), padding var(--duration-normal) var(--ease-out);
   }
-
   .faq-item__answer p {
-    padding-bottom: var(--space-lg);
-    font-size: var(--text-base);
-    color: var(--color-text-muted);
-    line-height: var(--leading-relaxed);
-    max-width: none;
+    padding-bottom: var(--space-lg); font-size: var(--text-base); color: var(--color-text-muted);
+    line-height: var(--leading-relaxed); max-width: none;
   }
 
   /* ── Responsive ───────────────────────────── */
   @media (min-width: 40rem) {
-    .facilities-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .important-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    .important-grid { grid-template-columns: repeat(3, 1fr); }
   }
-
+  @media (min-width: 48rem) {
+    .facilities-grid { grid-template-columns: repeat(3, 1fr); }
+  }
   @media (min-width: 64rem) {
-    .facilities-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .location-grid {
-      grid-template-columns: 1fr 1.1fr;
-    }
-    .gallery-collage {
-      aspect-ratio: 16 / 9;
-    }
+    .hero-nav { display: flex; }
+    .hero-menu-btn { display: none; }
+    .location-grid { grid-template-columns: 1fr 1.1fr; }
+    .gallery-collage { aspect-ratio: 16 / 9; }
   }
 </style>
 
 <script is:inline>
   (function () {
 
-    /* ── Word-by-word scroll animation ── */
+    /* ── Hero mobile menu → opens global mobile-nav ── */
+    var heroMenuBtn = document.querySelector(".hero-menu-btn");
+    var mobileNav = document.getElementById("mobile-nav");
+    if (heroMenuBtn && mobileNav) {
+      function closeMenu() {
+        heroMenuBtn.setAttribute("aria-expanded", "false");
+        mobileNav.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+      heroMenuBtn.addEventListener("click", function () {
+        var expanded = heroMenuBtn.getAttribute("aria-expanded") === "true";
+        heroMenuBtn.setAttribute("aria-expanded", String(!expanded));
+        mobileNav.classList.toggle("is-open");
+        document.body.style.overflow = expanded ? "" : "hidden";
+      });
+      mobileNav.addEventListener("click", function (e) {
+        if (e.target.tagName === "A") closeMenu();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeMenu();
+      });
+    }
+
+    /* ── Line-by-line scroll animation ── */
     var textEl = document.getElementById("intro-animated-text");
     if (textEl && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       var raw = textEl.textContent.trim();
@@ -1114,20 +1047,49 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
       var wordEls = textEl.querySelectorAll(".word");
       var total = wordEls.length;
 
+      // Group words by their visual line (offsetTop)
+      var lines = [];
+      var lastTop = -1;
+      wordEls.forEach(function (w) {
+        var top = w.getBoundingClientRect().top + window.scrollY;
+        if (Math.abs(top - lastTop) > 4) {
+          lines.push([]);
+          lastTop = top;
+        }
+        lines[lines.length - 1].push(w);
+      });
+      var totalLines = lines.length;
+
       function updateWords() {
         var rect = textEl.getBoundingClientRect();
         var viewH = window.innerHeight;
-        // Progress: 0 when top of text hits bottom of viewport, 1 when text centre hits middle
         var start = viewH;
         var end = viewH * 0.5 - rect.height * 0.5;
         var progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
-        var litCount = Math.round(progress * total);
-        wordEls.forEach(function (w, i) {
-          w.classList.toggle("is-lit", i < litCount);
+        var litLines = Math.round(progress * totalLines);
+        lines.forEach(function (line, i) {
+          line.forEach(function (w) {
+            w.classList.toggle("is-lit", i < litLines);
+          });
         });
       }
 
       window.addEventListener("scroll", updateWords, { passive: true });
+      window.addEventListener("resize", function () {
+        // Recompute lines on resize
+        lines = [];
+        lastTop = -1;
+        wordEls.forEach(function (w) {
+          var top = w.getBoundingClientRect().top + window.scrollY;
+          if (Math.abs(top - lastTop) > 4) {
+            lines.push([]);
+            lastTop = top;
+          }
+          lines[lines.length - 1].push(w);
+        });
+        totalLines = lines.length;
+        updateWords();
+      });
       updateWords();
     }
 
@@ -1142,22 +1104,19 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
       var dots = [];
 
       slides.forEach(function (slide, i) {
-        // Truncation: if text > 350 chars, add a "Read More" button
         var textEl = slide.querySelector(".testimonial-slide__text");
-        if (textEl && textEl.getAttribute("data-full") && textEl.getAttribute("data-full").length > 350) {
+        if (textEl && textEl.textContent.length > 300) {
+          textEl.classList.add("is-truncated");
           var btn = document.createElement("button");
           btn.className = "testimonial-slide__read-more";
           btn.textContent = "Read More";
           btn.addEventListener("click", function () {
-            var expanded = textEl.classList.toggle("is-expanded");
-            btn.textContent = expanded ? "Show Less" : "Read More";
+            var expanded = textEl.classList.toggle("is-truncated");
+            btn.textContent = expanded ? "Read More" : "Show Less";
           });
           textEl.insertAdjacentElement("afterend", btn);
-        } else if (textEl) {
-          textEl.classList.add("is-expanded");
         }
 
-        // Dots
         var dot = document.createElement("button");
         dot.className = "testimonial-dot" + (i === 0 ? " is-active" : "");
         dot.setAttribute("role", "tab");
@@ -1184,7 +1143,6 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
       if (prevBtn) prevBtn.addEventListener("click", function () { goTo(current - 1); });
       if (nextBtn) nextBtn.addEventListener("click", function () { goTo(current + 1); });
 
-      // Auto-advance every 6s
       var timer = setInterval(function () { goTo(current + 1); }, 6000);
       var sliderEl = document.querySelector(".testimonial-slider");
       if (sliderEl) {
@@ -1196,22 +1154,18 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     }
 
     /* ── FAQ accordion ── */
-    var faqBtns = document.querySelectorAll(".faq-item__question");
-    faqBtns.forEach(function (btn) {
+    document.querySelectorAll(".faq-item__question").forEach(function (btn) {
       var answer = document.getElementById(btn.getAttribute("aria-controls"));
       btn.addEventListener("click", function () {
         var item = btn.closest(".faq-item");
         var isOpen = item.classList.contains("faq-item--open");
-
-        // Close all
         document.querySelectorAll(".faq-item--open").forEach(function (openItem) {
           openItem.classList.remove("faq-item--open");
-          var openAnswer = openItem.querySelector(".faq-item__answer");
-          var openBtn = openItem.querySelector(".faq-item__question");
-          if (openAnswer) openAnswer.style.maxHeight = null;
-          if (openBtn) openBtn.setAttribute("aria-expanded", "false");
+          var a = openItem.querySelector(".faq-item__answer");
+          var b = openItem.querySelector(".faq-item__question");
+          if (a) a.style.maxHeight = null;
+          if (b) b.setAttribute("aria-expanded", "false");
         });
-
         if (!isOpen && answer) {
           item.classList.add("faq-item--open");
           btn.setAttribute("aria-expanded", "true");

@@ -1,6 +1,6 @@
 :root {
   /* Colors */
-  --color-bg: #f4f3ef;
+  --color-bg: #FDCE88;
   --color-surface: #eeece7;
   --color-surface-alt: #e7e4de;
   --color-primary: #e3977b;
@@ -19,7 +19,8 @@
 
   /* Typography */
   --font-sans: "Lato", system-ui, -apple-system, sans-serif;
-  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-serif: "Schibsted Grotesk", system-ui, -apple-system, sans-serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, monospace;
 
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
@@ -39,6 +40,7 @@
   --leading-relaxed: 1.75;
 
   --tracking-tight: -0.02em;
+  --tracking-tighter: -0.04em;
   --tracking-normal: 0;
   --tracking-wide: 0.06em;
   --tracking-wider: 0.1em;
@@ -66,6 +68,7 @@
   --container-max: 72rem;
   --container-narrow: 56rem;
   --container-padding: clamp(1.25rem, 4vw, 2.5rem);
+  --hero-padding: clamp(0.75rem, 1.5vw, 1.25rem);
 
   /* Borders */
   --radius-sm: 0.25rem;

@@ -9,7 +9,12 @@ const site = siteSettingsCollection[0]?.data;
 <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
   <nav aria-label="Mobile navigation">
     <ul class="mobile-nav__list" role="list">
-      {siteConfig.nav.map((item) => (
+      {[
+        { label: "Gallery", href: "/gallery/" },
+        { label: "Local Area", href: "/location/" },
+        { label: "Your Hosts", href: "/your-hosts/" },
+        { label: "Contact", href: "/contact/" },
+      ].map((item) => (
         <li class="mobile-nav__item">
           <a href={item.href} class="mobile-nav__link">{item.label}</a>
         </li>
