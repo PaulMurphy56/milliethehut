@@ -32,6 +32,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Offset fixed header on non-hero pages */
+main > *:first-child:not(.hero) {
+  padding-top: calc(var(--space-5xl) + var(--space-xl));
+}
+
 img,
 picture,
 video,

@@ -1,29 +1,26 @@
 :root {
   /* Colors */
-  --color-primary: #b5533c;
-  --color-primary-light: #c96648;
-  --color-primary-dark: #9a4232;
-  --color-accent: #7a9e7e;
-  --color-accent-light: #91b595;
-  --color-bg: #faf7f2;
-  --color-surface: #f4efe8;
-  --color-surface-alt: #ede8e0;
-  --color-text: #2c2018;
-  --color-text-muted: #6b5b4e;
-  --color-text-inverse: #faf7f2;
-  --color-border: #d9d0c5;
-  --color-border-light: #ebe4da;
+  --color-bg: #f4f3ef;
+  --color-surface: #eeece7;
+  --color-surface-alt: #e7e4de;
+  --color-primary: #e3977b;
+  --color-primary-dark: #c87d62;
+  --color-cta: #ABE3C4;
+  --color-cta-hover: #91d0ae;
+  --color-text: #111111;
+  --color-text-muted: #555555;
+  --color-text-inverse: #ffffff;
+  --color-border: #d4d1cb;
+  --color-border-light: #e0ddd7;
   --color-white: #ffffff;
   --color-black: #000000;
-  --color-button: #b5533c;
-  --color-button-hover: #9a4232;
   --color-error: #dc2626;
   --color-success: #16a34a;
 
   /* Typography */
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-serif: "Lora", Georgia, "Times New Roman", serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Lato", system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, monospace;
 
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
   --text-sm: clamp(0.8125rem, 0.775rem + 0.25vw, 0.875rem);
@@ -44,11 +41,13 @@
   --tracking-tight: -0.02em;
   --tracking-normal: 0;
   --tracking-wide: 0.06em;
+  --tracking-wider: 0.1em;
 
   --weight-normal: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
+  --weight-black: 900;
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -61,12 +60,12 @@
   --space-4xl: 6rem;
   --space-5xl: 8rem;
 
-  --section-padding: clamp(3rem, 5vw, 6rem);
+  --section-padding: clamp(4rem, 7vw, 8rem);
 
   /* Layout */
   --container-max: 72rem;
   --container-narrow: 56rem;
-  --container-padding: clamp(1rem, 3vw, 2rem);
+  --container-padding: clamp(1.25rem, 4vw, 2.5rem);
 
   /* Borders */
   --radius-sm: 0.25rem;
@@ -77,10 +76,10 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(44, 32, 24, 0.06);
-  --shadow-md: 0 4px 6px -1px rgba(44, 32, 24, 0.08);
-  --shadow-lg: 0 10px 25px -3px rgba(44, 32, 24, 0.1);
-  --shadow-xl: 0 20px 50px -5px rgba(44, 32, 24, 0.12);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.13);
 
   /* Transitions */
   --ease-out: cubic-bezier(0.33, 1, 0.68, 1);

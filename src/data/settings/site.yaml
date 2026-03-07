@@ -1,0 +1,16 @@
+name: "Millie The Hut"
+tagline: "A Shepherd's Hut Retreat on the England/Wales Border"
+description: "Millie The Hut is a beautifully restored shepherd's hut nestled on the England/Wales border near Presteigne, Powys. The perfect escape for couples seeking peace, countryside views, and cosy comfort."
+phone: "07700 000000"
+email: "hello@milliethehut.co.uk"
+bookingUrl: "https://milliethehut.co.uk/book/"
+addressLocality: "Presteigne"
+addressRegion: "Powys"
+addressPostalCode: "LD8"
+addressCountry: "GB"
+geoLatitude: 52.2762
+geoLongitude: -3.0028
+checkinTime: "15:00"
+checkoutTime: "10:00"
+instagramUrl: "https://instagram.com/milliethehut"
+facebookUrl: "https://facebook.com/milliethehut"

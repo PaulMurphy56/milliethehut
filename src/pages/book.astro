@@ -2,21 +2,26 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import Container from "../components/ui/Container.astro";
 import Button from "../components/ui/Button.astro";
-import SectionHeading from "../components/ui/SectionHeading.astro";
-import { siteConfig } from "../lib/siteConfig";
+import { getCollection } from "astro:content";
+
+const pageCollection = await getCollection("pageBook");
+const page = pageCollection[0]?.data;
+
+const siteSettingsCollection = await getCollection("siteSettings");
+const site = siteSettingsCollection[0]?.data;
 ---
 
 <PageLayout
-  title={`Book Your Stay | ${siteConfig.name}`}
-  description="Book Millie The Hut — a shepherd's hut retreat near Presteigne on the England/Wales border. Check availability or send an enquiry."
+  title={page?.metaTitle ?? "Book Your Stay | Millie The Hut"}
+  description={page?.metaDescription}
 >
   <!-- Page Header -->
   <section class="page-header">
     <Container>
       <div class="page-header__content" data-reveal="slide-up">
-        <p class="page-header__eyebrow">Book & Contact</p>
-        <h1 class="page-header__title">Start planning your escape</h1>
-        <p class="page-header__desc">Check availability, send an enquiry, or simply say hello. We'd love to hear from you.</p>
+        {page?.pageEyebrow && <p class="page-header__eyebrow">{page.pageEyebrow}</p>}
+        <h1 class="page-header__title">{page?.pageTitle ?? "Book"}</h1>
+        {page?.pageDescription && <p class="page-header__desc">{page.pageDescription}</p>}
       </div>
     </Container>
   </section>
@@ -28,8 +33,8 @@ import { siteConfig } from "../lib/siteConfig";
 
         <!-- Enquiry form -->
         <div class="form-wrap" data-reveal="slide-up">
-          <h2 class="form-wrap__title">Send an enquiry</h2>
-          <p class="form-wrap__desc">Fill in the form below and we'll get back to you within 24 hours.</p>
+          {page?.formHeading && <h2 class="form-wrap__title">{page.formHeading}</h2>}
+          {page?.formDescription && <p class="form-wrap__desc">{page.formDescription}</p>}
 
           <form class="enquiry-form" name="booking-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="booking-enquiry" />
@@ -39,40 +44,17 @@ import { siteConfig } from "../lib/siteConfig";
 
             <div class="form-group">
               <label class="form-label" for="name">Your name <span aria-hidden="true">*</span></label>
-              <input
-                class="form-input"
-                type="text"
-                id="name"
-                name="name"
-                required
-                autocomplete="name"
-                placeholder="Jane Smith"
-              />
+              <input class="form-input" type="text" id="name" name="name" required autocomplete="name" placeholder="Jane Smith" />
             </div>
 
             <div class="form-group">
               <label class="form-label" for="email">Email address <span aria-hidden="true">*</span></label>
-              <input
-                class="form-input"
-                type="email"
-                id="email"
-                name="email"
-                required
-                autocomplete="email"
-                placeholder="jane@example.com"
-              />
+              <input class="form-input" type="email" id="email" name="email" required autocomplete="email" placeholder="jane@example.com" />
             </div>
 
             <div class="form-group">
               <label class="form-label" for="phone">Phone number</label>
-              <input
-                class="form-input"
-                type="tel"
-                id="phone"
-                name="phone"
-                autocomplete="tel"
-                placeholder="07700 000000"
-              />
+              <input class="form-input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="07700 000000" />
             </div>
 
             <div class="form-row">
@@ -106,13 +88,7 @@ import { siteConfig } from "../lib/siteConfig";
 
             <div class="form-group">
               <label class="form-label" for="message">Anything else you'd like to say?</label>
-              <textarea
-                class="form-input form-textarea"
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Questions, special requests, or just a hello..."
-              ></textarea>
+              <textarea class="form-input form-textarea" id="message" name="message" rows="4" placeholder="Questions, special requests, or just a hello..."></textarea>
             </div>
 
             <Button type="submit" size="lg">Send Enquiry</Button>
@@ -121,45 +97,54 @@ import { siteConfig } from "../lib/siteConfig";
 
         <!-- Contact details -->
         <aside class="contact-details" data-reveal="fade">
-          <div class="contact-card">
-            <h2 class="contact-card__title">Get in touch directly</h2>
-            <ul class="contact-card__list" role="list">
-              <li class="contact-card__item">
-                <span class="contact-card__label">Phone</span>
-                <a href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`} class="contact-card__value">{siteConfig.phone}</a>
-              </li>
-              <li class="contact-card__item">
-                <span class="contact-card__label">Email</span>
-                <a href={`mailto:${siteConfig.email}`} class="contact-card__value">{siteConfig.email}</a>
-              </li>
-              <li class="contact-card__item">
-                <span class="contact-card__label">Location</span>
-                <span class="contact-card__value">{siteConfig.address.locality}, {siteConfig.address.region}</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="contact-card">
-            <h2 class="contact-card__title">Good to know</h2>
-            <ul class="info-list" role="list">
-              <li>Check-in from <strong>3:00pm</strong></li>
-              <li>Check-out by <strong>10:00am</strong></li>
-              <li>Minimum stay: <strong>2 nights</strong></li>
-              <li>Maximum guests: <strong>2 people</strong></li>
-              <li>Dogs welcome — <strong>please mention when enquiring</strong></li>
-            </ul>
-          </div>
-
-          <div class="contact-card">
-            <h2 class="contact-card__title">Follow Millie</h2>
-            <div class="contact-socials">
-              {Object.entries(siteConfig.socials).map(([platform, url]) => (
-                <a href={url} target="_blank" rel="noopener noreferrer" class="contact-social-link">
-                  {platform.charAt(0).toUpperCase() + platform.slice(1)}
-                </a>
-              ))}
+          {site && (
+            <div class="contact-card">
+              <h2 class="contact-card__title">Get in touch directly</h2>
+              <ul class="contact-card__list" role="list">
+                {site.phone && (
+                  <li class="contact-card__item">
+                    <span class="contact-card__label">Phone</span>
+                    <a href={`tel:${site.phone.replace(/\s+/g, "")}`} class="contact-card__value">{site.phone}</a>
+                  </li>
+                )}
+                {site.email && (
+                  <li class="contact-card__item">
+                    <span class="contact-card__label">Email</span>
+                    <a href={`mailto:${site.email}`} class="contact-card__value">{site.email}</a>
+                  </li>
+                )}
+                {site.addressLocality && (
+                  <li class="contact-card__item">
+                    <span class="contact-card__label">Location</span>
+                    <span class="contact-card__value">{site.addressLocality}, {site.addressRegion}</span>
+                  </li>
+                )}
+              </ul>
             </div>
-          </div>
+          )}
+
+          {page?.infoItems && page.infoItems.length > 0 && (
+            <div class="contact-card">
+              <h2 class="contact-card__title">Good to know</h2>
+              <ul class="info-list" role="list">
+                {page.infoItems.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          )}
+
+          {site && (site.instagramUrl || site.facebookUrl) && (
+            <div class="contact-card">
+              <h2 class="contact-card__title">Follow Millie</h2>
+              <div class="contact-socials">
+                {site.instagramUrl && (
+                  <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="contact-social-link">Instagram</a>
+                )}
+                {site.facebookUrl && (
+                  <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" class="contact-social-link">Facebook</a>
+                )}
+              </div>
+            </div>
+          )}
         </aside>
       </div>
     </Container>
@@ -205,7 +190,6 @@ import { siteConfig } from "../lib/siteConfig";
     align-items: start;
   }
 
-  /* Form */
   .form-wrap__title {
     margin-bottom: var(--space-sm);
   }
@@ -279,7 +263,6 @@ import { siteConfig } from "../lib/siteConfig";
     cursor: pointer;
   }
 
-  /* Contact sidebar */
   .contact-details {
     display: flex;
     flex-direction: column;

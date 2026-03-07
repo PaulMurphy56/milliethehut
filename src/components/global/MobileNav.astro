@@ -1,5 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import { siteConfig } from "../../lib/siteConfig";
+
+const siteSettingsCollection = await getCollection("siteSettings");
+const site = siteSettingsCollection[0]?.data;
 ---
 
 <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
@@ -14,10 +18,12 @@ import { siteConfig } from "../../lib/siteConfig";
   </nav>
 
   <div class="mobile-nav__footer">
-    <a href={siteConfig.bookingUrl} class="mobile-nav__cta">Book Your Stay</a>
-    <a href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`} class="mobile-nav__phone">
-      {siteConfig.phone}
-    </a>
+    <a href={site?.bookingUrl ?? "/book/"} class="mobile-nav__cta">Book Your Stay</a>
+    {site?.phone && (
+      <a href={`tel:${site.phone.replace(/\s+/g, "")}`} class="mobile-nav__phone">
+        {site.phone}
+      </a>
+    )}
   </div>
 </div>
 

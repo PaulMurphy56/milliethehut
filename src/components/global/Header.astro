@@ -1,19 +1,29 @@
 ---
-import { siteConfig } from "../../lib/siteConfig";
+import { getCollection } from "astro:content";
 import Container from "../ui/Container.astro";
+
+const siteSettingsCollection = await getCollection("siteSettings");
+const site = siteSettingsCollection[0]?.data;
+
+const nav = [
+  { label: "Gallery", href: "/gallery/" },
+  { label: "Local Area", href: "/location/" },
+  { label: "Your Hosts", href: "/your-hosts/" },
+  { label: "Contact", href: "/contact/" },
+];
 ---
 
-<header class="header" role="banner">
+<header class="header" role="banner" id="site-header">
   <Container>
     <div class="header__inner">
-      <a href="/" class="header__logo" aria-label={`${siteConfig.name} — Home`}>
-        <span class="header__logo-text">{siteConfig.name}</span>
+      <a href="/" class="header__logo" aria-label="Millie The Hut — Home">
+        <span class="header__logo-text">{site?.name ?? "Millie The Hut"}</span>
       </a>
 
       <nav class="header__nav" aria-label="Main navigation">
         <ul class="header__nav-list" role="list">
-          {siteConfig.nav.map((item) => (
-            <li class="header__nav-item">
+          {nav.map((item) => (
+            <li>
               <a href={item.href} class="header__nav-link">{item.label}</a>
             </li>
           ))}
@@ -21,7 +31,12 @@ import Container from "../ui/Container.astro";
       </nav>
 
       <div class="header__actions">
-        <a href={siteConfig.bookingUrl} class="header__book-btn">Book Now</a>
+        <a href={site?.bookingUrl ?? "/book/"} class="header__book-btn" aria-label="Book Now">
+          <span>Book Now</span>
+          <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+            <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/>
+          </svg>
+        </a>
       </div>
 
       <button
@@ -39,12 +54,27 @@ import Container from "../ui/Container.astro";
 
 <style>
   .header {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
-    background: rgba(250, 247, 242, 0.97);
-    border-bottom: 1px solid var(--color-border-light);
-    backdrop-filter: blur(12px);
+    left: 0;
+    right: 0;
+    z-index: 200;
+    transition: background var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+  }
+
+  /* Transparent over hero */
+  .header.is-transparent {
+    background: transparent;
+  }
+
+  /* Scrolled / non-hero pages */
+  .header.is-solid,
+  .header:not(.is-transparent) {
+    background: rgba(244, 243, 239, 0.85);
+    backdrop-filter: blur(16px) saturate(1.8);
+    -webkit-backdrop-filter: blur(16px) saturate(1.8);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
   }
 
   .header__inner {
@@ -64,13 +94,18 @@ import Container from "../ui/Container.astro";
 
   .header__logo-text {
     font-family: var(--font-serif);
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     font-weight: var(--weight-bold);
-    color: var(--color-text);
+    color: var(--color-white);
     letter-spacing: -0.01em;
+    transition: color var(--duration-fast) var(--ease-out);
   }
 
-  /* Desktop nav */
+  .header.is-solid .header__logo-text,
+  .header:not(.is-transparent) .header__logo-text {
+    color: var(--color-text);
+  }
+
   .header__nav {
     display: none;
   }
@@ -81,42 +116,46 @@ import Container from "../ui/Container.astro";
     gap: var(--space-xl);
   }
 
-  .header__nav-item {
-    position: relative;
-  }
-
   .header__nav-link {
-    font-size: var(--text-base);
-    font-weight: var(--weight-medium);
-    color: var(--color-text);
-    position: relative;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
     padding: var(--space-sm) 0;
     display: inline-block;
     transition: color var(--duration-fast) var(--ease-out);
+    position: relative;
   }
 
-  .header__nav-link::before {
+  .header__nav-link::after {
     content: "";
     position: absolute;
-    bottom: -2px;
+    bottom: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background: var(--color-primary);
+    height: 1px;
+    background: var(--color-white);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--duration-normal) var(--ease-out);
   }
 
-  .header__nav-link:hover {
-    color: var(--color-primary);
-  }
-
-  .header__nav-link:hover::before {
+  .header__nav-link:hover::after {
     transform: scaleX(1);
   }
 
-  /* Book button */
+  .header.is-solid .header__nav-link,
+  .header:not(.is-transparent) .header__nav-link {
+    color: var(--color-text);
+  }
+
+  .header.is-solid .header__nav-link::after,
+  .header:not(.is-transparent) .header__nav-link::after {
+    background: var(--color-text);
+  }
+
   .header__actions {
     display: none;
     align-items: center;
@@ -125,24 +164,37 @@ import Container from "../ui/Container.astro";
   .header__book-btn {
     display: inline-flex;
     align-items: center;
-    padding: var(--space-sm) var(--space-lg);
-    background: var(--color-primary);
-    color: var(--color-text-inverse);
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--color-cta);
+    color: var(--color-black);
+    font-family: var(--font-sans);
     font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    border-radius: var(--radius-full);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
     transition:
       background var(--duration-fast) var(--ease-out),
-      transform var(--duration-fast) var(--ease-out);
+      transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
     white-space: nowrap;
   }
 
   .header__book-btn:hover {
-    background: var(--color-primary-dark);
+    background: var(--color-cta-hover);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(171, 227, 196, 0.4);
   }
 
-  /* Hamburger */
+  .header__book-btn svg {
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .header__book-btn:hover svg {
+    transform: translateX(3px);
+  }
+
   .header__menu-btn {
     display: flex;
     align-items: center;
@@ -161,10 +213,19 @@ import Container from "../ui/Container.astro";
     display: block;
     width: 1.25rem;
     height: 2px;
-    background: var(--color-text);
+    background: var(--color-white);
     border-radius: 1px;
     transition: all var(--duration-normal) var(--ease-out);
     position: relative;
+  }
+
+  .header.is-solid .header__menu-icon,
+  .header.is-solid .header__menu-icon::before,
+  .header.is-solid .header__menu-icon::after,
+  .header:not(.is-transparent) .header__menu-icon,
+  .header:not(.is-transparent) .header__menu-icon::before,
+  .header:not(.is-transparent) .header__menu-icon::after {
+    background: var(--color-text);
   }
 
   .header__menu-icon::before,
@@ -197,7 +258,33 @@ import Container from "../ui/Container.astro";
 </style>
 
 <script is:inline>
-  document.addEventListener("DOMContentLoaded", function () {
+  (function () {
+    var header = document.getElementById("site-header");
+    var hero = document.querySelector(".hero");
+    if (!header) return;
+
+    function update() {
+      var scrolled = window.scrollY > 20;
+      if (hero) {
+        // On hero page: transparent over hero, solid once scrolled past
+        var heroBottom = hero.offsetHeight;
+        if (window.scrollY > heroBottom - 80) {
+          header.classList.remove("is-transparent");
+          header.classList.add("is-solid");
+        } else {
+          header.classList.add("is-transparent");
+          header.classList.remove("is-solid");
+        }
+      } else {
+        header.classList.remove("is-transparent");
+        header.classList.add("is-solid");
+      }
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+
+    // Mobile menu
     var btn = document.querySelector(".header__menu-btn");
     var nav = document.getElementById("mobile-nav");
     if (!btn || !nav) return;
@@ -208,27 +295,19 @@ import Container from "../ui/Container.astro";
       document.body.style.overflow = "";
     }
 
-    function toggleMenu() {
+    btn.addEventListener("click", function () {
       var expanded = btn.getAttribute("aria-expanded") === "true";
       btn.setAttribute("aria-expanded", String(!expanded));
       nav.classList.toggle("is-open");
       document.body.style.overflow = expanded ? "" : "hidden";
-    }
-
-    btn.addEventListener("click", toggleMenu);
+    });
 
     nav.addEventListener("click", function (e) {
       if (e.target.tagName === "A") closeMenu();
     });
 
-    document.addEventListener("click", function (e) {
-      if (btn.getAttribute("aria-expanded") === "true" && !nav.contains(e.target) && !btn.contains(e.target)) {
-        closeMenu();
-      }
-    });
-
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeMenu();
     });
-  });
+  })();
 </script>

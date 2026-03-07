@@ -1,5 +1,9 @@
 ---
-import { siteConfig } from "../../lib/siteConfig";
+import { getCollection } from "astro:content";
+
+const siteSettingsCollection = await getCollection("siteSettings");
+const site = siteSettingsCollection[0]?.data;
+if (!site) return;
 ---
 
 <script
@@ -7,33 +11,31 @@ import { siteConfig } from "../../lib/siteConfig";
   set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
-    name: siteConfig.name,
-    description: siteConfig.description,
-    url: siteConfig.url,
-    telephone: siteConfig.phone,
-    email: siteConfig.email,
+    name: site.name,
+    description: site.description,
+    url: "https://milliethehut.co.uk",
+    telephone: site.phone,
+    email: site.email,
     address: {
       "@type": "PostalAddress",
-      addressLocality: siteConfig.address.locality,
-      addressRegion: siteConfig.address.region,
-      postalCode: siteConfig.address.postalCode,
-      addressCountry: siteConfig.address.country,
+      addressLocality: site.addressLocality,
+      addressRegion: site.addressRegion,
+      postalCode: site.addressPostalCode,
+      addressCountry: site.addressCountry,
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: siteConfig.geo.latitude,
-      longitude: siteConfig.geo.longitude,
+      latitude: site.geoLatitude,
+      longitude: site.geoLongitude,
     },
-    checkinTime: "15:00",
-    checkoutTime: "10:00",
+    checkinTime: site.checkinTime,
+    checkoutTime: site.checkoutTime,
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Wood-burning stove", value: true },
       { "@type": "LocationFeatureSpecification", name: "Private deck", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Hot tub", value: true },
       { "@type": "LocationFeatureSpecification", name: "Countryside views", value: true },
     ],
-    sameAs: Object.values(siteConfig.socials),
+    sameAs: [site.instagramUrl, site.facebookUrl].filter(Boolean),
     priceRange: "££",
-    touristType: "Couples, Nature Lovers, Glampers",
   })}
 />

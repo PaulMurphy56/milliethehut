@@ -1,17 +1,22 @@
 ---
-import { siteConfig } from "../../lib/siteConfig";
+import { getCollection } from "astro:content";
 import Container from "../ui/Container.astro";
+
+const siteSettingsCollection = await getCollection("siteSettings");
+const site = siteSettingsCollection[0]?.data;
 ---
 
 <footer class="footer" role="contentinfo">
   <Container>
     <div class="footer__grid">
       <div class="footer__brand">
-        <span class="footer__logo">{siteConfig.name}</span>
-        <p class="footer__tagline">{siteConfig.tagline}</p>
-        <p class="footer__address">
-          {siteConfig.address.locality}, {siteConfig.address.region}
-        </p>
+        <span class="footer__logo">{site?.name}</span>
+        {site?.tagline && <p class="footer__tagline">{site.tagline}</p>}
+        {site?.addressLocality && (
+          <p class="footer__address">
+            {site.addressLocality}, {site.addressRegion}
+          </p>
+        )}
       </div>
 
       <div class="footer__col">
@@ -27,21 +32,30 @@ import Container from "../ui/Container.astro";
       <div class="footer__col">
         <h3 class="footer__heading">Contact</h3>
         <ul class="footer__links" role="list">
-          <li><a href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`}>{siteConfig.phone}</a></li>
-          <li><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+          {site?.phone && (
+            <li><a href={`tel:${site.phone.replace(/\s+/g, "")}`}>{site.phone}</a></li>
+          )}
+          {site?.email && (
+            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          )}
         </ul>
         <div class="footer__socials">
-          {Object.entries(siteConfig.socials).map(([platform, url]) => (
-            <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Follow us on ${platform}`} class="footer__social-link">
-              {platform.charAt(0).toUpperCase() + platform.slice(1)}
+          {site?.instagramUrl && (
+            <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" class="footer__social-link">
+              Instagram
             </a>
-          ))}
+          )}
+          {site?.facebookUrl && (
+            <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook" class="footer__social-link">
+              Facebook
+            </a>
+          )}
         </div>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} {site?.name}. All rights reserved.</p>
     </div>
   </Container>
 </footer>
