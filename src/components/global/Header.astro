@@ -1,52 +1,47 @@
 ---
 import { getCollection } from "astro:content";
-import Container from "../ui/Container.astro";
 
 const siteSettingsCollection = await getCollection("siteSettings");
 const site = siteSettingsCollection[0]?.data;
 
 const nav = [
-  { label: "Gallery", href: "/gallery/" },
+  { label: "Gallery",    href: "/gallery/" },
   { label: "Local Area", href: "/location/" },
   { label: "Your Hosts", href: "/your-hosts/" },
-  { label: "Contact", href: "/contact/" },
+  { label: "Contact",    href: "/contact/" },
 ];
 ---
 
 <header class="header" role="banner" id="site-header">
-  <Container>
-    <div class="header__inner">
-      <a href="/" class="header__logo" aria-label="Millie The Hut — Home">
-        <span class="header__logo-text">{site?.name ?? "Millie The Hut"}</span>
+  <div class="header__inner">
+    <div class="header__left"></div>
+
+    <nav class="header__nav" aria-label="Main navigation">
+      <ul class="header__nav-list" role="list">
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} class="header__nav-link">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a href={site?.bookingUrl ?? "/book/"} class="header__book-btn">
+        Book Now &rarr;
       </a>
-
-      <nav class="header__nav" aria-label="Main navigation">
-        <ul class="header__nav-list" role="list">
-          {nav.map((item) => (
-            <li>
-              <a href={item.href} class="header__nav-link">{item.label}</a>
-            </li>
-          ))}
-        </ul>
-        <a href={site?.bookingUrl ?? "/book/"} class="header__book-btn" aria-label="Book Now">
-          <span>Book Now</span>
-          <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/>
-          </svg>
-        </a>
-      </nav>
-
-      <button
-        class="header__menu-btn"
-        type="button"
-        aria-label="Open menu"
-        aria-expanded="false"
-        aria-controls="mobile-nav"
-      >
-        <span class="header__menu-icon"></span>
-      </button>
     </div>
-  </Container>
+
+    <button
+      class="header__menu-btn"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <span class="header__menu-icon"></span>
+    </button>
+  </div>
 </header>
 
 <style>
@@ -56,124 +51,58 @@ const nav = [
     left: 0;
     right: 0;
     z-index: 200;
-    transition: background var(--duration-normal) var(--ease-out),
-                box-shadow var(--duration-normal) var(--ease-out);
-  }
-
-  .header.is-hidden-home {
-    display: none;
-  }
-
-  .header.is-transparent {
-    background: transparent;
-  }
-
-  .header.is-solid,
-  .header:not(.is-transparent) {
-    background: rgba(253, 206, 136, 0.85);
-    backdrop-filter: blur(16px) saturate(1.8);
-    -webkit-backdrop-filter: blur(16px) saturate(1.8);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+    padding: var(--space-md) var(--hero-padding);
   }
 
   .header__inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: var(--space-lg);
-    padding: var(--space-md) 0;
+    padding: var(--space-sm) var(--space-lg);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
   }
 
-  .header__logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    text-decoration: none;
+  .header__left {
+    flex: 1;
   }
 
-  .header__logo-text {
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-black);
-    color: var(--color-text);
-    letter-spacing: var(--tracking-tighter);
-    transition: color var(--duration-fast) var(--ease-out);
-  }
-
-  .header__nav {
-    display: none;
-    align-items: center;
-    gap: var(--space-xl);
-  }
-
+  .header__nav { display: none; }
   .header__nav-list {
     display: flex;
     align-items: center;
     gap: var(--space-xl);
   }
-
   .header__nav-link {
     font-family: var(--font-sans);
     font-size: var(--text-sm);
-    font-weight: 700;
+    font-weight: var(--weight-normal);
+    color: var(--color-white);
+    transition: opacity var(--duration-fast) var(--ease-out);
     letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--color-text);
-    padding: var(--space-sm) 0;
-    display: inline-block;
-    transition: color var(--duration-fast) var(--ease-out);
-    position: relative;
   }
+  .header__nav-link:hover { opacity: 0.7; }
 
-  .header__nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--color-text);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--duration-normal) var(--ease-out);
-  }
-
-  .header__nav-link:hover::after {
-    transform: scaleX(1);
-  }
-
+  .header__actions { display: none; }
   .header__book-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.25rem;
+    padding: 0.5rem 1.5rem;
     background: var(--color-cta);
     color: var(--color-black);
     font-family: var(--font-sans);
     font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    border-radius: var(--radius-sm);
-    transition:
-      background var(--duration-fast) var(--ease-out),
-      transform var(--duration-fast) var(--ease-out),
-      box-shadow var(--duration-fast) var(--ease-out);
+    font-weight: var(--weight-bold);
+    border-radius: var(--radius-full);
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
     white-space: nowrap;
   }
-
   .header__book-btn:hover {
-    background: var(--color-cta-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(171, 227, 196, 0.4);
-  }
-
-  .header__book-btn svg {
-    transition: transform var(--duration-fast) var(--ease-out);
-  }
-
-  .header__book-btn:hover svg {
-    transform: translate(2px, -2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   .header__menu-btn {
@@ -187,63 +116,39 @@ const nav = [
     cursor: pointer;
     padding: 0;
   }
-
   .header__menu-icon,
   .header__menu-icon::before,
   .header__menu-icon::after {
     display: block;
     width: 1.25rem;
     height: 2px;
-    background: var(--color-text);
+    background: var(--color-white);
     border-radius: 1px;
     transition: all var(--duration-normal) var(--ease-out);
     position: relative;
   }
-
   .header__menu-icon::before,
   .header__menu-icon::after {
     content: "";
     position: absolute;
     left: 0;
   }
-
   .header__menu-icon::before { top: -6px; }
-  .header__menu-icon::after { top: 6px; }
+  .header__menu-icon::after  { top: 6px; }
 
-  .header__menu-btn[aria-expanded="true"] .header__menu-icon {
-    background: transparent;
-  }
-  .header__menu-btn[aria-expanded="true"] .header__menu-icon::before {
-    top: 0;
-    transform: rotate(45deg);
-  }
-  .header__menu-btn[aria-expanded="true"] .header__menu-icon::after {
-    top: 0;
-    transform: rotate(-45deg);
-  }
+  .header__menu-btn[aria-expanded="true"] .header__menu-icon { background: transparent; }
+  .header__menu-btn[aria-expanded="true"] .header__menu-icon::before { top: 0; transform: rotate(45deg); }
+  .header__menu-btn[aria-expanded="true"] .header__menu-icon::after  { top: 0; transform: rotate(-45deg); }
 
   @media (min-width: 64rem) {
-    .header__nav { display: flex; }
+    .header__nav     { display: block; }
+    .header__actions { display: flex; }
     .header__menu-btn { display: none; }
   }
 </style>
 
 <script is:inline>
   (function () {
-    var header = document.getElementById("site-header");
-    var hero = document.querySelector(".hero");
-    if (!header) return;
-
-    // Hide global header on homepage (hero has its own nav)
-    if (hero) {
-      header.classList.add("is-hidden-home");
-      return;
-    }
-
-    // Non-homepage: solid header
-    header.classList.add("is-solid");
-
-    // Mobile menu
     var btn = document.querySelector(".header__menu-btn");
     var nav = document.getElementById("mobile-nav");
     if (!btn || !nav) return;
@@ -261,12 +166,7 @@ const nav = [
       document.body.style.overflow = expanded ? "" : "hidden";
     });
 
-    nav.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") closeMenu();
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeMenu();
-    });
+    nav.addEventListener("click", function (e) { if (e.target.tagName === "A") closeMenu(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
   })();
 </script>

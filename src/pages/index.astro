@@ -10,39 +10,6 @@ const sortedFaqs = allFaqs.sort((a, b) => a.data.order - b.data.order);
 
 const siteSettingsCollection = await getCollection("siteSettings");
 const site = siteSettingsCollection[0]?.data;
-
-const facilities = [
-  { icon: "shower",  label: "En suite shower & flushing toilet" },
-  { icon: "bed",     label: "Bedding, towels & toiletries" },
-  { icon: "egg",     label: "Eggs, milk, tea, coffee, oils etc" },
-  { icon: "cooking", label: "Induction hob, microwave, toaster, kettle" },
-  { icon: "fridge",  label: "Fridge with ice box" },
-  { icon: "usb",     label: "USB points" },
-  { icon: "fire",    label: "Wood burner" },
-  { icon: "firepit", label: "Kadai fire pit & barbecue" },
-  { icon: "music",   label: "Bluetooth radio & board games" },
-];
-
-const importantBits = [
-  { icon: "people", title: "Sleeps Two",                        note: "No babies or children" },
-  { icon: "clock",  title: "Check-in 3pm / Check-out 10am",    note: "Flexible by arrangement" },
-  { icon: "nopets", title: "No Pets",                           note: "Sorry, no exceptions" },
-];
-
-const reviews = allTestimonials.length > 0 ? allTestimonials : [
-  { data: { name: "Sarah & James", location: "Hereford", rating: 5, body: "Millie The Hut is simply magical. We arrived to a perfectly set hut, lit the fire pit as the sun went down, and didn't want to leave. The most restorative weekend we've had in years. If you're looking for somewhere to truly switch off, this is it." }},
-  { data: { name: "Tom & Emily",   location: "Birmingham", rating: 5, body: "The perfect escape. Waking up to birdsong and the most incredible views of the countryside. The hut has everything you need and more. We've already booked our next stay." }},
-  { data: { name: "Rachel D.",     location: "London", rating: 5, body: "Absolutely wonderful. The attention to detail is second to none. From the welcome hamper to the cosy wood burner, every moment felt special. A true hidden gem in the Welsh Marches — we told everyone about it when we got home." }},
-];
-
-const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
-  { data: { question: "What is there to do near Millie The Hut shepherd's hut in Herefordshire?", answer: "You're perfectly placed for exploring the best of the Welsh Marches. Presteigne is a charming market town just minutes away, while Hay-on-Wye — famous for its bookshops — is a scenic 30-minute drive. Offa's Dyke National Trail passes close by for walkers, and the Brecon Beacons are within easy reach for a day out." }},
-  { data: { question: "Is there Wi-Fi at the shepherd's hut?", answer: "Millie The Hut is intentionally off-grid in spirit — we find the best breaks involve disconnecting a little. That said, mobile signal is available and our Bluetooth radio will keep you entertained. We encourage you to swap the scroll for a stroll." }},
-  { data: { question: "Is there parking at the glamping site?", answer: "Yes, there is private off-road parking directly at the hut for one vehicle. The location is easily accessible by car from the A44/A4113 corridor." }},
-  { data: { question: "What should I pack for a stay at Millie The Hut?", answer: "We supply bedding, towels, toiletries, and a welcome hamper with essentials like eggs, milk, tea and coffee. We recommend packing weather-appropriate clothing (it's the Welsh Marches — be prepared for anything!), walking boots, and a good book. A torch can be handy for evening stargazing." }},
-  { data: { question: "Can I have a fire at the glamping hut?", answer: "Absolutely — it's one of the highlights. The Kadai fire pit and barbecue are yours to enjoy, and the wood burner inside keeps the hut beautifully warm on cooler evenings. Logs and kindling are provided." }},
-  { data: { question: "How do I find Millie The Hut? Is it easy to locate in the countryside?", answer: "We're located at Wegnall's Mill, Presteigne, Powys, LD8 2LD. The easiest way to find us is with What3Words: ///unwanted.passports.among — just enter this into the What3Words app and it will guide you right to the door. Full arrival instructions are sent with your booking confirmation." }},
-];
 ---
 
 <PageLayout
@@ -53,9 +20,9 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     <LocalBusinessSchema />
   </Fragment>
 
-  <!-- ═══ SECTION 1: HERO ═══════════════════════ -->
-  <section class="hero" aria-label="Welcome to Millie The Hut">
-    <div class="hero__card">
+  <!-- Hero -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero__frame">
       <img
         src="/images/hero.avif"
         alt="Millie The Hut shepherd's hut at golden hour in the Welsh Marches countryside"
@@ -63,358 +30,304 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
         fetchpriority="high"
         decoding="async"
       />
-      <div class="hero__overlay"></div>
-
-      <!-- Nav inside the image card -->
-      <nav class="hero-nav" aria-label="Main navigation">
-        <ul class="hero-nav__list" role="list">
-          <li><a href="/gallery/" class="hero-nav__link">Gallery</a></li>
-          <li><a href="/location/" class="hero-nav__link">Local Area</a></li>
-          <li><a href="/your-hosts/" class="hero-nav__link">Your Hosts</a></li>
-          <li><a href="/contact/" class="hero-nav__link">Contact</a></li>
-        </ul>
-        <a href={site?.bookingUrl ?? "/book/"} class="hero-nav__book">
-          <span>Book Now</span>
-          <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/>
-          </svg>
-        </a>
-      </nav>
-
-      <!-- Mobile hamburger inside hero -->
-      <button class="hero-menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
-        <span class="hero-menu-icon"></span>
-      </button>
-
-      <!-- Brand overlay -->
-      <h1 class="hero__brand">Millie<br/>The Hut</h1>
-
-      <!-- Tagline bottom-right -->
-      <p class="hero__tagline">Escape to the Welsh Marches.</p>
+      <div class="hero__overlay">
+        <h1 class="hero__title">Millie<br />The Hut</h1>
+        <p class="hero__tagline">Escape to the Welsh Marches</p>
+      </div>
     </div>
   </section>
 
-  <!-- ═══ SECTION 2: INTRODUCTION ═══════════════ -->
-  <section class="intro section" aria-labelledby="intro-heading">
-    <Container>
-      <h2 class="intro__heading" id="intro-heading">
-        Millie The Hut,<br/>Presteigne, Herefordshire.
-      </h2>
-
-      <div class="intro__text-wrap">
-        <p class="intro__text" id="intro-animated-text">Down a leafy lane, where steam trains once ran, across a Victorian railway bridge that takes you from Wales to England, you'll find a meadow where sheep graze, and what else, but a traditional-style Shepherds Hut and Shack. On sunny days, the meadow is bathed in light from dawn to dusk, and the gin-clear Hindwell Brook that bounds it flashes silver. Whatever the weather, after dark is a special time to be here, when the log burner in the hut, the firepit by the stream and the lamps and candles in the Shack cast a magical golden glow.</p>
-      </div>
-
-      <!-- Separator + Trust Bar -->
-      <hr class="intro__divider" />
-      <div class="trust-bar" aria-label="Awards and features">
-        <div class="trust-bar__item">
-          <div class="trust-bar__logo" aria-hidden="true">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="30" stroke="#e3977b" stroke-width="1.5"/>
-              <path d="M32 16l4.6 9.6 10.6 1.5-7.6 7.4 1.8 10.5L32 40.2l-9.4 4.8 1.8-10.5-7.6-7.4 10.6-1.5L32 16z" fill="#e3977b"/>
-            </svg>
-          </div>
-          <p class="trust-bar__label">Luxury Glamping<br/><span>Welsh Marches</span></p>
-        </div>
-        <div class="trust-bar__item">
-          <div class="trust-bar__logo" aria-hidden="true">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="10" y="13" width="44" height="38" rx="4" stroke="#e3977b" stroke-width="1.5"/>
-              <path d="M22 32h20M22 40h14" stroke="#e3977b" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="32" cy="24" r="5" stroke="#e3977b" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <p class="trust-bar__label">Guests Rate Us<br/><span>5 Stars</span></p>
-        </div>
-        <div class="trust-bar__item">
-          <div class="trust-bar__logo" aria-hidden="true">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 10C23.16 10 16 18.6 16 29c0 14.4 16 31 16 31s16-16.6 16-31c0-10.4-7.16-19-16-19z" stroke="#e3977b" stroke-width="1.5"/>
-              <circle cx="32" cy="29" r="6" stroke="#e3977b" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <p class="trust-bar__label">Near Presteigne<br/><span>Powys, Wales</span></p>
+  <!-- Introduction -->
+  <section class="section" aria-labelledby="intro-heading">
+    <Container narrow>
+      <div class="intro">
+        <h2 class="intro__heading" id="intro-heading">Millie The Hut, Presteigne, Herefordshire.</h2>
+        <div class="intro__text" id="scroll-text">
+          <p>Down a leafy lane, where steam trains once ran, across a Victorian railway bridge that takes you from Wales to England, you'll find a meadow where sheep graze, and a traditional-style Shepherds Hut and Shack. On sunny days, the meadow is bathed in light from dawn to dusk, and the gin-clear Hindwell Brook that bounds it flashes silver. Whatever the weather, after dark is a special time to be here, when the log burner in the hut, the firepit by the stream and the lamps and candles in the Shack cast a magical golden glow.</p>
         </div>
       </div>
     </Container>
   </section>
 
-  <!-- ═══ SECTION 3: GALLERY PREVIEW ═══════════ -->
-  <section class="gallery-preview section" aria-label="Photo gallery">
+  <!-- Trust Indicators -->
+  <section class="section" aria-labelledby="trust-heading">
     <Container>
-      <div class="gallery-collage">
-        <div class="gallery-collage__left">
-          <div class="gallery-collage__img-wrap">
-            <div class="gallery-collage__placeholder" aria-label="Interior of Millie The Hut"><span>Interior</span></div>
+      <h2 class="sr-only" id="trust-heading">Why Choose Millie The Hut</h2>
+      <div class="trust" data-reveal-stagger>
+        <div class="trust__item">
+          <svg class="trust__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 256 256" fill="currentColor"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"/></svg>
+          <p class="trust__label">Exceptional Guest Reviews</p>
+        </div>
+        <div class="trust__item">
+          <svg class="trust__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 256 256" fill="currentColor"><path d="M232,96a72.08,72.08,0,0,0-72-72H96A72.08,72.08,0,0,0,24,96c0,28.81,9.88,51.14,30.42,69.48A156.28,156.28,0,0,1,88,207.45V224a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V207.45a156.28,156.28,0,0,1,33.58-41.97C222.12,147.14,232,124.81,232,96ZM185.5,150.48A171.53,171.53,0,0,0,149.09,196H136V148.94l26.35-21.09a8,8,0,1,0-10-12.48L128,134.42l-24.36-19.05a8,8,0,1,0-10,12.48L120,148.94V196H106.91a171.53,171.53,0,0,0-36.41-45.52C52.25,134.28,40,115.54,40,96A56.06,56.06,0,0,1,96,40h64a56.06,56.06,0,0,1,56,56C216,115.54,203.75,134.28,185.5,150.48Z"/></svg>
+          <p class="trust__label">Peaceful Countryside Escape</p>
+        </div>
+        <div class="trust__item">
+          <svg class="trust__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 256 256" fill="currentColor"><path d="M152,40V16a8,8,0,0,0-16,0V40a8,8,0,0,0,16,0Zm68.49,59.12a8,8,0,0,0,5.65-2.34l16.97-17a8,8,0,0,0-11.32-11.32l-16.97,17a8,8,0,0,0,5.67,13.66ZM232,120H208a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16ZM79.51,99.12a8,8,0,0,0,11.32-11.32l-17-17A8,8,0,0,0,62.54,82.1ZM80,128a8,8,0,0,0-8-8H48a8,8,0,0,0,0,16H72A8,8,0,0,0,80,128Zm64,72a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V208A8,8,0,0,0,144,200Zm64.48-37.88-17,17a8,8,0,0,0,11.32,11.32l17-17a8,8,0,0,0-11.32-11.32Zm-145-17a8,8,0,0,0-11.32,0l-17,17a8,8,0,0,0,11.32,11.32l17-17A8,8,0,0,0,63.51,145.12ZM144,72a56,56,0,1,0,56,56A56.06,56.06,0,0,0,144,72Z"/></svg>
+          <p class="trust__label">Cosy Year-Round Retreat</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Gallery Preview -->
+  <section class="section" aria-labelledby="gallery-heading">
+    <Container>
+      <h2 class="section__heading" id="gallery-heading">Gallery</h2>
+      <div class="gallery-preview" data-reveal="fade">
+        <div class="gallery-preview__left">
+          <div class="gallery-preview__img-wrap gallery-preview__img-wrap--portrait">
+            <img src="https://placehold.co/600x900/e8ddd3/666?text=Portrait+Image" alt="Gallery preview — portrait image of the shepherd's hut" class="gallery-preview__img" loading="lazy" decoding="async" />
           </div>
         </div>
-        <div class="gallery-collage__right">
-          <div class="gallery-collage__img-wrap">
-            <div class="gallery-collage__placeholder" aria-label="The private deck"><span>The Deck</span></div>
+        <div class="gallery-preview__right">
+          <div class="gallery-preview__img-wrap">
+            <img src="https://placehold.co/700x450/e8ddd3/666?text=Landscape+Image+1" alt="Gallery preview — landscape image of the meadow" class="gallery-preview__img" loading="lazy" decoding="async" />
           </div>
-          <div class="gallery-collage__img-wrap">
-            <div class="gallery-collage__placeholder" aria-label="Evening fire pit"><span>Fire Pit</span></div>
+          <div class="gallery-preview__img-wrap">
+            <img src="https://placehold.co/700x450/e8ddd3/666?text=Landscape+Image+2" alt="Gallery preview — landscape image of the interior" class="gallery-preview__img" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
-      <div class="gallery-preview__action">
-        <a href="/gallery/" class="btn-outline-dark">
-          View All Photos
-          <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
-        </a>
+      <div class="gallery-preview__cta">
+        <a href="/gallery/" class="btn">View All &rarr;</a>
       </div>
     </Container>
   </section>
 
-  <!-- ═══ SECTION 4: FACILITIES ══════════════════ -->
-  <section class="facilities section section--surface" aria-labelledby="facilities-heading">
+  <!-- Facilities -->
+  <section class="section" aria-labelledby="facilities-heading">
     <Container>
-      <h2 class="section-heading" id="facilities-heading">Our Facilities</h2>
-      <div class="facilities-grid">
-        {facilities.map((item) => (
-          <div class="facility-card">
-            <div class="facility-card__icon" aria-hidden="true">
-              {item.icon === "shower" && (
-                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M208,136H111.51l99.82-99.82a8,8,0,0,0-11.32-11.32L99.52,125.45a95.91,95.91,0,0,0-53.2-29.14,8,8,0,0,0-2.64,15.78A80,80,0,0,1,128,192v8a8,8,0,0,0,16,0v-8h64a8,8,0,0,0,0-16ZM80,200a8,8,0,1,1-8-8A8,8,0,0,1,80,200Zm-32,0a8,8,0,1,1-8-8A8,8,0,0,1,48,200Zm16-28a8,8,0,1,1-8-8A8,8,0,0,1,64,172Z"/></svg>
-              )}
-              {item.icon === "bed" && (
-                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M208,72H24V48a8,8,0,0,0-16,0V208a8,8,0,0,0,16,0v-40H232v40a8,8,0,0,0,16,0V112A40,40,0,0,0,208,72ZM24,88h84v64H24Zm100,64V88h84a24,24,0,0,1,24,24v40Z"/></svg>
-              )}
-              {item.icon === "egg" && (
-                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M186.67,123.87C179.73,82.79,158.43,40,128,40S76.27,82.79,69.33,123.87C63.44,158.49,69.21,192,89.09,211a52,52,0,0,0,77.82,0C186.79,192,192.56,158.49,186.67,123.87Z"/></svg>
-              )}
-              {item.icon === "cooking" && (
-                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M88,48V16a8,8,0,0,1,16,0V48a8,8,0,0,1-16,0Zm40,8a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,128,56Zm32,0a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,160,56Zm72,48v8a8,8,0,0,1-8,8H224v64a24,24,0,0,1-24,24H56a24,24,0,0,1-24-24V120H24a8,8,0,0,1,0-16h8V96a8,8,0,0,1,8-8H216a8,8,0,0,1,8,8v8h8A8,8,0,0,1,232,104Z"/></svg>
-              )}
-              {item.icon === "fridge" && (
-                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16Zm8,200a8,8,0,0,1-8,8H80a8,8,0,0,1-8-8V136H184Zm0-96H72V40a8,8,0,0,1,8-8h96a8,8,0,0,1,8,8ZM120,76V60a8,8,0,0,1,16,0V76a8,8,0,0,1-16,0Zm0,104v-16a8,8,0,0,1,16,0v16a8,8,0,0,1-16,0Z"/></svg>
-              )}
-              {item.icon === "usb" && (
-                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M208,56a16,16,0,1,0-16-16A16,16,0,0,0,208,56Zm-72,48a16,16,0,1,0-16-16A16,16,0,0,0,136,104Zm88,40H136V120.27A32,32,0,0,0,160,88V56A32,32,0,0,0,96,56V88a32,32,0,0,0,24,31.12V144H32a8,8,0,0,0,0,16h88v24.88A32,32,0,0,0,96,216v32a32,32,0,0,0,64,0V216a32,32,0,0,0-24-30.91V160h88a8,8,0,0,0,0-16Z"/></svg>
-              )}
-              {item.icon === "fire" && (
-                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M173.88,103.27C169,90.66,158.26,79.42,141.57,68.43a8,8,0,0,0-11.06,2.31,76.61,76.61,0,0,1-10.68,13.15c-5.15,5.16-8.43,4-9.09,3.66-3.89-2.15-6.72-11.16-4.8-28.11a8,8,0,0,0-12.59-7.43C80.47,62.78,40,98.06,40,152a88,88,0,0,0,176,0C216,133.79,197.27,112.16,173.88,103.27Z"/></svg>
-              )}
-              {item.icon === "firepit" && (
-                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M128,16C73.86,16,28,50.59,28,96c0,22.58,12.13,43.17,34.15,58A8,8,0,0,0,72,152h0a8,8,0,0,0-1.65-11.31C52.64,127.76,44,112.31,44,96c0-37.5,37.71-64,84-64s84,26.5,84,64c0,16.31-8.64,31.76-26.35,44.69A8,8,0,0,0,184,152a8,8,0,0,0,9.85-1.95C215.87,139.17,228,118.58,228,96,228,50.59,182.14,16,128,16ZM72,176v48a8,8,0,0,0,16,0V176a8,8,0,0,0-16,0Zm40,0v48a8,8,0,0,0,16,0V176a8,8,0,0,0-16,0Zm40,0v48a8,8,0,0,0,16,0V176a8,8,0,0,0-16,0Z"/></svg>
-              )}
-              {item.icon === "music" && (
-                <svg width="44" height="44" viewBox="0 0 256 256" fill="currentColor"><path d="M212.92,25.55a8,8,0,0,0-6.86-1.45l-128,32A8,8,0,0,0,72,64V176a36,36,0,1,0,16,30V120.43l112-28V136a36,36,0,1,0,16,30V32A8,8,0,0,0,212.92,25.55ZM52,228a20,20,0,1,1,20-20A20,20,0,0,1,52,228Zm128-32a20,20,0,1,1,20-20A20,20,0,0,1,180,196ZM88,103.57V69.83l112-28v33.74Z"/></svg>
-              )}
-            </div>
-            <p class="facility-card__label">{item.label}</p>
-          </div>
-        ))}
+      <h2 class="section__heading" id="facilities-heading">Our Facilities</h2>
+      <ul class="facilities" data-reveal-stagger>
+        <li class="facilities__item">
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M64,236a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H56A8,8,0,0,1,64,236Zm152-8H200a8,8,0,0,0,0,16h16a8,8,0,0,0,0-16Zm24-100v40a8,8,0,0,1-16,0V176H32v-8a8,8,0,0,1-16,0v-40a8,8,0,0,1,16,0v8H88V112a32,32,0,0,1,32-32h16a32,32,0,0,1,32,32v24h56v-8a8,8,0,0,1,16,0ZM152,136V112a16,16,0,0,0-16-16H120a16,16,0,0,0-16,16v24Z"/></svg>
+          <span>En suite shower &amp; flushing toilet</span>
+        </li>
+        <li class="facilities__item">
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M200,32H56A24,24,0,0,0,32,56V200a24,24,0,0,0,24,24H200a24,24,0,0,0,24-24V56A24,24,0,0,0,200,32Zm8,168a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8H200a8,8,0,0,1,8,8Zm-40-88a36,36,0,1,1-36-36A36,36,0,0,1,168,112Z"/></svg>
+          <span>Bedding, towels &amp; toiletries</span>
+        </li>
+        <li class="facilities__item">
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M224,104h-8.4a79.76,79.76,0,0,0-25.29-42.63l15.41-15.41a8,8,0,1,0-11.32-11.32L178.9,50.14A79.53,79.53,0,0,0,144,40.36V24a8,8,0,0,0-16,0V40.36A79.53,79.53,0,0,0,93.1,50.14L77.6,34.64a8,8,0,1,0-11.32,11.32l15.41,15.41A79.76,79.76,0,0,0,56.4,104H48a8,8,0,0,0,0,16h8v8a79.72,79.72,0,0,0,28.93,61.54l-16.65,16.65a8,8,0,0,0,11.32,11.32l18-18A79.4,79.4,0,0,0,128,208a79.4,79.4,0,0,0,30.4-18.49l18,18a8,8,0,0,0,11.32-11.32l-16.65-16.65A79.72,79.72,0,0,0,200,128v-8h8a8,8,0,0,0,0-16Z"/></svg>
+          <span>Eggs, milk, tea, coffee, oils etc</span>
+        </li>
+        <li class="facilities__item">
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M88,48V16a8,8,0,0,1,16,0V48a8,8,0,0,1-16,0Zm40,8a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,128,56Zm32,0a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,160,56Zm72,64v16a8,8,0,0,1-16,0V128a8,8,0,0,0-8-8H48a8,8,0,0,0-8,8v56a32,32,0,0,0,32,32H184a32,32,0,0,0,32-32,8,8,0,0,1,16,0,48.05,48.05,0,0,1-48,48H72a48.05,48.05,0,0,1-48-48V128a24,24,0,0,1,24-24h8V88a8,8,0,0,1,16,0v16H184V88a8,8,0,0,1,16,0v16h8a24,24,0,0,1,24,24Z"/></svg>
+          <span>Induction hob, microwave, toaster, kettle</span>
+        </li>
+        <li class="facilities__item">
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M208,40H48A16,16,0,0,0,32,56V200a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V56A16,16,0,0,0,208,40ZM48,56H208V96H48ZM48,200V112H208v88Z"/></svg>
+          <span>Fridge with ice box</span>
+        </li>
+        <li class="facilities__item">
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-93.66a8,8,0,0,1,0,11.32l-32,32a8,8,0,0,1-11.32-11.32L148.69,136H88a8,8,0,0,1,0-16h60.69l-18.35-18.34a8,8,0,0,1,11.32-11.32Z"/></svg>
+          <span>USB points</span>
+        </li>
+        <li class="facilities__item">
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M168,128a40,40,0,1,1-40-40A40,40,0,0,1,168,128Zm-24-96H112a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm80,64V232a24,24,0,0,1-24,24H56a24,24,0,0,1-24-24V96A24,24,0,0,1,56,72H200A24,24,0,0,1,224,96Z"/></svg>
+          <span>Wood burner</span>
+        </li>
+        <li class="facilities__item">
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24C74.17,24,28,63.07,28,112c0,28.28,15.07,54.11,40,72V224a8,8,0,0,0,12.8,6.4L128,196l47.2,34.4A8,8,0,0,0,188,224V184c24.93-17.89,40-43.72,40-72C228,63.07,181.83,24,128,24Z"/></svg>
+          <span>Kadai fire pit &amp; barbecue</span>
+        </li>
+        <li class="facilities__item">
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM172.42,72.84l-64,32a8.05,8.05,0,0,0-3.58,3.58l-32,64A8,8,0,0,0,80,184a8.1,8.1,0,0,0,3.58-.84l64-32a8.05,8.05,0,0,0,3.58-3.58l32-64a8,8,0,0,0-10.74-10.74ZM138,138,97.89,158.11,118,118l40.15-20.07Z"/></svg>
+          <span>Bluetooth radio &amp; board games</span>
+        </li>
+      </ul>
+    </Container>
+  </section>
+
+  <!-- The Important Bits -->
+  <section class="section" aria-labelledby="important-heading">
+    <Container>
+      <h2 class="section__heading" id="important-heading">The Important Bits</h2>
+      <div class="important" data-reveal-stagger>
+        <div class="important__item">
+          <svg class="important__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.24,195.63a8,8,0,1,0,13.52,8.74,80,80,0,0,1,134.48,0,8,8,0,0,0,13.52-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.76,87.63a95.83,95.83,0,0,0-47.51-37.71A60,60,0,0,0,168,40a59.75,59.75,0,0,0-40,15.26,8,8,0,1,0,10.67,11.92A44,44,0,1,1,168,152a8,8,0,0,0-6.76,12.28,96,96,0,0,1,9.53,16.09,8,8,0,0,0,4.39,4.24A79.36,79.36,0,0,1,212.76,204a8,8,0,1,0,13.52-8.74,95.52,95.52,0,0,0-25.52-19.63,43.83,43.83,0,0,0,18-9.71Z"/></svg>
+          <p class="important__label">Sleeps Two</p>
+          <p class="important__sub">No babies or children</p>
+        </div>
+        <div class="important__item">
+          <svg class="important__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></svg>
+          <p class="important__label">Check-in 3pm / Check-out 10am</p>
+        </div>
+        <div class="important__item">
+          <svg class="important__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M208,136H176a8,8,0,0,1-6.76-3.71L152,104.85,119.24,164.29a8,8,0,0,1-14.48,0L80,118.85l-9.24,13.43A8,8,0,0,1,64,136H24a8,8,0,0,1,0-16H58.75l15.49-22.57a8,8,0,0,1,13.53,0L112,143.15l32.76-59.44a8,8,0,0,1,14.48,0L181.25,120H208a8,8,0,0,1,0,16ZM128,216a88.11,88.11,0,0,1-79-49.07,8,8,0,0,1,14.36-7.07,72,72,0,0,0,129.36,0,8,8,0,0,1,14.36,7.07A88.11,88.11,0,0,1,128,216Z"/></svg>
+          <p class="important__label">No Pets</p>
+        </div>
       </div>
     </Container>
   </section>
 
-  <!-- ═══ SECTION 5: THE IMPORTANT BITS ══════════ -->
-  <section class="important section" aria-labelledby="important-heading">
-    <Container>
-      <h2 class="section-heading" id="important-heading">The Important Bits</h2>
-      <div class="important-grid">
-        {importantBits.map((bit) => (
-          <div class="important-item">
-            <div class="important-item__icon" aria-hidden="true">
-              {bit.icon === "people" && (
-                <svg width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,1.1-8.33A24,24,0,1,0,150.92,88h0a8,8,0,0,1-16,0h0a40,40,0,1,1,68.19,28.09A67.72,67.72,0,0,1,220,128,51.6,51.6,0,0,1,246.4,161.6,8,8,0,0,1,244.8,150.4ZM190,212a8,8,0,0,1-8,8H74a8,8,0,0,1-8-8,64,64,0,0,1,128,0Zm-16.33,0a48,48,0,0,0-91.34,0ZM128,152a40,40,0,1,0-40-40A40,40,0,0,0,128,152Zm0-64a24,24,0,1,1-24,24A24,24,0,0,1,128,88ZM72,128a8,8,0,0,0-8-8A51.6,51.6,0,0,0,22.4,148.8a8,8,0,1,0,12.8,9.6A35.72,35.72,0,0,1,64,144,8,8,0,0,0,72,128Z"/></svg>
-              )}
-              {bit.icon === "clock" && (
-                <svg width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></svg>
-              )}
-              {bit.icon === "nopets" && (
-                <svg width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L68.9,75.09A64,64,0,0,0,53.5,168.67l-9.41,18.82A8,8,0,0,0,51.29,199a7.6,7.6,0,0,0,3.6.86,8,8,0,0,0,7.18-4.43l8-16a63.49,63.49,0,0,0,58,0l8,16A8,8,0,0,0,143.11,200a7.6,7.6,0,0,0,3.6-.86,8,8,0,0,0,3.58-10.74l-9.18-18.35a64.15,64.15,0,0,0,17.48-13.15l44.49,49A8,8,0,0,0,208,208a8,8,0,0,0,5.92-13.38Z"/></svg>
-              )}
-            </div>
-            <h3 class="important-item__title">{bit.title}</h3>
-            <p class="important-item__note">{bit.note}</p>
-          </div>
-        ))}
-      </div>
-    </Container>
-  </section>
-
-  <!-- ═══ SECTION 6: TESTIMONIALS SLIDER ═════════ -->
-  <section class="testimonials section section--surface" aria-labelledby="reviews-heading">
-    <Container>
-      <h2 class="section-heading" id="reviews-heading">Words From Our Guests</h2>
-      <div class="testimonial-slider" role="region" aria-label="Guest testimonials">
-        <div class="testimonial-slider__track" id="testimonial-track">
-          {reviews.map((t, i) => (
-            <article class="testimonial-slide" id={`slide-${i}`} aria-hidden={i > 0 ? "true" : "false"}>
-              <div class="testimonial-slide__quote-mark" aria-hidden="true">&ldquo;</div>
-              <div class="testimonial-slide__stars" aria-label={`${t.data.rating} out of 5 stars`}>
-                {"★".repeat(t.data.rating)}{"☆".repeat(5 - t.data.rating)}
-              </div>
-              <blockquote class="testimonial-slide__quote">
-                <p class="testimonial-slide__text">{t.data.body}</p>
+  <!-- Testimonials -->
+  <section class="section" aria-labelledby="testimonials-heading">
+    <Container narrow>
+      <h2 class="section__heading" id="testimonials-heading">Words From Our Guests</h2>
+      <div class="testimonials" id="testimonial-slider">
+        <div class="testimonials__track">
+          {allTestimonials.length > 0 ? (
+            allTestimonials.map((t, i) => (
+              <blockquote class={`testimonials__slide ${i === 0 ? 'is-active' : ''}`} data-slide={i}>
+                <span class="testimonials__quote" aria-hidden="true">&ldquo;</span>
+                <div class="testimonials__body">
+                  <p class="testimonials__text" data-full-text={t.body}>{t.body}</p>
+                </div>
+                <footer class="testimonials__author">
+                  <span class="testimonials__name">{t.data.name}</span>
+                  <span class="testimonials__location">{t.data.location}</span>
+                </footer>
               </blockquote>
-              <footer class="testimonial-slide__footer">
-                <strong class="testimonial-slide__name">{t.data.name}</strong>
-                {t.data.location && <span class="testimonial-slide__location">{t.data.location}</span>}
-              </footer>
-            </article>
-          ))}
+            ))
+          ) : (
+            <>
+              <blockquote class="testimonials__slide is-active" data-slide="0">
+                <span class="testimonials__quote" aria-hidden="true">&ldquo;</span>
+                <div class="testimonials__body">
+                  <p class="testimonials__text">The most magical place we've ever stayed. Waking up to the sound of the brook and the sheep grazing in the meadow was absolutely heavenly. The hut has everything you need and more. We didn't want to leave and are already planning our return trip.</p>
+                </div>
+                <footer class="testimonials__author">
+                  <span class="testimonials__name">Sarah &amp; James</span>
+                  <span class="testimonials__location">Bristol</span>
+                </footer>
+              </blockquote>
+              <blockquote class="testimonials__slide" data-slide="1">
+                <span class="testimonials__quote" aria-hidden="true">&ldquo;</span>
+                <div class="testimonials__body">
+                  <p class="testimonials__text">A truly special retreat. The attention to detail is extraordinary — from the wood burner to the fire pit by the stream, every moment felt considered. The perfect escape from city life. Cannot recommend highly enough.</p>
+                </div>
+                <footer class="testimonials__author">
+                  <span class="testimonials__name">Emily</span>
+                  <span class="testimonials__location">London</span>
+                </footer>
+              </blockquote>
+              <blockquote class="testimonials__slide" data-slide="2">
+                <span class="testimonials__quote" aria-hidden="true">&ldquo;</span>
+                <div class="testimonials__body">
+                  <p class="testimonials__text">We celebrated our anniversary here and it was perfection. Sitting by the fire pit under a sky full of stars with the sound of the brook — pure magic. The hosts thought of everything. A real hidden gem on the Welsh border.</p>
+                </div>
+                <footer class="testimonials__author">
+                  <span class="testimonials__name">Tom &amp; Lucy</span>
+                  <span class="testimonials__location">Birmingham</span>
+                </footer>
+              </blockquote>
+            </>
+          )}
         </div>
-        <div class="testimonial-slider__controls">
-          <button class="testimonial-slider__btn" id="testimonial-prev" aria-label="Previous review" type="button">
-            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg>
-          </button>
-          <div class="testimonial-slider__dots" id="testimonial-dots" role="tablist"></div>
-          <button class="testimonial-slider__btn" id="testimonial-next" aria-label="Next review" type="button">
-            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
-          </button>
+        <div class="testimonials__controls">
+          <button class="testimonials__btn" type="button" aria-label="Previous testimonial" data-dir="prev">&larr;</button>
+          <div class="testimonials__dots" role="tablist" aria-label="Testimonial navigation">
+            {(allTestimonials.length > 0 ? allTestimonials : [0, 1, 2]).map((_, i) => (
+              <button
+                class={`testimonials__dot ${i === 0 ? 'is-active' : ''}`}
+                type="button"
+                role="tab"
+                aria-selected={i === 0 ? "true" : "false"}
+                aria-label={`Testimonial ${i + 1}`}
+                data-dot={i}
+              ></button>
+            ))}
+          </div>
+          <button class="testimonials__btn" type="button" aria-label="Next testimonial" data-dir="next">&rarr;</button>
         </div>
       </div>
     </Container>
   </section>
 
-  <!-- ═══ SECTION 7: LOCATION & MAP ══════════════ -->
-  <section class="location section" aria-labelledby="location-heading">
+  <!-- Location & Map -->
+  <section class="section" aria-labelledby="location-heading">
     <Container>
-      <div class="location-grid">
-        <div class="location-content">
-          <h2 class="section-heading" id="location-heading">Where to Find Us</h2>
-          <div class="location-w3w">
-            <div class="location-w3w__badge" aria-label="What3Words location">
-              <svg width="20" height="20" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M29.9 51.5H9.7l11.1-30h20.1zM61.3 51.5H41.1l11.1-30h20.1zM92.6 51.5H72.4l11.1-30h20.1zM29.9 78.5H9.7l11.1-30h20.1zM61.3 78.5H41.1l11.1-30h20.1zM92.6 78.5H72.4l11.1-30h20.1z"/></svg>
-              <span class="location-w3w__words">///unwanted.passports.among</span>
-            </div>
-            <p class="location-w3w__explainer">What3Words divides the world into 3m x 3m squares, each with a unique three-word address — the most precise way to navigate here.</p>
+      <h2 class="section__heading" id="location-heading">Where to Find Us</h2>
+      <div class="location">
+        <div class="location__info">
+          <div class="location__w3w">
+            <h3 class="location__sub-heading">What3Words</h3>
+            <p class="location__words">///unwanted.passports.among</p>
+            <p class="location__w3w-explain">What3Words divides the world into 3m squares, each with a unique three-word address. Use it for accurate navigation directly to Millie The Hut.</p>
           </div>
-          <address class="location-address">
-            <p>Wegnall's Mill<br/>Presteigne<br/>Powys, LD8 2LD</p>
+          <address class="location__address">
+            Wegnall's Mill<br />
+            Presteigne<br />
+            Powys<br />
+            LD8 2LD
           </address>
-          <a href="/book/" class="btn-cta">
-            Book Your Stay
-            <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
-          </a>
         </div>
-        <div class="location-map" aria-label="Map showing location of Millie The Hut near Presteigne">
+        <div class="location__map">
           <iframe
-            title="Map showing Wegnall's Mill, Presteigne, Powys"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-3.05%2C52.24%2C-2.99%2C52.28&layer=mapnik&marker=52.262%2C-3.021"
-            width="100%" height="100%" style="border:0;" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade" aria-hidden="true"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2452.5!2d-3.0!3d52.27!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDE2JzEyLjAiTiAzwrAwMCcwMC4wIlc!5e0!3m2!1sen!2suk!4v1"
+            width="100%"
+            height="400"
+            style="border:0; border-radius: var(--radius-xl);"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map showing location of Millie The Hut near Presteigne, Powys"
           ></iframe>
         </div>
       </div>
     </Container>
   </section>
 
-  <!-- ═══ SECTION 8: FAQ ═════════════════════════ -->
-  <section class="faq section section--surface" aria-labelledby="faq-heading">
-    <Container>
-      <h2 class="section-heading" id="faq-heading">Frequently Asked Questions</h2>
-      <div class="faq-list" role="list">
-        {faqs.map((faq, i) => (
-          <div class="faq-item" role="listitem">
-            <button class="faq-item__question" aria-expanded="false" aria-controls={`faq-answer-${i}`} type="button">
-              <span>{faq.data.question}</span>
-              <span class="faq-item__icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" class="faq-icon-plus"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg>
-                <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" class="faq-icon-minus"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"/></svg>
-              </span>
-            </button>
-            <div class="faq-item__answer" id={`faq-answer-${i}`} role="region" aria-hidden="true">
-              <p>{faq.data.answer}</p>
-            </div>
-          </div>
-        ))}
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-heading">
+    <Container narrow>
+      <h2 class="section__heading" id="faq-heading">Frequently Asked Questions</h2>
+      <div class="faq">
+        {sortedFaqs.length > 0 ? (
+          sortedFaqs.map((faq) => (
+            <details class="faq__item">
+              <summary class="faq__question">{faq.data.question}</summary>
+              <p class="faq__answer">{faq.data.answer}</p>
+            </details>
+          ))
+        ) : (
+          <>
+            <details class="faq__item">
+              <summary class="faq__question">What should I pack for a Shepherd's Hut stay in the Welsh Marches?</summary>
+              <p class="faq__answer">We provide bedding, towels and toiletries so you can travel light. We'd recommend bringing walking boots or wellies, warm layers for evenings by the fire pit, and a torch. Everything else you need — from tea and coffee to cooking essentials — is already here waiting for you.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__question">Is there Wi-Fi at the shepherd's hut?</summary>
+              <p class="faq__answer">There is no Wi-Fi at Millie The Hut — and that's by design. This is a place to disconnect and recharge. Mobile signal varies by network but is generally available. We find most guests welcome the chance to switch off.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__question">Is parking available at the glamping site?</summary>
+              <p class="faq__answer">Yes, free private parking is available right next to the hut. You can unload directly from your car before parking up for your stay.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__question">Is the shepherd's hut suitable for a winter stay?</summary>
+              <p class="faq__answer">Absolutely. The wood burner keeps the hut beautifully warm and cosy, making winter one of the most magical times to visit. There's nothing quite like cosying up by the fire while frost sparkles on the meadow outside.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__question">Are there pubs, restaurants or walks nearby?</summary>
+              <p class="faq__answer">Presteigne is just a short drive away and has excellent pubs, cafés and an award-winning independent cinema. The surrounding countryside offers stunning walks along Offa's Dyke, through the Radnorshire hills, and along the River Lugg. We provide a local guide with all our favourite recommendations.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__question">How do I find Millie The Hut using What3Words?</summary>
+              <p class="faq__answer">Our What3Words address is ///unwanted.passports.among. Simply enter this into the What3Words app or website and it will navigate you directly to within three metres of the hut entrance. It's the most accurate way to find us down our leafy lane.</p>
+            </details>
+          </>
+        )}
       </div>
     </Container>
   </section>
 
 </PageLayout>
 
-<style is:global>
-  /* Hide global header on homepage — hero has its own nav */
-  .hero ~ #site-header,
-  #site-header.is-hidden-home {
-    display: none !important;
-  }
-</style>
-
 <style>
-  /* ── Shared ──────────────────────────────── */
-  .section {
-    padding: var(--section-padding) 0;
-  }
-  .section--surface {
-    background: var(--color-surface);
-  }
-  .section-heading {
-    font-family: var(--font-serif);
-    font-size: var(--text-4xl);
-    font-weight: var(--weight-black);
-    color: var(--color-text);
-    margin-bottom: var(--space-3xl);
-    text-align: center;
-    line-height: var(--leading-tight);
-    letter-spacing: var(--tracking-tighter);
-  }
-
-  .btn-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.85rem 1.75rem;
-    background: var(--color-cta);
-    color: var(--color-black);
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    border-radius: var(--radius-sm);
-    transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  }
-  .btn-cta:hover {
-    background: var(--color-cta-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(171, 227, 196, 0.45);
-  }
-  .btn-cta svg { transition: transform var(--duration-fast) var(--ease-out); }
-  .btn-cta:hover svg { transform: translateX(4px); }
-
-  .btn-outline-dark {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.85rem 1.75rem;
-    border: 2px solid var(--color-text);
-    color: var(--color-text);
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    border-radius: var(--radius-sm);
-    transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
-  }
-  .btn-outline-dark:hover {
-    background: var(--color-text);
-    color: var(--color-white);
-    transform: translateY(-2px);
-  }
-  .btn-outline-dark svg { transition: transform var(--duration-fast) var(--ease-out); }
-  .btn-outline-dark:hover svg { transform: translateX(4px); }
-
-  /* ── HERO ─────────────────────────────────── */
+  /* ─── Hero ─── */
   .hero {
-    height: 100svh;
-    min-height: 560px;
+    min-height: 100vh;
     padding: var(--hero-padding);
-    background: var(--color-bg);
+    display: flex;
   }
 
-  .hero__card {
+  .hero__frame {
     position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: clamp(1rem, 2vw, 1.5rem);
+    flex: 1;
+    border-radius: var(--radius-hero);
     overflow: hidden;
   }
 
@@ -422,757 +335,611 @@ const faqs = sortedFaqs.length > 0 ? sortedFaqs : [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    transition: transform 10s ease-out;
-  }
-  .hero:hover .hero__img {
-    transform: scale(1.05);
+    position: absolute;
+    inset: 0;
   }
 
   .hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.2) 0%,
-      rgba(0,0,0,0.02) 40%,
-      rgba(0,0,0,0.5) 100%
-    );
-    pointer-events: none;
-  }
-
-  /* Hero nav (glass bar, top-right of image) */
-  .hero-nav {
-    position: absolute;
-    top: var(--space-lg);
-    right: var(--space-lg);
-    z-index: 10;
-    display: none;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: 0.5rem 0.6rem 0.5rem 1.2rem;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(16px) saturate(1.5);
-    -webkit-backdrop-filter: blur(16px) saturate(1.5);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-full);
-  }
-
-  .hero-nav__list {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: center;
-    gap: var(--space-lg);
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-2xl);
+    min-height: calc(100vh - var(--hero-padding) * 2);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.15) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
   }
 
-  .hero-nav__link {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.9);
-    transition: color var(--duration-fast) var(--ease-out);
-    white-space: nowrap;
-  }
-  .hero-nav__link:hover {
-    color: #fff;
+  .hero__title {
+    font-family: var(--font-serif);
+    font-size: var(--text-hero);
+    font-weight: var(--weight-black);
+    letter-spacing: var(--tracking-tighter);
+    line-height: 0.9;
+    color: var(--color-white);
+    margin-top: auto;
+    max-width: 8ch;
   }
 
-  .hero-nav__book {
-    display: inline-flex;
+  .hero__tagline {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-style: italic;
+    color: var(--color-white);
+    align-self: flex-end;
+    text-align: right;
+    max-width: 20ch;
+  }
+
+  @media (min-width: 48rem) {
+    .hero__overlay {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .hero__title {
+      margin-top: 0;
+      align-self: flex-end;
+    }
+    .hero__tagline {
+      align-self: flex-end;
+    }
+  }
+
+  /* ─── Sections ─── */
+  .section {
+    padding: var(--section-padding) 0;
+  }
+
+  .section__heading {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+  }
+
+  /* ─── Introduction ─── */
+  .intro {
+    text-align: center;
+  }
+
+  .intro__heading {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .intro__text p {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    max-width: 60ch;
+    margin-inline: auto;
+    color: #cccccc;
+    transition: color 0.1s linear;
+  }
+
+  .intro__text p.is-revealed {
+    color: var(--color-text);
+  }
+
+  /* ─── Trust Indicators ─── */
+  .trust {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    text-align: center;
+    max-width: 56rem;
+    margin-inline: auto;
+  }
+
+  .trust__item {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 1rem;
+    gap: var(--space-md);
+  }
+
+  .trust__icon {
+    color: var(--color-primary);
+  }
+
+  .trust__label {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+  }
+
+  @media (min-width: 48rem) {
+    .trust {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ─── Gallery Preview ─── */
+  .gallery-preview {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .gallery-preview__right {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .gallery-preview__img-wrap {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .gallery-preview__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+
+  .gallery-preview__img-wrap:hover .gallery-preview__img {
+    transform: scale(1.03);
+  }
+
+  .gallery-preview__cta {
+    text-align: center;
+    margin-top: var(--space-2xl);
+  }
+
+  @media (min-width: 48rem) {
+    .gallery-preview {
+      grid-template-columns: 45% 1fr;
+    }
+    .gallery-preview__img-wrap--portrait {
+      height: 100%;
+    }
+    .gallery-preview__img-wrap--portrait img {
+      height: 100%;
+    }
+  }
+
+  /* ─── Button ─── */
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
     background: var(--color-cta);
     color: var(--color-black);
     font-family: var(--font-sans);
     font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    border-radius: var(--radius-sm);
-    white-space: nowrap;
-    transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
-  }
-  .hero-nav__book:hover {
-    background: var(--color-cta-hover);
-    transform: translateY(-1px);
-  }
-  .hero-nav__book svg {
-    transition: transform var(--duration-fast) var(--ease-out);
-  }
-  .hero-nav__book:hover svg {
-    transform: translate(2px, -2px);
-  }
-
-  /* Mobile hamburger in hero */
-  .hero-menu-btn {
-    position: absolute;
-    top: var(--space-lg);
-    right: var(--space-lg);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.25);
+    font-weight: var(--weight-bold);
     border-radius: var(--radius-full);
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .hero-menu-icon,
-  .hero-menu-icon::before,
-  .hero-menu-icon::after {
-    display: block;
-    width: 1.1rem;
-    height: 1.5px;
-    background: #fff;
-    border-radius: 1px;
-    transition: all var(--duration-normal) var(--ease-out);
-    position: relative;
-  }
-  .hero-menu-icon::before,
-  .hero-menu-icon::after {
-    content: "";
-    position: absolute;
-    left: 0;
-  }
-  .hero-menu-icon::before { top: -5px; }
-  .hero-menu-icon::after  { top: 5px; }
-
-  .hero-menu-btn[aria-expanded="true"] .hero-menu-icon { background: transparent; }
-  .hero-menu-btn[aria-expanded="true"] .hero-menu-icon::before { top: 0; transform: rotate(45deg); }
-  .hero-menu-btn[aria-expanded="true"] .hero-menu-icon::after  { top: 0; transform: rotate(-45deg); }
-
-  /* Brand name overlay */
-  .hero__brand {
-    position: absolute;
-    top: clamp(1.5rem, 4vw, 3rem);
-    left: clamp(1.5rem, 4vw, 3rem);
-    z-index: 5;
-    font-family: var(--font-serif);
-    font-weight: var(--weight-black);
-    font-size: clamp(3rem, 10vw, 8rem);
-    line-height: 0.92;
-    letter-spacing: -0.04em;
-    color: #fff;
-    text-shadow: 0 4px 40px rgba(0,0,0,0.3);
-    margin: 0;
-    max-width: 10ch;
-  }
-
-  /* Tagline bottom-right */
-  .hero__tagline {
-    position: absolute;
-    bottom: clamp(1.5rem, 4vw, 3rem);
-    right: clamp(1.5rem, 4vw, 3rem);
-    z-index: 5;
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 400;
-    font-style: italic;
-    color: #fff;
-    text-align: right;
-    max-width: 16ch;
-    line-height: var(--leading-snug);
-    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
-  }
-
-  /* ── INTRO ───────────────────────────────── */
-  .intro__heading {
-    font-family: var(--font-serif);
-    font-size: var(--text-4xl);
-    font-weight: var(--weight-black);
-    color: var(--color-text);
-    margin-bottom: var(--space-2xl);
-    text-align: center;
-    line-height: var(--leading-tight);
-    letter-spacing: var(--tracking-tighter);
-  }
-
-  .intro__text-wrap {
-    max-width: 56ch;
-    margin: 0 auto var(--space-3xl);
-  }
-
-  .intro__text {
-    font-family: var(--font-sans);
-    font-size: var(--text-xl);
-    color: var(--color-text);
-    line-height: var(--leading-relaxed);
-    text-align: center;
-    font-weight: 300;
-    max-width: none;
-  }
-
-  /* Line-by-line scroll animation */
-  .intro__text .word {
-    display: inline;
-    color: #c8c8c8;
-    transition: color 0.25s ease;
-  }
-  .intro__text .word.is-lit {
-    color: var(--color-text);
-  }
-
-  /* Separator + Trust bar */
-  .intro__divider {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin-bottom: var(--space-3xl);
-  }
-
-  .trust-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
-  }
-  .trust-bar__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--space-md);
-  }
-  .trust-bar__logo {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
-    background: var(--color-surface);
-    transition: border-color var(--duration-fast) var(--ease-out);
-  }
-  .trust-bar__item:hover .trust-bar__logo {
-    border-color: var(--color-primary);
-  }
-  .trust-bar__label {
-    font-family: var(--font-sans);
-    font-size: var(--text-base);
-    font-weight: 700;
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
     letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--color-text);
-    line-height: var(--leading-snug);
-    max-width: none;
-  }
-  .trust-bar__label span {
-    display: block;
-    font-weight: 400;
-    color: var(--color-text-muted);
-    text-transform: none;
-    letter-spacing: 0;
-    margin-top: 4px;
-    font-size: var(--text-sm);
   }
 
-  /* ── GALLERY PREVIEW ─────────────────────── */
-  .gallery-collage {
-    display: grid;
-    grid-template-columns: 45% 1fr;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-xl);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    aspect-ratio: 16 / 10;
-  }
-  .gallery-collage__left { grid-row: 1 / -1; }
-  .gallery-collage__right { display: grid; grid-template-rows: 1fr 1fr; gap: var(--space-sm); }
-  .gallery-collage__img-wrap {
-    overflow: hidden;
-    height: 100%;
-    position: relative;
-  }
-  .gallery-collage__placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-alt) 100%);
-    border: 1px solid var(--color-border-light);
-    transition: transform var(--duration-slow) var(--ease-out);
-    cursor: default;
-  }
-  .gallery-collage__img-wrap:hover .gallery-collage__placeholder {
-    transform: scale(1.05);
-  }
-  .gallery-collage__placeholder span {
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    font-style: italic;
-    color: var(--color-text-muted);
-    user-select: none;
-  }
-  .gallery-preview__action {
-    text-align: center;
-    margin-top: var(--space-xl);
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   }
 
-  /* ── FACILITIES ──────────────────────────── */
-  .facilities-grid {
+  /* ─── Facilities ─── */
+  .facilities {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2xl) var(--space-xl);
+    max-width: 56rem;
+    margin-inline: auto;
   }
-  .facility-card {
+
+  .facilities__item {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: var(--space-md);
-    transition: transform var(--duration-fast) var(--ease-out);
-  }
-  .facility-card:hover {
-    transform: translateY(-3px);
-  }
-  .facility-card__icon {
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .facility-card__label {
-    font-family: var(--font-sans);
-    font-size: var(--text-lg);
-    font-weight: 400;
-    color: var(--color-text);
-    line-height: var(--leading-snug);
-    max-width: none;
+    gap: var(--space-sm);
   }
 
-  /* ── IMPORTANT BITS ──────────────────────── */
-  .important-grid {
+  .facilities__icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .facilities__item span {
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+
+  @media (min-width: 48rem) {
+    .facilities {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ─── Important Bits ─── */
+  .important {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    gap: var(--space-2xl);
+    text-align: center;
+    max-width: 56rem;
+    margin-inline: auto;
   }
-  .important-item {
+
+  .important__item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     gap: var(--space-md);
-    padding: var(--space-xl);
-    border: 1px solid var(--color-border-light);
-    border-radius: var(--radius-xl);
-    background: var(--color-surface);
-    transition: border-color var(--duration-fast) var(--ease-out);
   }
-  .important-item:hover {
-    border-color: var(--color-primary);
-  }
-  .important-item__icon {
+
+  .important__icon {
     color: var(--color-primary);
   }
-  .important-item__title {
+
+  .important__label {
     font-family: var(--font-serif);
-    font-size: var(--text-xl);
-    font-weight: var(--weight-black);
-    color: var(--color-text);
-    letter-spacing: var(--tracking-tighter);
-    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
   }
-  .important-item__note {
-    font-family: var(--font-sans);
+
+  .important__sub {
     font-size: var(--text-sm);
     color: var(--color-text-muted);
-    max-width: none;
   }
 
-  /* ── TESTIMONIALS ────────────────────────── */
-  .testimonial-slider {
-    max-width: 720px;
-    margin: 0 auto;
+  @media (min-width: 48rem) {
+    .important {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
-  .testimonial-slider__track {
+
+  /* ─── Testimonials ─── */
+  .testimonials {
     position: relative;
-    min-height: 280px;
-  }
-  .testimonial-slide {
-    display: none;
-    flex-direction: column;
-    gap: var(--space-lg);
     text-align: center;
-    padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
-    background: var(--color-bg);
-    border: 1px solid var(--color-border-light);
-    border-radius: var(--radius-xl);
-    animation: testimonial-in 0.4s var(--ease-out);
+  }
+
+  .testimonials__track {
     position: relative;
-    overflow: visible;
-  }
-  .testimonial-slide.is-active { display: flex; }
-
-  @keyframes testimonial-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    min-height: 16rem;
   }
 
-  /* Large decorative quotation mark */
-  .testimonial-slide__quote-mark {
+  .testimonials__slide {
     position: absolute;
-    top: -0.15em;
-    left: 50%;
-    transform: translateX(-50%);
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .testimonials__slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+  }
+
+  .testimonials__quote {
     font-family: var(--font-display);
-    font-size: clamp(5rem, 12vw, 8rem);
+    font-size: clamp(4rem, 8vw, 8rem);
     line-height: 1;
     color: var(--color-primary);
-    opacity: 0.2;
-    pointer-events: none;
-    user-select: none;
+    opacity: 0.3;
+    display: block;
+    margin-bottom: calc(-1 * var(--space-xl));
   }
 
-  .testimonial-slide__stars {
+  .testimonials__text {
     font-size: var(--text-lg);
-    letter-spacing: 3px;
-    color: var(--color-primary);
-    position: relative;
-    z-index: 1;
-  }
-  .testimonial-slide__quote { flex: 1; position: relative; z-index: 1; }
-  .testimonial-slide__text {
-    font-family: var(--font-display);
-    font-size: var(--text-lg);
-    font-style: italic;
-    color: var(--color-text);
     line-height: var(--leading-relaxed);
-    max-width: none;
+    max-width: 50ch;
+    margin-inline: auto;
+    font-style: italic;
   }
-  .testimonial-slide__text.is-truncated {
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+
+  .testimonials__text.is-truncated::after {
+    content: "…";
   }
-  .testimonial-slide__read-more {
+
+  .testimonials__view-more {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary);
+    cursor: pointer;
     background: none;
     border: none;
-    cursor: pointer;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    color: var(--color-primary);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    padding: 0;
-    margin-top: var(--space-sm);
-    transition: opacity var(--duration-fast) var(--ease-out);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
-  .testimonial-slide__read-more:hover { opacity: 0.7; }
 
-  .testimonial-slide__footer {
+  .testimonials__author {
+    margin-top: var(--space-lg);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    position: relative;
-    z-index: 1;
+    gap: var(--space-xs);
   }
-  .testimonial-slide__name {
-    font-family: var(--font-sans);
+
+  .testimonials__name {
+    font-family: var(--font-serif);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-base);
+  }
+
+  .testimonials__location {
     font-size: var(--text-sm);
-    font-weight: 700;
-    color: var(--color-text);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-  }
-  .testimonial-slide__location {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
     color: var(--color-text-muted);
   }
 
-  .testimonial-slider__controls {
+  .testimonials__controls {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-lg);
     margin-top: var(--space-xl);
   }
-  .testimonial-slider__btn {
+
+  .testimonials__btn {
     width: 2.5rem;
     height: 2.5rem;
-    border-radius: 50%;
-    border: 1.5px solid var(--color-border);
-    background: transparent;
-    color: var(--color-text);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    cursor: pointer;
+    font-size: var(--text-base);
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
+    transition: background var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
   }
-  .testimonial-slider__btn:hover {
-    border-color: var(--color-primary);
-    background: var(--color-primary);
-    color: var(--color-white);
-  }
-  .testimonial-slider__dots { display: flex; gap: var(--space-sm); }
-  .testimonial-dot {
-    width: 0.5rem; height: 0.5rem; border-radius: 50%; border: none;
-    background: var(--color-border); cursor: pointer; padding: 0;
-    transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
-  }
-  .testimonial-dot.is-active { background: var(--color-primary); transform: scale(1.4); }
 
-  /* ── LOCATION ─────────────────────────────── */
-  .location-grid {
+  .testimonials__btn:hover {
+    background: var(--color-surface);
+    transform: translateY(-1px);
+  }
+
+  .testimonials__dots {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .testimonials__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+    border: none;
+    background: var(--color-border);
+    cursor: pointer;
+    padding: 0;
+    transition: background var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
+  }
+
+  .testimonials__dot.is-active {
+    background: var(--color-primary);
+    transform: scale(1.3);
+  }
+
+  /* ─── Location ─── */
+  .location {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-3xl);
-    align-items: center;
   }
-  .location-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl);
+
+  .location__sub-heading {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-sm);
   }
-  .location-content .section-heading { text-align: left; margin-bottom: 0; }
-  .location-w3w { display: flex; flex-direction: column; gap: var(--space-sm); }
-  .location-w3w__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
-    background: var(--color-text);
-    color: var(--color-white);
-    border-radius: var(--radius-md);
-    width: fit-content;
+
+  .location__words {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
   }
-  .location-w3w__words { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 700; letter-spacing: 0.02em; }
-  .location-w3w__explainer { font-size: var(--text-sm); color: var(--color-text-muted); line-height: var(--leading-relaxed); max-width: 42ch; }
-  .location-address {
-    font-style: normal; font-family: var(--font-sans); font-size: var(--text-base);
-    color: var(--color-text-muted); line-height: var(--leading-relaxed);
+
+  .location__w3w-explain {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 45ch;
+    margin-bottom: var(--space-2xl);
   }
-  .location-address p { max-width: none; }
-  .location-map {
+
+  .location__address {
+    font-style: normal;
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  .location__map {
     border-radius: var(--radius-xl);
     overflow: hidden;
-    aspect-ratio: 4 / 3;
-    border: 1px solid var(--color-border-light);
-    box-shadow: var(--shadow-lg);
-    background: var(--color-surface-alt);
-  }
-  .location-map iframe { width: 100%; height: 100%; display: block; }
-
-  /* ── FAQ ──────────────────────────────────── */
-  .faq-list { max-width: 720px; margin: 0 auto; }
-  .faq-item { border-bottom: 1px solid var(--color-border-light); }
-  .faq-item:first-child { border-top: 1px solid var(--color-border-light); }
-  .faq-item__question {
-    display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
-    width: 100%; padding: var(--space-lg) 0; background: none; border: none; cursor: pointer;
-    text-align: left; font-family: var(--font-serif); font-size: var(--text-lg);
-    font-weight: var(--weight-bold); color: var(--color-text); line-height: var(--leading-snug);
-    transition: color var(--duration-fast) var(--ease-out);
-  }
-  .faq-item__question:hover { color: var(--color-primary); }
-  .faq-item__icon {
-    display: flex; align-items: center; flex-shrink: 0; width: 20px; height: 20px;
-    color: var(--color-primary); transition: transform var(--duration-fast) var(--ease-out);
-  }
-  .faq-icon-plus { display: block; }
-  .faq-icon-minus { display: none; }
-  .faq-item--open .faq-icon-plus { display: none; }
-  .faq-item--open .faq-icon-minus { display: block; }
-  .faq-item__answer {
-    max-height: 0; overflow: hidden;
-    transition: max-height var(--duration-slow) var(--ease-out), padding var(--duration-normal) var(--ease-out);
-  }
-  .faq-item__answer p {
-    padding-bottom: var(--space-lg); font-size: var(--text-base); color: var(--color-text-muted);
-    line-height: var(--leading-relaxed); max-width: none;
   }
 
-  /* ── Responsive ───────────────────────────── */
-  @media (min-width: 40rem) {
-    .important-grid { grid-template-columns: repeat(3, 1fr); }
+  .location__map iframe {
+    display: block;
   }
+
   @media (min-width: 48rem) {
-    .facilities-grid { grid-template-columns: repeat(3, 1fr); }
+    .location {
+      grid-template-columns: 1fr 1.5fr;
+      align-items: start;
+    }
   }
-  @media (min-width: 64rem) {
-    .hero-nav { display: flex; }
-    .hero-menu-btn { display: none; }
-    .location-grid { grid-template-columns: 1fr 1.1fr; }
-    .gallery-collage { aspect-ratio: 16 / 9; }
+
+  /* ─── FAQ ─── */
+  .faq {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--color-border-light);
+    padding: var(--space-lg) 0;
+  }
+
+  .faq__question {
+    cursor: pointer;
+    font-family: var(--font-serif);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-lg);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__question::after {
+    content: "+";
+    font-size: var(--text-xl);
+    font-weight: var(--weight-normal);
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .faq__item[open] .faq__question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq__answer {
+    margin-top: var(--space-md);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+    max-width: 60ch;
   }
 </style>
 
 <script is:inline>
+  // ─── Testimonial Slider ───
   (function () {
+    var slider = document.getElementById("testimonial-slider");
+    if (!slider) return;
 
-    /* ── Hero mobile menu → opens global mobile-nav ── */
-    var heroMenuBtn = document.querySelector(".hero-menu-btn");
-    var mobileNav = document.getElementById("mobile-nav");
-    if (heroMenuBtn && mobileNav) {
-      function closeMenu() {
-        heroMenuBtn.setAttribute("aria-expanded", "false");
-        mobileNav.classList.remove("is-open");
-        document.body.style.overflow = "";
-      }
-      heroMenuBtn.addEventListener("click", function () {
-        var expanded = heroMenuBtn.getAttribute("aria-expanded") === "true";
-        heroMenuBtn.setAttribute("aria-expanded", String(!expanded));
-        mobileNav.classList.toggle("is-open");
-        document.body.style.overflow = expanded ? "" : "hidden";
-      });
-      mobileNav.addEventListener("click", function (e) {
-        if (e.target.tagName === "A") closeMenu();
-      });
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") closeMenu();
-      });
+    var slides = slider.querySelectorAll(".testimonials__slide");
+    var dots = slider.querySelectorAll(".testimonials__dot");
+    var current = 0;
+    var total = slides.length;
+
+    function goTo(index) {
+      slides[current].classList.remove("is-active");
+      dots[current].classList.remove("is-active");
+      dots[current].setAttribute("aria-selected", "false");
+      current = (index + total) % total;
+      slides[current].classList.add("is-active");
+      dots[current].classList.add("is-active");
+      dots[current].setAttribute("aria-selected", "true");
     }
 
-    /* ── Line-by-line scroll animation ── */
-    var textEl = document.getElementById("intro-animated-text");
-    if (textEl && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      var raw = textEl.textContent.trim();
-      var words = raw.split(/\s+/);
-      textEl.innerHTML = words.map(function (w) {
-        return '<span class="word">' + w + '</span>';
-      }).join(" ");
-
-      var wordEls = textEl.querySelectorAll(".word");
-      var total = wordEls.length;
-
-      // Group words by their visual line (offsetTop)
-      var lines = [];
-      var lastTop = -1;
-      wordEls.forEach(function (w) {
-        var top = w.getBoundingClientRect().top + window.scrollY;
-        if (Math.abs(top - lastTop) > 4) {
-          lines.push([]);
-          lastTop = top;
-        }
-        lines[lines.length - 1].push(w);
-      });
-      var totalLines = lines.length;
-
-      function updateWords() {
-        var rect = textEl.getBoundingClientRect();
-        var viewH = window.innerHeight;
-        var start = viewH;
-        var end = viewH * 0.5 - rect.height * 0.5;
-        var progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
-        var litLines = Math.round(progress * totalLines);
-        lines.forEach(function (line, i) {
-          line.forEach(function (w) {
-            w.classList.toggle("is-lit", i < litLines);
-          });
-        });
-      }
-
-      window.addEventListener("scroll", updateWords, { passive: true });
-      window.addEventListener("resize", function () {
-        // Recompute lines on resize
-        lines = [];
-        lastTop = -1;
-        wordEls.forEach(function (w) {
-          var top = w.getBoundingClientRect().top + window.scrollY;
-          if (Math.abs(top - lastTop) > 4) {
-            lines.push([]);
-            lastTop = top;
-          }
-          lines[lines.length - 1].push(w);
-        });
-        totalLines = lines.length;
-        updateWords();
-      });
-      updateWords();
-    }
-
-    /* ── Testimonial slider ── */
-    var slides = document.querySelectorAll(".testimonial-slide");
-    var dotsContainer = document.getElementById("testimonial-dots");
-    var prevBtn = document.getElementById("testimonial-prev");
-    var nextBtn = document.getElementById("testimonial-next");
-
-    if (slides.length > 0 && dotsContainer) {
-      var current = 0;
-      var dots = [];
-
-      slides.forEach(function (slide, i) {
-        var textEl = slide.querySelector(".testimonial-slide__text");
-        if (textEl && textEl.textContent.length > 300) {
-          textEl.classList.add("is-truncated");
-          var btn = document.createElement("button");
-          btn.className = "testimonial-slide__read-more";
-          btn.textContent = "Read More";
-          btn.addEventListener("click", function () {
-            var expanded = textEl.classList.toggle("is-truncated");
-            btn.textContent = expanded ? "Read More" : "Show Less";
-          });
-          textEl.insertAdjacentElement("afterend", btn);
-        }
-
-        var dot = document.createElement("button");
-        dot.className = "testimonial-dot" + (i === 0 ? " is-active" : "");
-        dot.setAttribute("role", "tab");
-        dot.setAttribute("aria-label", "Review " + (i + 1));
-        dot.addEventListener("click", function () { goTo(i); });
-        dotsContainer.appendChild(dot);
-        dots.push(dot);
-      });
-
-      function goTo(index) {
-        if (index < 0) index = slides.length - 1;
-        if (index >= slides.length) index = 0;
-        slides[current].classList.remove("is-active");
-        slides[current].setAttribute("aria-hidden", "true");
-        dots[current].classList.remove("is-active");
-        current = index;
-        slides[current].classList.add("is-active");
-        slides[current].setAttribute("aria-hidden", "false");
-        dots[current].classList.add("is-active");
-      }
-
-      goTo(0);
-
-      if (prevBtn) prevBtn.addEventListener("click", function () { goTo(current - 1); });
-      if (nextBtn) nextBtn.addEventListener("click", function () { goTo(current + 1); });
-
-      var timer = setInterval(function () { goTo(current + 1); }, 6000);
-      var sliderEl = document.querySelector(".testimonial-slider");
-      if (sliderEl) {
-        sliderEl.addEventListener("mouseenter", function () { clearInterval(timer); });
-        sliderEl.addEventListener("mouseleave", function () {
-          timer = setInterval(function () { goTo(current + 1); }, 6000);
-        });
-      }
-    }
-
-    /* ── FAQ accordion ── */
-    document.querySelectorAll(".faq-item__question").forEach(function (btn) {
-      var answer = document.getElementById(btn.getAttribute("aria-controls"));
-      btn.addEventListener("click", function () {
-        var item = btn.closest(".faq-item");
-        var isOpen = item.classList.contains("faq-item--open");
-        document.querySelectorAll(".faq-item--open").forEach(function (openItem) {
-          openItem.classList.remove("faq-item--open");
-          var a = openItem.querySelector(".faq-item__answer");
-          var b = openItem.querySelector(".faq-item__question");
-          if (a) a.style.maxHeight = null;
-          if (b) b.setAttribute("aria-expanded", "false");
-        });
-        if (!isOpen && answer) {
-          item.classList.add("faq-item--open");
-          btn.setAttribute("aria-expanded", "true");
-          answer.style.maxHeight = answer.scrollHeight + "px";
-        }
-      });
+    slider.querySelector("[data-dir='prev']").addEventListener("click", function () {
+      goTo(current - 1);
     });
 
+    slider.querySelector("[data-dir='next']").addEventListener("click", function () {
+      goTo(current + 1);
+    });
+
+    dots.forEach(function (dot, i) {
+      dot.addEventListener("click", function () { goTo(i); });
+    });
+
+    // Truncation
+    var MAX_CHARS = 220;
+    slides.forEach(function (slide) {
+      var textEl = slide.querySelector(".testimonials__text");
+      if (!textEl) return;
+      var full = textEl.textContent;
+      if (full.length > MAX_CHARS) {
+        var truncated = full.substring(0, MAX_CHARS);
+        textEl.setAttribute("data-full", full);
+        textEl.textContent = truncated;
+        textEl.classList.add("is-truncated");
+
+        var btn = document.createElement("button");
+        btn.className = "testimonials__view-more";
+        btn.textContent = "View more";
+        btn.type = "button";
+        textEl.parentNode.appendChild(btn);
+
+        btn.addEventListener("click", function () {
+          var showing = btn.textContent === "View less";
+          textEl.textContent = showing ? truncated : full;
+          textEl.classList.toggle("is-truncated", showing);
+          btn.textContent = showing ? "View more" : "View less";
+        });
+      }
+    });
+  })();
+
+  // ─── Scroll Text Reveal ───
+  (function () {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var el = document.getElementById("scroll-text");
+    if (!el) return;
+    var p = el.querySelector("p");
+    if (!p) return;
+
+    var text = p.textContent;
+    var words = text.split(/(\s+)/);
+    p.innerHTML = "";
+    var spans = [];
+
+    words.forEach(function (word) {
+      if (word.match(/^\s+$/)) {
+        p.appendChild(document.createTextNode(word));
+      } else {
+        var span = document.createElement("span");
+        span.textContent = word;
+        span.style.color = "#cccccc";
+        span.style.transition = "color 0.3s ease";
+        p.appendChild(span);
+        spans.push(span);
+      }
+    });
+
+    function updateColors() {
+      var rect = el.getBoundingClientRect();
+      var windowH = window.innerHeight;
+      var elTop = rect.top;
+      var elH = rect.height;
+
+      // Progress: 0 when element enters viewport, 1 when center of element reaches center of viewport
+      var progress = Math.max(0, Math.min(1, (windowH - elTop) / (windowH * 0.5 + elH * 0.5)));
+
+      var revealCount = Math.floor(progress * spans.length);
+      spans.forEach(function (span, i) {
+        span.style.color = i < revealCount ? "#000000" : "#cccccc";
+      });
+    }
+
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          updateColors();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    updateColors();
   })();
 </script>

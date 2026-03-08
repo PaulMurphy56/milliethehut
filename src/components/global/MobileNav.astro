@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import { siteConfig } from "../../lib/siteConfig";
 
 const siteSettingsCollection = await getCollection("siteSettings");
 const site = siteSettingsCollection[0]?.data;
@@ -23,7 +22,7 @@ const site = siteSettingsCollection[0]?.data;
   </nav>
 
   <div class="mobile-nav__footer">
-    <a href={site?.bookingUrl ?? "/book/"} class="mobile-nav__cta">Book Your Stay</a>
+    <a href={site?.bookingUrl ?? "/book/"} class="mobile-nav__cta">Book Now &rarr;</a>
     {site?.phone && (
       <a href={`tel:${site.phone.replace(/\s+/g, "")}`} class="mobile-nav__phone">
         {site.phone}
@@ -36,13 +35,12 @@ const site = siteSettingsCollection[0]?.data;
   .mobile-nav {
     position: fixed;
     inset: 0;
-    top: 4.5rem;
     z-index: 99;
     background: var(--color-bg);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: var(--space-2xl) var(--container-padding);
+    padding: var(--space-5xl) var(--container-padding) var(--space-2xl);
     transform: translateX(100%);
     transition: transform var(--duration-normal) var(--ease-out);
     overflow-y: auto;
@@ -83,17 +81,19 @@ const site = siteSettingsCollection[0]?.data;
   .mobile-nav__cta {
     display: block;
     padding: var(--space-md) var(--space-xl);
-    background: var(--color-primary);
-    color: var(--color-text-inverse);
-    font-weight: var(--weight-semibold);
+    background: var(--color-cta);
+    color: var(--color-black);
+    font-weight: var(--weight-bold);
     text-align: center;
     border-radius: var(--radius-full);
     font-size: var(--text-base);
-    transition: background var(--duration-fast) var(--ease-out);
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
   }
 
   .mobile-nav__cta:hover {
-    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   .mobile-nav__phone {
