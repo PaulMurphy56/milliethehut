@@ -25,7 +25,10 @@ import Container from "../components/ui/Container.astro";
 
         <!-- Booking Form -->
         <div class="form-wrap" data-reveal="slide-up">
-          <form class="booking-form" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          {Astro.url.searchParams.get("success") === "true" && (
+            <p class="form-success" role="alert">Thanks for your enquiry — we'll be in touch shortly to confirm availability.</p>
+          )}
+          <form class="booking-form" name="booking" method="POST" action="/book/?success=true" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="booking" />
             <p class="sr-only" aria-hidden="true">
               <label>Don't fill this in: <input name="bot-field" /></label>
@@ -198,6 +201,17 @@ import Container from "../components/ui/Container.astro";
   }
 
   /* ─── Form ─── */
+  .form-success {
+    background: var(--color-cta);
+    color: var(--color-text);
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-xl);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+  }
   .booking-form {
     display: flex;
     flex-direction: column;

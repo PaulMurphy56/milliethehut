@@ -31,7 +31,10 @@ const site = siteSettingsCollection[0]?.data;
 
         <!-- Contact Form -->
         <div class="form-wrap" data-reveal="slide-up">
-          <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          {Astro.url.searchParams.get("success") === "true" && (
+            <p class="form-success" role="alert">Thanks for your message — we'll be in touch soon.</p>
+          )}
+          <form class="contact-form" name="contact" method="POST" action="/contact/?success=true" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="contact" />
             <p class="sr-only" aria-hidden="true">
               <label>Don't fill this in: <input name="bot-field" /></label>
@@ -187,6 +190,17 @@ const site = siteSettingsCollection[0]?.data;
   }
 
   /* ─── Form ─── */
+  .form-success {
+    background: var(--color-cta);
+    color: var(--color-text);
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-xl);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+  }
   .form-wrap__title {
     font-family: var(--font-display);
     font-size: clamp(28px, 3.5vw, 50px);
