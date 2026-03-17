@@ -18,7 +18,7 @@ const { title, description, canonicalUrl, ogImage } = Astro.props;
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage}>
   <slot name="head" slot="head" />
   <SkipLink />
-  <Header />
+  <Header innerPage={true} />
   <MobileNav />
   <main id="main-content">
     <slot />

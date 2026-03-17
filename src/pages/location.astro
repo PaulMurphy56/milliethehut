@@ -1,322 +1,612 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import Container from "../components/ui/Container.astro";
-import Button from "../components/ui/Button.astro";
-import SectionHeading from "../components/ui/SectionHeading.astro";
 import { getCollection } from "astro:content";
 
 const pageCollection = await getCollection("pageLocation");
 const page = pageCollection[0]?.data;
-
-const allAttractions = await getCollection("attractions");
-const sortedAttractions = allAttractions.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <PageLayout
-  title={page?.metaTitle ?? "Location | Millie The Hut"}
+  title={page?.metaTitle ?? "Local Area | Millie The Hut"}
   description={page?.metaDescription}
 >
-  <!-- Page Header -->
-  <section class="page-header">
+  <!-- Inner Hero -->
+  <section class="inner-hero">
     <Container>
-      <div class="page-header__content" data-reveal="slide-up">
-        {page?.pageEyebrow && <p class="page-header__eyebrow">{page.pageEyebrow}</p>}
-        <h1 class="page-header__title">{page?.pageTitle ?? "Location"}</h1>
-        {page?.pageDescription && <p class="page-header__desc">{page.pageDescription}</p>}
+      <div class="inner-hero__grid">
+        <div class="inner-hero__text">
+          <h1 class="inner-hero__title">{page?.pageTitle ?? "Local Area"}</h1>
+          <p class="inner-hero__subtitle">{page?.pageDescription ?? "Millie The Hut sits quietly on the England/Wales border, amidst wild countryside, cute towns, and open skies."}</p>
+          <p class="inner-hero__jump">Jump to:</p>
+          <nav class="inner-hero__links" aria-label="Page sections">
+            <a href="#the-area" class="inner-hero__link">The Area</a>
+            <a href="#activities" class="inner-hero__link">Activities</a>
+            <a href="#food-drink" class="inner-hero__link">Food &amp; Drink</a>
+          </nav>
+        </div>
+        <div class="inner-hero__image">
+          <figure class="inner-hero__figure">
+            <img src="/images/presteigne.jpg" alt="The Welsh Marches countryside near Presteigne" class="inner-hero__image-placeholder" loading="eager" decoding="async" />
+            <figcaption class="section-img__caption">Presteigne High Street</figcaption>
+          </figure>
+        </div>
       </div>
     </Container>
   </section>
 
-  <!-- Getting there -->
-  <section class="section">
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       THE AREA
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="content-section" id="the-area" aria-labelledby="the-area-heading">
     <Container>
-      <div class="getting-there-grid">
-        <div data-reveal="slide-up">
-          <SectionHeading
-            label="Getting Here"
-            title={page?.gettingThereHeading ?? "Getting here"}
-          />
-          {page?.gettingThereParagraphs?.map((para) => (
-            <p>{para}</p>
-          ))}
-          <div class="getting-there__actions">
-            <Button href="/book/" size="md">Book Your Stay</Button>
+      <h2 class="content-section__heading" id="the-area-heading">The Area</h2>
+
+      <!-- Local Attractions -->
+      <div class="subsection" data-reveal="slide-up">
+        <h3 class="subsection__heading">Local Attractions</h3>
+        <div class="subsection__body">
+          <ul class="attraction-list">
+            <li>Presteigne's award-winning gas-lit Judge's Lodgings is a large atmospheric elegant upstairs-downstairs house, complete with court room and cells, that will show you what life was like locally 150 years ago (open end March- end Oct). Excellent gift shop.</li>
+            <li>Nearby Kington hosts Hergest Croft Gardens, famed for its rare plants shrubs and huge 'champion trees', the charming Small Breeds Farm Park and Owl Centre and Westonbury Mill Water Gardens.</li>
+            <li>The Black-and-White Trail links a series of picture-postcard Herefordshire village. Particularly recommended is an easy round trip from Presteigne taking in Pembridge, Weobley ('webley'), and Eardisland ('ur-disland'), all of which boast centurilf-timbered houses, ancient churches, good pubs and other recommended places to eat and drink.</li>
+          </ul>
+        </div>
+      </div>
+
+      <figure class="section-img" data-reveal="fade">
+        <img src="/images/local-area/garden.jpg" alt="Hergest Croft Gardens" loading="lazy" decoding="async" />
+        <figcaption class="section-img__caption">Hergest Croft Gardens</figcaption>
+      </figure>
+
+      <!-- Slightly Further Afield -->
+      <div class="subsection" data-reveal="slide-up">
+        <h3 class="subsection__heading">Slightly Further Afield</h3>
+        <div class="subsection__body">
+          <ul class="attraction-list">
+            <li>Hereford boasts a beautiful cathedral, home to the acclaimed Mappa Mundi, and has most of the facilities you'd expect in a small city.</li>
+            <li>The world-famous book town of Hay-on-Wye attracts visitors from all over the world in late May at Festival time, but is well worth a visit at any time of year for its artisan shops, and places to eat and drink, whether or not you're a bibliophile. (Many shops close Mon-Tues).</li>
+            <li>Ludlow, famous for its food, is a gem of Georgian architecture with a romantic ruined castle. The town stages almost daily markets, hosts several festivals a year and has some good vintage and antique shopping.</li>
+            <li>Leominster ('lemster') is also chock-a-block with good value vintage and antique shops. Close by are two fine National Trust properties, Berrington Hall and Croft Castle.</li>
+            <li>Due west, into Wales and the Cambrian Mountains, lie the stupendous Elan voirs. These marvels of Victorian engineering were built to supply drinking water to Birmingham and still do so today. The area features some wonderful easily accessible walks and is a haven for wildlife with The Red Kite Feeding Station at Rhayader offering spectacular close-ups of hundreds of these giant birds at a time.</li>
+          </ul>
+        </div>
+      </div>
+
+      <figure class="section-img" data-reveal="fade">
+        <img src="/images/local-area/elan.jpeg" alt="Elan Valley Reservoir" loading="lazy" decoding="async" />
+        <figcaption class="section-img__caption">Elan Valley Reservoir</figcaption>
+      </figure>
+
+      <!-- Local Wildlife -->
+      <div class="portrait-section" data-reveal="fade">
+        <div class="subsection subsection--no-margin">
+          <h3 class="subsection__heading">Local Wildlife</h3>
+          <div class="subsection__prose">
+            <p>The Marches are full of wildlife, and our fields, trees and sky above are home to woodpeckers, red kites, buzzards, pheasants, grey herons, swifts, rabbits, squirrels and foxes. Depending on the time of year you'll hear majestic red kites and buzzards 'mewing' high overhead, the staccato tones of a male pheasant staking out his patch (cock fights are common!), the eerie towhit-towhoo of tawny owls, and (if you're lucky) the chattering of baby owls in the sycamore used as a nursery for the past two years on the edge of Millie's field.</p>
+            <p>Spring is magical with baby rabbits, baby squirrels, nesting birds with chicks, and of course lambs in the fields. Early mornin the rabbits, while the eagle-eyed may see brown trout leaping out the Hindwell, trying to catch insects in summer. In the field across the brook at the back of the hut guests have spotted Roe Deer.</p>
           </div>
         </div>
-        {page?.journeyTimes && page.journeyTimes.length > 0 && (
-          <aside class="distances-card" data-reveal="fade">
-            <h2 class="distances-card__title">Journey times</h2>
-            <ul class="distances-list" role="list">
-              {page.journeyTimes.map((item) => (
-                <li class="distances-list__item">
-                  <span class="distances-list__place">{item.place}</span>
-                  <span class="distances-list__time">{item.time}</span>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        )}
+        <figure class="portrait-section__img">
+          <img src="/images/local-area/rabbits.jpeg" alt="Rabbits in the fields at Millie The Hut" loading="lazy" decoding="async" />
+        </figure>
+      </div>
+
+      <!-- What's On -->
+      <div class="subsection" data-reveal="slide-up">
+        <h3 class="subsection__heading">What's On</h3>
+        <div class="subsection__body">
+          <ul class="attraction-list">
+            <li>The internationally acclaimed Presteigne Festival of modern classical music is staged annually in several venues around town over six days spanning the August Bank Holiday. The elegant Italianate Assembly Rooms is a main venue and year-round stages live music of all kinds. It is also home to a cinema club.</li>
+            <li>In July, Sheep Music Festival, featuring mostly local bands, is usually staged on the idyllic pastures of Wents Meadows, a five-minute stroll from town.</li>
+            <li>Contemporary art lovers should check out the Sidney Nolan Trust arts centre (a 5-minute walk along the railway line from Millie), which stages regular exhibitions and live events.</li>
+            <li>In and around Presteigne, there's something going on all year round, from unusual (even arcane!) entertaining local events such as Wassailing in January (cider celebrations) and Hill Climbs in October (veteran cars straining every cylinder, slipping, sliding and splattering mud, ascending steep grassy inclines) to grand fairs and markets of all kind in Ludlow, and the internationally famous Hay Festival in May.</li>
+            <li>Our neighbouring market town, Kington stages vibrant food festivals in June and December with up to 100 stalls showcasing the best of the Marches food producers.</li>
+          </ul>
+        </div>
+      </div>
+      <figure class="section-img" data-reveal="fade">
+        <img src="/images/local-area/car.jpg" alt="Presteigne Hill Climb" loading="lazy" decoding="async" />
+        <figcaption class="section-img__caption">Presteigne Hill Climb</figcaption>
+      </figure>
+    </Container>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       ACTIVITIES
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="content-section content-section--alt" id="activities" aria-labelledby="activities-heading">
+    <Container>
+      <h2 class="content-section__heading" id="activities-heading">Activities</h2>
+
+      <!-- Walking (featured) -->
+      <div class="subsection" data-reveal="slide-up">
+        <h3 class="subsection__heading">Walking</h3>
+        <div class="subsection__prose">
+          <p>The Marches is a wonderful place for walking and the old railway line footpath leading directly from Millie's field, makes it easy to stride straight out without the need for a car.</p>
+          <p>Offa's Dyke, a long-distance waymarked footpath which traditionally marks the border between England and Wales, runs close by Presteigne and is easily accessed via the neighbouring small towns of Knighton, where you'll find the Offa's Dyke Information Centre, and Kington where several long-distance paths converge to make this a regional walking hub, hosting a major walking fptember.</p>
+          <p>A favourite easy, if quite steep, walk ascends from Hergest ('har-guest') Croft Gardens to Hergest Ridge - made famous by musician Mike Oldfield - offering a wonderful 360-degree panorama taking in several neighbouring counties. Once up here, past the landmark clump of monkey puzzle trees, you can continue on to the village of Gladestry where you'll find the welcoming Royal Oak with a lovely garden for a pub lunch. It's roughly an hour to the monkey puzzle trees and a further hour to Gladestry.</p>
+        </div>
+      </div>
+
+      <figure class="section-img" data-reveal="fade">
+        <img src="/images/local-area/hergest.webp" alt="The view from Hergest Ridge" loading="lazy" decoding="async" />
+        <figcaption class="section-img__caption">The view from Hergest Ridge</figcaption>
+      </figure>
+
+      <!-- Activity cards -->
+      <div class="activity-grid" data-reveal-stagger>
+        <div class="activity-card">
+          <h3 class="activity-card__title">Wild Swimming</h3>
+          <p class="activity-card__desc">You're very welcome to 'go wild' in the Hindwell, which borders Millie's field. In summer it's quite small and shallow but will certainly cool you off in a heatwave.</p>
+        </div>
+
+        <div class="activity-card">
+          <h3 class="activity-card__title">Golf</h3>
+          <p class="activity-card__desc">Kington, a 10-minute drive away, boasts England's highest, and surely one of its most panoramic golf clubs, set within wild National Trust land. It's well worth a walk round here, with or without clubs (open to non-members).</p>
+        </div>
+
+        <div class="activity-card">
+          <h3 class="activity-card__title">Canoeing</h3>
+          <p class="activity-card__desc">The River Wye is a picturesque place to either learn to canoe or skills. The nearest centres are at Hay-on-Wye.</p>
+        </div>
+
+        <div class="activity-card">
+          <h3 class="activity-card__title">Stargazing</h3>
+          <p class="activity-card__desc">With so little light pollution, stargazing from your hut (clear weather permitting) may well be a highlight of your visit. If you want to learn more, on the edge of Presteigne is The Spaceguard Centre, an observatory that monitors asteroids and comets near the earth, and is open to the public.</p>
+        </div>
       </div>
     </Container>
   </section>
 
-  <!-- Map placeholder -->
-  <section class="map-section" aria-label="Map location">
-    <div class="map-placeholder">
-      <Container>
-        <div class="map-placeholder__inner">
-          <p class="map-placeholder__text">Interactive map coming soon</p>
-          {page?.pageEyebrow && (
-            <p class="map-placeholder__sub">{page.pageEyebrow}</p>
-          )}
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       FOOD & DRINK
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="content-section" id="food-drink" aria-labelledby="food-drink-heading">
+    <Container>
+      <h2 class="content-section__heading" id="food-drink-heading">Food &amp; Drink</h2>
+
+      <!-- Overview -->
+      <div class="subsection" data-reveal="slide-up">
+        <div class="subsection__prose">
+          <p>There's plenty on offer on Presteigne High Street to satisfy most tastes, whether you're shopping for ingredients, looking for a takeaway, or a place to eat out. DO please note however that most restaurants in Presteigne close Monday to Wednesday. You'll find top quality and varied produce at The Salty Dog greengrocers/fishmongers, Carini's butchers shop and Deli-Tinto. Presteigne Farmers Market is held on the first Saturday of each month. Spar and Premier Stores offer a good range of groceries and both open daily, early morning to late evening.</p>
         </div>
-      </Container>
-    </div>
+      </div>
+
+      <!-- Takeaway -->
+      <div class="subsection" data-reveal="slide-up">
+        <h3 class="subsection__heading">Takeaway</h3>
+        <div class="subsection__prose">
+          <p>Fancy a takeaway, then back to The Shack to dine under the stars? There's perfect pizza frohne's, generous portions of fish and chips from the Victoria Fish Bar and Chinese fayre from The Cabin.</p>
+        </div>
+      </div>
+
+      <!-- Eating out in Town -->
+      <div class="portrait-section portrait-section--reverse" data-reveal="fade">
+        <div class="subsection subsection--no-margin">
+          <h3 class="subsection__heading">Eating Out in Town</h3>
+          <div class="venue-grid" data-reveal-stagger>
+            <div class="venue-card">
+              <h4 class="venue-card__name">Daphne's</h4>
+              <p class="venue-card__desc">Charred thin-crust pizzas, home-made cider and perry, weekend buzz.</p>
+            </div>
+            <div class="venue-card">
+              <h4 class="venue-card__name">Crocketts</h4>
+              <p class="venue-card__desc">Creative tapas-style dishes from around the world plus Sunday brunch.</p>
+            </div>
+            <div class="venue-card">
+              <h4 class="venue-card__name">Wild Thyme</h4>
+              <p class="venue-card__desc">Italian cucina in a rustic-modern setting.</p>
+            </div>
+          </div>
+        </div>
+        <figure class="portrait-section__img">
+          <img src="/images/local-area/daphnes.jpg" alt="Daphnes Pizza, Presteigne" loading="lazy" decoding="async" />
+          <figcaption class="section-img__caption">Daphnes Pizza</figcaption>
+        </figure>
+      </div>
+
+      <!-- Coffee & Tea -->
+      <div class="subsection" data-reveal="slide-up">
+        <h3 class="subsection__heading">Coffee &amp; Tea</h3>
+        <div class="subsection__prose">
+          <p>For a simple tea or coffee there are several choices on The High Street; all are good though The Workhouse Gallery and Wild Thyme are our favourites.</p>
+        </div>
+      </div>
+
+      <!-- Just a Drink -->
+      <div class="subsection" data-reveal="slide-up">
+        <h3 class="subsection__heading">Just a Drink</h3>
+        <div class="subsection__prose">
+          <p>There are three pubs in Presteigne (we particularly like the Dukes Arms - note, cash only) plus the black-and-white landmark 400-year old Radnorshire Arms Hotel with an attractive beer garden (carvery Sunday lunch and Wednesday early evening).</p>
+        </div>
+      </div>
+
+      <!-- Eating out further afield -->
+      <div class="subsection" data-reveal="slide-up">
+        <h3 class="subsection__heading">Eating Out Further Afield</h3>
+        <div class="venue-grid" data-reveal-stagger>
+          <div class="venue-card">
+            <h4 class="venue-card__name">The Stagg Inn, Titley</h4>
+            <span class="venue-card__distance">10 mins</span>
+            <p class="venue-card__desc">Highly recommended.</p>
+          </div>
+          <div class="venue-card">
+            <h4 class="venue-card__name">The Harp Inn, Old Radnor</h4>
+            <span class="venue-card__distance">15 mins</span>
+            <p class="venue-card__desc">Guests say great for Sunday lunch, food variable at other times.</p>
+          </div>
+          <div class="venue-card">
+            <h4 class="venue-card__name">The Riverside Inn, Aymestry</h4>
+            <span class="venue-card__distance">20 mins</span>
+            <p class="venue-card__desc">Highly recommenn at Leintwardine. Beautiful riverside setting, food OK (try also The Sun at Leintwardine, a two-minute walk away, for a drink).</p>
+          </div>
+          <div class="venue-card">
+            <h4 class="venue-card__name">The Cider Barn, near Pembridge</h4>
+            <span class="venue-card__distance">20 mins</span>
+            <p class="venue-card__desc">Highly recommended.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
   </section>
 
-  <!-- Attractions -->
-  {sortedAttractions.length > 0 && (
-    <section class="section" aria-labelledby="attractions-heading">
-      <Container>
-        <SectionHeading
-          label="Explore"
-          title={page?.attractionsSectionHeading ?? "What's nearby"}
-          description={page?.attractionsSectionDescription}
-          align="center"
-        />
-        <div class="attractions-grid" data-reveal-stagger>
-          {sortedAttractions.map((attraction) => (
-            <article class="attraction-card">
-              <div class="attraction-card__header">
-                <h3 class="attraction-card__name">{attraction.data.name}</h3>
-                <span class="attraction-card__distance">{attraction.data.distance}</span>
-              </div>
-              <p class="attraction-card__desc">{attraction.data.description}</p>
-            </article>
-          ))}
-        </div>
-      </Container>
-    </section>
-  )}
-
-  <!-- The landscape -->
-  {(page?.landscapeHeading || page?.landscapeParagraphs?.length) && (
-    <section class="section section--surface" aria-labelledby="landscape-heading">
-      <Container narrow>
-        <SectionHeading
-          label="The Landscape"
-          title={page?.landscapeHeading ?? "The Area"}
-          align="center"
-        />
-        <div class="prose" data-reveal="slide-up">
-          {page?.landscapeParagraphs?.map((para) => (
-            <p>{para}</p>
-          ))}
-        </div>
-      </Container>
-    </section>
-  )}
-
   <!-- CTA -->
-  {(page?.ctaHeading || page?.ctaDescription) && (
-    <section class="cta-banner">
-      <Container>
-        <div class="cta-banner__inner" data-reveal="slide-up">
-          {page.ctaHeading && <h2 class="cta-banner__title">{page.ctaHeading}</h2>}
-          {page.ctaDescription && <p class="cta-banner__desc">{page.ctaDescription}</p>}
-          <Button href="/book/" size="lg">Book Now</Button>
-        </div>
-      </Container>
-    </section>
-  )}
+  <section class="cta-banner">
+    <Container>
+      <div class="cta-banner__inner" data-reveal="slide-up">
+        <h2 class="cta-banner__title">Ready to explore?</h2>
+        <p class="cta-banner__desc">Book your stay at Millie The Hut and discover the Welsh Marches for yourself.</p>
+        <a href="/book/" class="cta-banner__btn">Book Your Stay &rarr;</a>
+      </div>
+    </Container>
+  </section>
 </PageLayout>
 
 <style>
-  .page-header {
-    background: var(--color-surface);
+  /* ─── Inner Hero ─── */
+  .inner-hero {
     padding: var(--space-5xl) 0 var(--section-padding);
+    background: var(--color-bg-white);
   }
 
-  .page-header__eyebrow {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    color: var(--color-primary);
-    margin-bottom: var(--space-sm);
-    max-width: none;
-  }
-
-  .page-header__title {
-    margin-bottom: var(--space-md);
-  }
-
-  .page-header__desc {
-    font-size: var(--text-xl);
-    color: var(--color-text-muted);
-    max-width: 52ch;
-    font-style: italic;
-    font-family: var(--font-serif);
-    line-height: var(--leading-relaxed);
-  }
-
-  .section {
-    padding: var(--section-padding) 0;
-  }
-
-  .section--surface {
-    background: var(--color-surface);
-  }
-
-  .getting-there-grid {
+  .inner-hero__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-3xl);
-    align-items: start;
+    gap: var(--space-2xl);
+    align-items: center;
   }
 
-  .getting-there-grid p {
-    color: var(--color-text-muted);
+  .inner-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 70px);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
     margin-bottom: var(--space-lg);
-    line-height: var(--leading-relaxed);
-    max-width: 52ch;
   }
 
-  .getting-there__actions {
-    margin-top: var(--space-xl);
-  }
-
-  .distances-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border-light);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-  }
-
-  .distances-card__title {
+  .inner-hero__subtitle {
     font-family: var(--font-sans);
-    font-size: var(--text-sm);
+    font-size: clamp(18px, 2.5vw, 25px);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+    max-width: 40ch;
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-xl);
+  }
+
+  .inner-hero__jump {
+    font-family: var(--font-sans);
+    font-size: 13px;
     font-weight: var(--weight-semibold);
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
     color: var(--color-primary);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xs);
   }
 
-  .distances-list {
+  .inner-hero__links {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: var(--space-sm);
   }
 
-  .distances-list__item {
-    display: flex;
-    justify-content: space-between;
+  .inner-hero__link {
+    display: inline-flex;
     align-items: center;
-    padding: var(--space-sm) 0;
-    border-bottom: 1px solid var(--color-border-light);
-    font-size: var(--text-sm);
-  }
-
-  .distances-list__item:last-child {
-    border-bottom: none;
-  }
-
-  .distances-list__place {
+    padding: var(--space-xs) var(--space-lg);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--weight-semibold);
     color: var(--color-text);
-    font-weight: var(--weight-medium);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-full);
+    transition: border-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+    letter-spacing: var(--tracking-tight);
   }
 
-  .distances-list__time {
+  .inner-hero__link:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .inner-hero__figure {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .inner-hero__image-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-xl);
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 48rem) {
+    .inner-hero__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  /* ─── Content Sections ─── */
+  .content-section {
+    padding: var(--section-padding) 0;
+  }
+
+  .content-section--alt {
+    background: var(--color-surface);
+  }
+
+  .content-section__heading {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 50px);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-3xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  /* ─── Subsections ─── */
+  .subsection {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .subsection:last-child {
+    margin-bottom: 0;
+  }
+
+  .subsection__heading {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-lg);
+    color: var(--color-text);
+  }
+
+  .subsection__prose p {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: var(--leading-relaxed);
     color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+    max-width: 65ch;
   }
 
-  .map-section {
-    background: var(--color-surface-alt);
+  .subsection__prose p:last-child {
+    margin-bottom: 0;
   }
 
-  .map-placeholder {
-    height: 20rem;
+  /* ─── Attraction Lists ─── */
+  .attraction-list {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: var(--space-lg);
   }
 
-  .map-placeholder__inner {
-    text-align: center;
+  .attraction-list li {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+    padding-left: var(--space-lg);
+    position: relative;
+    max-width: 65ch;
   }
 
-  .map-placeholder__text {
+  .attraction-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+  }
+
+  /* ─── Section Images (landscape, full-width) ─── */
+  .section-img {
+    position: relative;
+    margin: var(--space-3xl) 0;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .section-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .section-img__caption {
+    position: absolute;
+    bottom: var(--space-md);
+    right: var(--space-md);
+    background: rgba(0, 0, 0, 0.52);
+    color: #fff;
     font-family: var(--font-serif);
-    font-size: var(--text-xl);
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-sm);
     font-style: italic;
-    max-width: none;
-  }
-
-  .map-placeholder__sub {
     font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    opacity: 0.6;
-    max-width: none;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    pointer-events: none;
   }
 
-  .attractions-grid {
+  /* ─── Portrait Side Layouts ─── */
+  .portrait-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .portrait-section__img {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .portrait-section__img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .subsection--no-margin {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .portrait-section {
+      grid-template-columns: 1fr 260px;
+      align-items: start;
+    }
+
+    .portrait-section--reverse {
+      grid-template-columns: 1fr 220px;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .portrait-section {
+      grid-template-columns: 1fr 300px;
+    }
+
+    .portrait-section--reverse {
+      grid-template-columns: 1fr 260px;
+    }
+  }
+
+  /* ─── Activity Cards ─── */
+  .activity-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-md);
   }
 
-  .attraction-card {
-    background: var(--color-bg);
+  .activity-card {
+    padding: var(--space-xl);
+    background: var(--color-bg-white);
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-xl);
-    padding: var(--space-xl);
     transition: border-color var(--duration-fast) var(--ease-out);
   }
 
-  .attraction-card:hover {
+  .content-section--alt .activity-card {
+    background: var(--color-bg-white);
+  }
+
+  .activity-card:hover {
     border-color: var(--color-primary);
   }
 
-  .attraction-card__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+  .activity-card__title {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
     margin-bottom: var(--space-sm);
+  }
+
+  .activity-card__desc {
+    font-family: var(--font-sans);
+    font-size: clamp(14px, 1.3vw, 16px);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: none;
+  }
+
+  /* ─── Venue Cards ─── */
+  .venue-grid {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-md);
   }
 
-  .attraction-card__name {
-    font-size: var(--text-lg);
+  .venue-card {
+    padding: var(--space-xl);
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-xl);
+    transition: border-color var(--duration-fast) var(--ease-out);
   }
 
-  .attraction-card__distance {
+  .venue-card:hover {
+    border-color: var(--color-primary);
+  }
+
+  .venue-card__name {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-xs);
+  }
+
+  .venue-card__distance {
+    display: inline-block;
+    font-family: var(--font-sans);
     font-size: var(--text-xs);
     font-weight: var(--weight-semibold);
     color: var(--color-primary);
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
-    white-space: nowrap;
-    flex-shrink: 0;
+    margin-bottom: var(--space-sm);
   }
 
-  .attraction-card__desc {
-    font-size: var(--text-sm);
+  .venue-card__desc {
+    font-family: var(--font-sans);
+    font-size: clamp(14px, 1.3vw, 16px);
     color: var(--color-text-muted);
     line-height: var(--leading-relaxed);
     max-width: none;
   }
 
-  .prose p {
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-lg);
-    line-height: var(--leading-relaxed);
-    font-size: var(--text-lg);
-    max-width: none;
+  @media (min-width: 48rem) {
+    .activity-grid,
+    .venue-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
+  @media (min-width: 64rem) {
+    .activity-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ─── CTA Banner ─── */
   .cta-banner {
     background: var(--color-text);
     color: var(--color-text-inverse);
@@ -328,8 +618,11 @@ const sortedAttractions = allAttractions.sort((a, b) => a.data.order - b.data.or
   }
 
   .cta-banner__title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 50px);
     color: var(--color-text-inverse);
     margin-bottom: var(--space-md);
+    letter-spacing: var(--tracking-tight);
   }
 
   .cta-banner__desc {
@@ -341,18 +634,24 @@ const sortedAttractions = allAttractions.sort((a, b) => a.data.order - b.data.or
     font-style: italic;
   }
 
-  @media (min-width: 48rem) {
-    .attractions-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .cta-banner__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: var(--space-md) var(--space-2xl);
+    background: var(--color-cta);
+    color: var(--color-black);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    border-radius: var(--radius-full);
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+    letter-spacing: var(--tracking-tight);
   }
 
-  @media (min-width: 64rem) {
-    .getting-there-grid {
-      grid-template-columns: 1.3fr 1fr;
-    }
-    .attractions-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .cta-banner__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   }
 </style>

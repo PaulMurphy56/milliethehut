@@ -9,6 +9,7 @@ const site = siteSettingsCollection[0]?.data;
   <nav aria-label="Mobile navigation">
     <ul class="mobile-nav__list" role="list">
       {[
+        { label: "Home", href: "/" },
         { label: "Gallery", href: "/gallery/" },
         { label: "Local Area", href: "/location/" },
         { label: "Your Hosts", href: "/your-hosts/" },
@@ -59,7 +60,7 @@ const site = siteSettingsCollection[0]?.data;
   .mobile-nav__link {
     display: block;
     padding: var(--space-md) 0;
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: var(--text-2xl);
     font-weight: var(--weight-bold);
     color: var(--color-text);
@@ -83,6 +84,7 @@ const site = siteSettingsCollection[0]?.data;
     padding: var(--space-md) var(--space-xl);
     background: var(--color-cta);
     color: var(--color-black);
+    font-family: var(--font-display);
     font-weight: var(--weight-bold);
     text-align: center;
     border-radius: var(--radius-full);

@@ -4,6 +4,11 @@ import { getCollection } from "astro:content";
 const siteSettingsCollection = await getCollection("siteSettings");
 const site = siteSettingsCollection[0]?.data;
 
+interface Props {
+  innerPage?: boolean;
+}
+const { innerPage = false } = Astro.props;
+
 const nav = [
   { label: "Gallery",    href: "/gallery/" },
   { label: "Local Area", href: "/location/" },
@@ -13,24 +18,26 @@ const nav = [
 ---
 
 <header class="header" role="banner" id="site-header">
-  <div class="header__inner">
-    <div class="header__left"></div>
-
+  <div class:list={["header__inner", { "header__inner--constrained": innerPage }]}>
     <nav class="header__nav" aria-label="Main navigation">
-      <ul class="header__nav-list" role="list">
-        {nav.map((item) => (
-          <li>
-            <a href={item.href} class="header__nav-link">{item.label}</a>
-          </li>
-        ))}
-      </ul>
+      <div class="header__nav-pill" id="nav-pill">
+        <div class="header__left">
+          <a href="/" class="header__logo">Millie The Hut</a>
+        </div>
+        <div class="header__right">
+          <ul class="header__nav-list" role="list">
+            {nav.map((item) => (
+              <li>
+                <a href={item.href} class="header__nav-link">{item.label}</a>
+              </li>
+            ))}
+          </ul>
+          <a href={site?.bookingUrl ?? "/book/"} class="header__book-btn">
+            Book Now <span class="header__book-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
     </nav>
-
-    <div class="header__actions">
-      <a href={site?.bookingUrl ?? "/book/"} class="header__book-btn">
-        Book Now &rarr;
-      </a>
-    </div>
 
     <button
       class="header__menu-btn"
@@ -51,58 +58,100 @@ const nav = [
     left: 0;
     right: 0;
     z-index: 200;
-    padding: var(--space-md) var(--hero-padding);
+    padding: calc(var(--space-xl) + 3px) var(--container-padding);
+    transition: padding var(--duration-normal) var(--ease-out);
   }
 
   .header__inner {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: var(--space-lg);
-    padding: var(--space-sm) var(--space-lg);
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    gap: var(--space-xl);
+  }
+
+  .header__inner--constrained {
+    max-width: var(--container-max);
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .header__nav { display: none; flex: 1; }
+
+  /* Nav pill — transparent by default, spans full width */
+  .header__nav-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.6rem 0.6rem 0.6rem 1.75rem;
     border-radius: var(--radius-full);
+    background: transparent;
+    transition: background var(--duration-normal) var(--ease-out),
+                backdrop-filter var(--duration-normal) var(--ease-out);
   }
 
   .header__left {
-    flex: 1;
+    display: flex;
+    align-items: center;
   }
 
-  .header__nav { display: none; }
+  .header__right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .header__logo {
+    font-family: var(--font-display);
+    font-size: 25px;
+    font-weight: var(--weight-bold);
+    color: var(--color-white);
+    white-space: nowrap;
+    letter-spacing: var(--tracking-tight);
+    transition: color var(--duration-normal) var(--ease-out);
+  }
+
   .header__nav-list {
     display: flex;
     align-items: center;
     gap: var(--space-xl);
   }
   .header__nav-link {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
+    font-family: var(--font-display);
+    font-size: 22px;
     font-weight: var(--weight-normal);
     color: var(--color-white);
     transition: opacity var(--duration-fast) var(--ease-out);
-    letter-spacing: var(--tracking-wide);
+    letter-spacing: -0.03em;
   }
   .header__nav-link:hover { opacity: 0.7; }
 
-  .header__actions { display: none; }
   .header__book-btn {
-    padding: 0.5rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 2rem;
     background: var(--color-cta);
     color: var(--color-black);
     font-family: var(--font-sans);
-    font-size: var(--text-sm);
+    font-size: 15px;
     font-weight: var(--weight-bold);
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-hero);
     transition: transform var(--duration-fast) var(--ease-out),
                 box-shadow var(--duration-fast) var(--ease-out);
     white-space: nowrap;
+    letter-spacing: var(--tracking-tight);
+  }
+  .header__book-arrow {
+    display: inline-block;
+    transition: transform var(--duration-fast) var(--ease-out);
   }
   .header__book-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+  .header__book-btn:hover .header__book-arrow {
+    transform: translateX(4px);
   }
 
   .header__menu-btn {
@@ -137,18 +186,39 @@ const nav = [
   .header__menu-icon::after  { top: 6px; }
 
   .header__menu-btn[aria-expanded="true"] .header__menu-icon { background: transparent; }
-  .header__menu-btn[aria-expanded="true"] .header__menu-icon::before { top: 0; transform: rotate(45deg); }
-  .header__menu-btn[aria-expanded="true"] .header__menu-icon::after  { top: 0; transform: rotate(-45deg); }
+  .header__menu-btn[aria-expanded="true"] .header__menu-icon::before { top: 0; transform: rotate(45deg); background: var(--color-black); }
+  .header__menu-btn[aria-expanded="true"] .header__menu-icon::after  { top: 0; transform: rotate(-45deg); background: var(--color-black); }
+
+  .header:global(.is-scrolled) {
+    padding: 15px var(--container-padding);
+  }
 
   @media (min-width: 64rem) {
-    .header__nav     { display: block; }
-    .header__actions { display: flex; }
+    .header__nav     { display: flex; }
     .header__menu-btn { display: none; }
   }
 </style>
 
+<style is:global>
+  /* Scroll-dependent styles (added via JS, must be global) */
+  .header.is-scrolled .header__nav-pill {
+    background: rgba(26, 58, 42, 0.37);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header.is-scrolled .header__menu-icon,
+  .header.is-scrolled .header__menu-icon::before,
+  .header.is-scrolled .header__menu-icon::after {
+    background: var(--color-black);
+  }
+  .header.is-scrolled .header__menu-btn[aria-expanded="true"] .header__menu-icon {
+    background: transparent;
+  }
+</style>
+
 <script is:inline>
-  (function () {
+  document.addEventListener("DOMContentLoaded", function () {
     var btn = document.querySelector(".header__menu-btn");
     var nav = document.getElementById("mobile-nav");
     if (!btn || !nav) return;
@@ -168,5 +238,41 @@ const nav = [
 
     nav.addEventListener("click", function (e) { if (e.target.tagName === "A") closeMenu(); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
-  })();
+  });
+
+  // ─── Nav background transition on scroll ───
+  document.addEventListener("DOMContentLoaded", function () {
+    var header = document.getElementById("site-header");
+    if (!header) return;
+
+    var heroFrame = document.querySelector(".hero__frame");
+    if (!heroFrame) {
+      header.classList.add("is-scrolled");
+      return;
+    }
+
+    var ticking = false;
+
+    function checkScroll() {
+      var frameBottom = heroFrame.getBoundingClientRect().bottom;
+      var headerBottom = header.getBoundingClientRect().bottom;
+      if (frameBottom <= headerBottom) {
+        header.classList.add("is-scrolled");
+      } else {
+        header.classList.remove("is-scrolled");
+      }
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          checkScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    checkScroll();
+  });
 </script>

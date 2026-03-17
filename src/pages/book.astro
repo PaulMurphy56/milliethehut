@@ -1,188 +1,195 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import Container from "../components/ui/Container.astro";
-import Button from "../components/ui/Button.astro";
-import { getCollection } from "astro:content";
-
-const pageCollection = await getCollection("pageBook");
-const page = pageCollection[0]?.data;
-
-const siteSettingsCollection = await getCollection("siteSettings");
-const site = siteSettingsCollection[0]?.data;
 ---
 
 <PageLayout
-  title={page?.metaTitle ?? "Book Your Stay | Millie The Hut"}
-  description={page?.metaDescription}
+  title="Book | Millie The Hut"
+  description="Check availability and make a booking enquiry for Millie The Hut — luxury shepherd's hut glamping in the Welsh Marches."
 >
   <!-- Page Header -->
   <section class="page-header">
     <Container>
       <div class="page-header__content" data-reveal="slide-up">
-        {page?.pageEyebrow && <p class="page-header__eyebrow">{page.pageEyebrow}</p>}
-        <h1 class="page-header__title">{page?.pageTitle ?? "Book"}</h1>
-        {page?.pageDescription && <p class="page-header__desc">{page.pageDescription}</p>}
+        <h1 class="page-header__title">Booking Enquiry</h1>
+        <p class="page-header__desc">Please check our availability calendar, and make a booking enquiry using the form below.</p>
+        <p class="page-header__rate-link"><a href="#rates-heading">See our rate card below &darr;</a></p>
       </div>
     </Container>
   </section>
 
-  <!-- Booking + Contact grid -->
+  <!-- Booking Grid -->
   <section class="section">
     <Container>
       <div class="booking-grid">
 
-        <!-- Enquiry form -->
+        <!-- Booking Form -->
         <div class="form-wrap" data-reveal="slide-up">
-          {page?.formHeading && <h2 class="form-wrap__title">{page.formHeading}</h2>}
-          {page?.formDescription && <p class="form-wrap__desc">{page.formDescription}</p>}
-
-          <form class="enquiry-form" name="booking-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="booking-enquiry" />
+          <form class="booking-form" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="booking" />
             <p class="sr-only" aria-hidden="true">
               <label>Don't fill this in: <input name="bot-field" /></label>
             </p>
 
             <div class="form-group">
-              <label class="form-label" for="name">Your name <span aria-hidden="true">*</span></label>
-              <input class="form-input" type="text" id="name" name="name" required autocomplete="name" placeholder="Jane Smith" />
+              <label class="form-label" for="booking-email">Email address <span aria-hidden="true">*</span></label>
+              <input class="form-input" type="email" id="booking-email" name="email" required autocomplete="email" placeholder="jane@example.com" />
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="email">Email address <span aria-hidden="true">*</span></label>
-              <input class="form-input" type="email" id="email" name="email" required autocomplete="email" placeholder="jane@example.com" />
+              <label class="form-label" for="booking-dates">Dates you would like to book <span aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" id="booking-dates" name="dates" required placeholder="e.g. 14–17 June 2026" />
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="phone">Phone number</label>
-              <input class="form-input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="07700 000000" />
+              <label class="form-label" for="booking-comments">Any requests / comments</label>
+              <textarea class="form-input form-textarea" id="booking-comments" name="comments" rows="5" placeholder="Anything else you'd like us to know?"></textarea>
             </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="checkin">Arrival date <span aria-hidden="true">*</span></label>
-                <input class="form-input" type="date" id="checkin" name="checkin" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="checkout">Departure date <span aria-hidden="true">*</span></label>
-                <input class="form-input" type="date" id="checkout" name="checkout" required />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="guests">Number of guests <span aria-hidden="true">*</span></label>
-              <select class="form-input form-select" id="guests" name="guests" required>
-                <option value="">Please select</option>
-                <option value="1">1 guest</option>
-                <option value="2">2 guests</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="dogs">Do you have a dog?</label>
-              <select class="form-input form-select" id="dogs" name="dogs">
-                <option value="no">No</option>
-                <option value="yes-1">Yes — 1 dog</option>
-                <option value="yes-2">Yes — 2 dogs</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="message">Anything else you'd like to say?</label>
-              <textarea class="form-input form-textarea" id="message" name="message" rows="4" placeholder="Questions, special requests, or just a hello..."></textarea>
-            </div>
-
-            <Button type="submit" size="lg">Send Enquiry</Button>
+            <button class="form-submit" type="submit">Send Enquiry &rarr;</button>
           </form>
         </div>
 
-        <!-- Contact details -->
-        <aside class="contact-details" data-reveal="fade">
-          {site && (
-            <div class="contact-card">
-              <h2 class="contact-card__title">Get in touch directly</h2>
-              <ul class="contact-card__list" role="list">
-                {site.phone && (
-                  <li class="contact-card__item">
-                    <span class="contact-card__label">Phone</span>
-                    <a href={`tel:${site.phone.replace(/\s+/g, "")}`} class="contact-card__value">{site.phone}</a>
-                  </li>
-                )}
-                {site.email && (
-                  <li class="contact-card__item">
-                    <span class="contact-card__label">Email</span>
-                    <a href={`mailto:${site.email}`} class="contact-card__value">{site.email}</a>
-                  </li>
-                )}
-                {site.addressLocality && (
-                  <li class="contact-card__item">
-                    <span class="contact-card__label">Location</span>
-                    <span class="contact-card__value">{site.addressLocality}, {site.addressRegion}</span>
-                  </li>
-                )}
-              </ul>
+        <!-- Availability Widget Sidebar -->
+        <aside class="booking-sidebar" data-reveal="fade">
+          <div class="widget-card">
+            <h2 class="widget-card__title">Availability</h2>
+            <div class="widget-card__embed" id="bookalet-widget">
+              <script src="https://widgets.bookalet.co.uk/publish.js" data-bookalet="b25b1c2d-43da-4f9a-85cd-921af5cfd74a" data-property="25256" is:inline></script>
             </div>
-          )}
-
-          {page?.infoItems && page.infoItems.length > 0 && (
-            <div class="contact-card">
-              <h2 class="contact-card__title">Good to know</h2>
-              <ul class="info-list" role="list">
-                {page.infoItems.map((item) => <li>{item}</li>)}
-              </ul>
-            </div>
-          )}
-
-          {site && (site.instagramUrl || site.facebookUrl) && (
-            <div class="contact-card">
-              <h2 class="contact-card__title">Follow Millie</h2>
-              <div class="contact-socials">
-                {site.instagramUrl && (
-                  <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="contact-social-link">Instagram</a>
-                )}
-                {site.facebookUrl && (
-                  <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" class="contact-social-link">Facebook</a>
-                )}
-              </div>
-            </div>
-          )}
+          </div>
         </aside>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Rate Card -->
+  <section class="section section--rate-card" aria-labelledby="rates-heading">
+    <Container>
+      <h2 class="section__heading" id="rates-heading">Rate Card <span class="section__heading-sub">(per night)</span></h2>
+
+      <div class="rate-table-wrap" data-reveal="slide-up">
+        <table class="rate-table">
+          <thead>
+            <tr>
+              <th class="rate-table__th rate-table__th--dates">Dates</th>
+              <th class="rate-table__th">Sun – Thur</th>
+              <th class="rate-table__th">Fri – Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rate-table__season">
+                <strong>Low Season</strong>
+                <span>5 Jan – 29 Mar &amp; 30 Oct – 20 Dec*</span>
+              </td>
+              <td class="rate-table__price">&pound;120</td>
+              <td class="rate-table__price">&pound;145</td>
+            </tr>
+            <tr>
+              <td class="rate-table__season">
+                <strong>Mid Season</strong>
+                <span>30 Mar – 30 Jun &amp; 7 Sept – 29 Oct*</span>
+              </td>
+              <td class="rate-table__price">&pound;130</td>
+              <td class="rate-table__price">&pound;160</td>
+            </tr>
+            <tr>
+              <td class="rate-table__season">
+                <strong>High Season</strong>
+                <span>1 July – 6 Sept*</span>
+              </td>
+              <td class="rate-table__price">&pound;150</td>
+              <td class="rate-table__price">&pound;175</td>
+            </tr>
+            <tr>
+              <td class="rate-table__season">
+                <strong>Peak Season</strong>
+                <span>Val Day, Easter 3–6 Apr, Bank Hol w/ends &amp; 21 Dec 2026 – 3 Jan 2027</span>
+              </td>
+              <td class="rate-table__price">&pound;160**</td>
+              <td class="rate-table__price">&pound;190</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rate-notes" data-reveal="fade">
+        <p>*Excl Peak Season Dates inc Bank Hols.</p>
+        <p>** Bank Hol Sundays &pound;180</p>
+        <p>Min stay – 2 nights midweek, 3 nights weekends (except low season, 2 nights). Booking start days Mon, Wed, Fri (may be some flexibility, please enquire).</p>
       </div>
     </Container>
   </section>
 </PageLayout>
 
 <style>
+  /* ─── Page Header ─── */
   .page-header {
-    background: var(--color-surface);
-    padding: var(--space-5xl) 0 var(--section-padding);
-  }
-
-  .page-header__eyebrow {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    color: var(--color-primary);
-    margin-bottom: var(--space-sm);
-    max-width: none;
+    padding: var(--space-5xl) 0 calc(var(--section-padding) / 2);
+    background: var(--color-bg-white);
   }
 
   .page-header__title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 70px);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
     margin-bottom: var(--space-md);
   }
 
   .page-header__desc {
-    font-size: var(--text-xl);
+    font-family: var(--font-sans);
+    font-size: clamp(18px, 2.5vw, 25px);
     color: var(--color-text-muted);
     max-width: 48ch;
-    font-style: italic;
-    font-family: var(--font-serif);
+    line-height: var(--leading-relaxed);
+    letter-spacing: var(--tracking-tight);
   }
 
+  .page-header__rate-link {
+    margin-top: var(--space-sm);
+  }
+
+  .page-header__rate-link a {
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.3vw, 18px);
+    color: var(--color-primary);
+    font-weight: var(--weight-medium);
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .page-header__rate-link a:hover {
+    opacity: 0.7;
+  }
+
+  /* ─── Sections ─── */
   .section {
+    padding: calc(var(--section-padding) / 2) 0 var(--section-padding);
+    background: var(--color-bg-white);
+  }
+
+  .section--rate-card {
     padding: var(--section-padding) 0;
   }
 
+  .section__heading {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 50px);
+    font-weight: var(--weight-bold);
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .section__heading-sub {
+    font-weight: var(--weight-normal);
+    font-size: 0.6em;
+    color: var(--color-text-muted);
+  }
+
+  /* ─── Booking Grid ─── */
   .booking-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -190,17 +197,8 @@ const site = siteSettingsCollection[0]?.data;
     align-items: start;
   }
 
-  .form-wrap__title {
-    margin-bottom: var(--space-sm);
-  }
-
-  .form-wrap__desc {
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-xl);
-    line-height: var(--leading-relaxed);
-  }
-
-  .enquiry-form {
+  /* ─── Form ─── */
+  .booking-form {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
@@ -212,14 +210,9 @@ const site = siteSettingsCollection[0]?.data;
     gap: var(--space-xs);
   }
 
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
-  }
-
   .form-label {
-    font-size: var(--text-sm);
+    font-family: var(--font-sans);
+    font-size: clamp(14px, 1.2vw, 18px);
     font-weight: var(--weight-medium);
     color: var(--color-text);
   }
@@ -233,7 +226,8 @@ const site = siteSettingsCollection[0]?.data;
     padding: var(--space-sm) var(--space-md);
     border: 1.5px solid var(--color-border);
     border-radius: var(--radius-md);
-    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.2vw, 18px);
     background: var(--color-bg);
     color: var(--color-text);
     transition: border-color var(--duration-fast) var(--ease-out);
@@ -252,32 +246,49 @@ const site = siteSettingsCollection[0]?.data;
 
   .form-textarea {
     resize: vertical;
-    min-height: 8rem;
+    min-height: 10rem;
   }
 
-  .form-select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 256 256'%3E%3Cpath fill='%236b5b4e' d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right var(--space-md) center;
-    padding-right: var(--space-3xl);
+  .form-submit {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.4rem;
+    padding: var(--space-md) var(--space-2xl);
+    background: var(--color-cta);
+    color: var(--color-black);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    border: none;
+    border-radius: var(--radius-full);
     cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+    letter-spacing: var(--tracking-tight);
   }
 
-  .contact-details {
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  /* ─── Sidebar ─── */
+  .booking-sidebar {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
   }
 
-  .contact-card {
+  .widget-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-xl);
     padding: var(--space-xl);
   }
 
-  .contact-card__title {
-    font-family: var(--font-sans);
+  .widget-card__title {
+    font-family: var(--font-display);
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
     text-transform: uppercase;
@@ -286,78 +297,112 @@ const site = siteSettingsCollection[0]?.data;
     margin-bottom: var(--space-lg);
   }
 
-  .contact-card__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
+  .widget-card__embed {
+    min-height: 300px;
   }
 
-  .contact-card__item {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  /* ─── Rate Table ─── */
+  .rate-table-wrap {
+    max-width: 48rem;
+    margin-inline: auto;
+    overflow-x: auto;
   }
 
-  .contact-card__label {
-    font-size: var(--text-xs);
-    font-weight: var(--weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
+  .rate-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.3vw, 17px);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .rate-table__th {
+    font-family: var(--font-display);
+    font-size: clamp(15px, 1.5vw, 18px);
+    font-weight: var(--weight-bold);
+    text-align: center;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 2px solid var(--color-text);
+    white-space: nowrap;
+  }
+
+  .rate-table__th--dates {
+    text-align: left;
+    width: 45%;
+  }
+
+  .rate-table__season {
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--color-border-light);
+    vertical-align: top;
+  }
+
+  .rate-table__season strong {
+    display: block;
+    font-weight: var(--weight-bold);
+    margin-bottom: 2px;
+  }
+
+  .rate-table__season span {
+    font-size: clamp(13px, 1.1vw, 15px);
     color: var(--color-text-muted);
-  }
-
-  .contact-card__value {
-    font-size: var(--text-base);
-    color: var(--color-text);
-    font-weight: var(--weight-medium);
-    transition: color var(--duration-fast) var(--ease-out);
-  }
-
-  .contact-card__value:hover {
-    color: var(--color-primary);
-  }
-
-  .info-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
-
-  .info-list li {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    padding-left: var(--space-md);
-    position: relative;
     line-height: var(--leading-relaxed);
   }
 
-  .info-list li::before {
-    content: "·";
-    position: absolute;
-    left: 0;
-    color: var(--color-primary);
-    font-weight: var(--weight-bold);
-  }
-
-  .contact-socials {
-    display: flex;
-    gap: var(--space-md);
-  }
-
-  .contact-social-link {
-    font-size: var(--text-sm);
+  .rate-table__price {
+    text-align: center;
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--color-border-light);
     font-weight: var(--weight-semibold);
-    color: var(--color-primary);
-    transition: opacity var(--duration-fast) var(--ease-out);
+    font-size: clamp(16px, 1.5vw, 20px);
+    vertical-align: middle;
   }
 
-  .contact-social-link:hover {
-    opacity: 0.7;
+  /* ─── Rate Notes ─── */
+  .rate-notes {
+    max-width: 48rem;
+    margin-inline: auto;
+    margin-top: var(--space-2xl);
+    text-align: center;
+  }
+
+  .rate-notes p {
+    font-family: var(--font-sans);
+    font-size: clamp(14px, 1.2vw, 16px);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-sm);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .rate-notes p:last-child {
+    margin-bottom: 0;
+    margin-top: var(--space-md);
   }
 
   @media (min-width: 64rem) {
     .booking-grid {
       grid-template-columns: 1.4fr 1fr;
     }
+  }
+</style>
+
+<style is:global>
+  /* ─── Bookalet Widget Theme Overrides ─── */
+  #bookalet-widget .bk-calendar {
+    font-family: 'Inter', system-ui, sans-serif !important;
+  }
+  #bookalet-widget .bk-calendar-header {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    font-family: 'Playfair Display', Georgia, serif !important;
+  }
+  #bookalet-widget .bk-calendar td.available {
+    background-color: #ABE3C4 !important;
+    color: #000000 !important;
+  }
+  #bookalet-widget .bk-calendar td.unavailable {
+    background-color: #f4efe8 !important;
+    color: #999999 !important;
   }
 </style>

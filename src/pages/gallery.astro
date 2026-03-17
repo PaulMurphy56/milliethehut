@@ -1,0 +1,379 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Container from "../components/ui/Container.astro";
+import { getCollection } from "astro:content";
+
+const pageCollection = await getCollection("pageGallery");
+const page = pageCollection[0]?.data;
+
+const allGallery = await getCollection("gallery");
+const sortedGallery = allGallery.sort((a, b) => a.data.order - b.data.order);
+---
+
+<PageLayout
+  title={page?.metaTitle ?? "Gallery | Millie The Hut"}
+  description={page?.metaDescription}
+>
+  <!-- Inner Hero -->
+  <section class="inner-hero">
+    <Container>
+      <div class="inner-hero__grid">
+        <div class="inner-hero__text">
+          <h1 class="inner-hero__title">{page?.pageTitle ?? "Gallery"}</h1>
+          <p class="inner-hero__subtitle">{page?.pageDescription ?? "Step inside Millie and explore the meadow, the views, and the little details that make a stay here so special."}</p>
+        </div>
+        <div class="inner-hero__image">
+          <img src="/images/gallery/262937.avif" alt="Inside Millie The Hut" class="inner-hero__image-placeholder" loading="eager" decoding="async" />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Gallery Collage -->
+  <section class="section" aria-labelledby="gallery-heading">
+    <Container>
+      <h2 class="sr-only" id="gallery-heading">Photo Gallery</h2>
+      <div class="collage" id="gallery-collage">
+        {sortedGallery.length > 0 ? (
+          sortedGallery.map((img, i) => (
+            <figure class="collage__item" data-reveal="fade">
+              <button class="collage__btn" type="button" aria-label={`View full image: ${img.data.title}`} data-lightbox-src={img.data.image} data-lightbox-alt={img.data.alt}>
+                <img
+                  src={img.data.image}
+                  alt={img.data.alt}
+                  class="collage__img"
+                  loading={i < 2 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              </button>
+              <figcaption class="collage__caption" aria-hidden="true"></figcaption>
+            </figure>
+          ))
+        ) : (
+          <>
+            <figure class="collage__item" data-reveal="fade">
+              <div class="collage__placeholder" role="img" aria-label="The Hut Exterior">
+                <span class="collage__placeholder-label">The Hut Exterior</span>
+              </div>
+            </figure>
+            <figure class="collage__item" data-reveal="fade">
+              <div class="collage__placeholder collage__placeholder--tall" role="img" aria-label="Cosy Interior">
+                <span class="collage__placeholder-label">Cosy Interior</span>
+              </div>
+            </figure>
+            <figure class="collage__item" data-reveal="fade">
+              <div class="collage__placeholder" role="img" aria-label="Countryside Views">
+                <span class="collage__placeholder-label">The Views</span>
+              </div>
+            </figure>
+            <figure class="collage__item" data-reveal="fade">
+              <div class="collage__placeholder collage__placeholder--tall" role="img" aria-label="The Bedroom">
+                <span class="collage__placeholder-label">The Bedroom</span>
+              </div>
+            </figure>
+            <figure class="collage__item" data-reveal="fade">
+              <div class="collage__placeholder" role="img" aria-label="The Deck">
+                <span class="collage__placeholder-label">The Deck</span>
+              </div>
+            </figure>
+            <figure class="collage__item" data-reveal="fade">
+              <div class="collage__placeholder" role="img" aria-label="The Wood Burner">
+                <span class="collage__placeholder-label">The Wood Burner</span>
+              </div>
+            </figure>
+          </>
+        )}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <Container>
+      <div class="cta-banner__inner" data-reveal="slide-up">
+        <h2 class="cta-banner__title">Like what you see?</h2>
+        <p class="cta-banner__desc">Book your stay at Millie The Hut and experience it for yourself.</p>
+        <a href="/book/" class="cta-banner__btn">Book Your Stay &rarr;</a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <button class="lightbox__close" type="button" aria-label="Close image viewer">&times;</button>
+    <img class="lightbox__img" id="lightbox-img" alt="" />
+  </div>
+</PageLayout>
+
+<style>
+  /* ─── Inner Hero ─── */
+  .inner-hero {
+    padding: var(--space-5xl) 0 var(--section-padding);
+    background: var(--color-bg-white);
+  }
+
+  .inner-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .inner-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 70px);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
+    margin-bottom: var(--space-lg);
+  }
+
+  .inner-hero__subtitle {
+    font-family: var(--font-sans);
+    font-size: clamp(18px, 2.5vw, 25px);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-muted);
+    max-width: 40ch;
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .inner-hero__image-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-xl);
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 48rem) {
+    .inner-hero__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  /* ─── Sections ─── */
+  .section {
+    padding: var(--section-padding) 0;
+  }
+
+  /* ─── Gallery Collage ─── */
+  .collage {
+    columns: 1;
+    column-gap: var(--space-md);
+  }
+
+  .collage__item {
+    break-inside: avoid;
+    margin-bottom: var(--space-md);
+  }
+
+  .collage__btn {
+    display: block;
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: zoom-in;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .collage__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--duration-slow) var(--ease-out);
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    min-height: 200px;
+  }
+
+  .collage__btn:hover .collage__img {
+    transform: scale(1.03);
+  }
+
+  .collage__caption {
+    font-family: var(--font-serif);
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
+    padding-left: var(--space-xs);
+  }
+
+  .collage__placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-lg);
+  }
+
+  .collage__placeholder--tall {
+    aspect-ratio: 3 / 4;
+  }
+
+  .collage__placeholder-label {
+    font-family: var(--font-serif);
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+
+  @media (min-width: 48rem) {
+    .collage {
+      columns: 2;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .collage {
+      columns: 3;
+    }
+  }
+
+  /* ─── CTA Banner ─── */
+  .cta-banner {
+    background: var(--color-text);
+    color: var(--color-text-inverse);
+    padding: var(--section-padding) 0;
+  }
+
+  .cta-banner__inner {
+    text-align: center;
+  }
+
+  .cta-banner__title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 50px);
+    color: var(--color-text-inverse);
+    margin-bottom: var(--space-md);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .cta-banner__desc {
+    font-size: var(--text-lg);
+    opacity: 0.8;
+    margin-inline: auto;
+    margin-bottom: var(--space-2xl);
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  .cta-banner__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: var(--space-md) var(--space-2xl);
+    background: var(--color-cta);
+    color: var(--color-black);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    border-radius: var(--radius-full);
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .cta-banner__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  /* ─── Lightbox ─── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-normal) var(--ease-out),
+                visibility var(--duration-normal) var(--ease-out);
+  }
+
+  .lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--color-white);
+    font-size: 1.5rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--duration-fast) var(--ease-out);
+  }
+
+  .lightbox__close:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .lightbox__img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+    transform: scale(0.95);
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  .lightbox.is-open .lightbox__img {
+    transform: scale(1);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var lightbox = document.getElementById("lightbox");
+    var lightboxImg = document.getElementById("lightbox-img");
+    var closeBtn = lightbox ? lightbox.querySelector(".lightbox__close") : null;
+    if (!lightbox || !lightboxImg) return;
+
+    var buttons = document.querySelectorAll("[data-lightbox-src]");
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var src = btn.getAttribute("data-lightbox-src");
+        var alt = btn.getAttribute("data-lightbox-alt") || "";
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeLightbox();
+    });
+  })();
+</script>

@@ -20,6 +20,8 @@ const site = siteSettingsCollection[0]?.data;
     <LocalBusinessSchema />
   </Fragment>
 
+  <h1 class="sr-only">Millie The Hut — Shepherd's Hut Glamping in the Welsh Marches</h1>
+
   <!-- Hero -->
   <section class="hero" aria-label="Hero">
     <div class="hero__frame">
@@ -31,14 +33,14 @@ const site = siteSettingsCollection[0]?.data;
         decoding="async"
       />
       <div class="hero__overlay">
-        <h1 class="hero__title">Millie<br />The Hut</h1>
-        <p class="hero__tagline">Escape to the Welsh Marches</p>
+        <div class="hero__overlay-top"></div>
+        <p class="hero__tagline">Escape to the<br />Welsh Marches</p>
       </div>
     </div>
   </section>
 
   <!-- Introduction -->
-  <section class="section" aria-labelledby="intro-heading">
+  <section class="section section--white" aria-labelledby="intro-heading">
     <Container narrow>
       <div class="intro">
         <h2 class="intro__heading" id="intro-heading">Millie The Hut, Presteigne, Herefordshire.</h2>
@@ -50,194 +52,191 @@ const site = siteSettingsCollection[0]?.data;
   </section>
 
   <!-- Trust Indicators -->
-  <section class="section" aria-labelledby="trust-heading">
+  <section class="section section--white section--tight-top" aria-labelledby="trust-heading">
     <Container>
       <h2 class="sr-only" id="trust-heading">Why Choose Millie The Hut</h2>
       <div class="trust" data-reveal-stagger>
         <div class="trust__item">
-          <svg class="trust__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 256 256" fill="currentColor"><path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"/></svg>
-          <p class="trust__label">Exceptional Guest Reviews</p>
+          <img class="trust__img trust__img--bg-remove" src="/images/i.jpg" alt="Independent award — one of the best 25 budget glamping sites in the UK" width="150" height="150" loading="lazy" decoding="async" />
+          <p class="trust__label">One of the best 25 'budget' glamping sites in the UK</p>
         </div>
         <div class="trust__item">
-          <svg class="trust__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 256 256" fill="currentColor"><path d="M232,96a72.08,72.08,0,0,0-72-72H96A72.08,72.08,0,0,0,24,96c0,28.81,9.88,51.14,30.42,69.48A156.28,156.28,0,0,1,88,207.45V224a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V207.45a156.28,156.28,0,0,1,33.58-41.97C222.12,147.14,232,124.81,232,96ZM185.5,150.48A171.53,171.53,0,0,0,149.09,196H136V148.94l26.35-21.09a8,8,0,1,0-10-12.48L128,134.42l-24.36-19.05a8,8,0,1,0-10,12.48L120,148.94V196H106.91a171.53,171.53,0,0,0-36.41-45.52C52.25,134.28,40,115.54,40,96A56.06,56.06,0,0,1,96,40h64a56.06,56.06,0,0,1,56,56C216,115.54,203.75,134.28,185.5,150.48Z"/></svg>
-          <p class="trust__label">Peaceful Countryside Escape</p>
+          <img class="trust__img" src="/images/dt.png" alt="Distinctly Norfolk award logo" width="150" height="150" loading="lazy" decoding="async" />
+          <p class="trust__label">"Remarkably affordable.... excellent choice"</p>
         </div>
         <div class="trust__item">
-          <svg class="trust__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 256 256" fill="currentColor"><path d="M152,40V16a8,8,0,0,0-16,0V40a8,8,0,0,0,16,0Zm68.49,59.12a8,8,0,0,0,5.65-2.34l16.97-17a8,8,0,0,0-11.32-11.32l-16.97,17a8,8,0,0,0,5.67,13.66ZM232,120H208a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16ZM79.51,99.12a8,8,0,0,0,11.32-11.32l-17-17A8,8,0,0,0,62.54,82.1ZM80,128a8,8,0,0,0-8-8H48a8,8,0,0,0,0,16H72A8,8,0,0,0,80,128Zm64,72a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V208A8,8,0,0,0,144,200Zm64.48-37.88-17,17a8,8,0,0,0,11.32,11.32l17-17a8,8,0,0,0-11.32-11.32Zm-145-17a8,8,0,0,0-11.32,0l-17,17a8,8,0,0,0,11.32,11.32l17-17A8,8,0,0,0,63.51,145.12ZM144,72a56,56,0,1,0,56,56A56.06,56.06,0,0,0,144,72Z"/></svg>
-          <p class="trust__label">Cosy Year-Round Retreat</p>
+          <img class="trust__img" src="/images/luxlife.png" alt="Lux Life award logo" width="150" height="150" loading="lazy" decoding="async" />
+          <p class="trust__label">Best Shepherds Hut UK 2025</p>
         </div>
       </div>
     </Container>
   </section>
 
+  <!-- Animated Line Divider -->
+  <div class="section--white">
+    <Container>
+      <div class="line-divider" data-line-divider></div>
+    </Container>
+  </div>
+
   <!-- Gallery Preview -->
-  <section class="section" aria-labelledby="gallery-heading">
+  <section class="section section--white" aria-labelledby="gallery-heading">
     <Container>
       <h2 class="section__heading" id="gallery-heading">Gallery</h2>
       <div class="gallery-preview" data-reveal="fade">
         <div class="gallery-preview__left">
           <div class="gallery-preview__img-wrap gallery-preview__img-wrap--portrait">
-            <img src="https://placehold.co/600x900/e8ddd3/666?text=Portrait+Image" alt="Gallery preview — portrait image of the shepherd's hut" class="gallery-preview__img" loading="lazy" decoding="async" />
+            <img src="/images/stars.avif" alt="Starry night sky over Millie The Hut in the Welsh Marches" class="gallery-preview__img" loading="lazy" decoding="async" />
           </div>
         </div>
         <div class="gallery-preview__right">
           <div class="gallery-preview__img-wrap">
-            <img src="https://placehold.co/700x450/e8ddd3/666?text=Landscape+Image+1" alt="Gallery preview — landscape image of the meadow" class="gallery-preview__img" loading="lazy" decoding="async" />
+            <img src="/images/bbq.jpg" alt="Kadai fire pit and barbecue at Millie The Hut" class="gallery-preview__img" loading="lazy" decoding="async" />
           </div>
           <div class="gallery-preview__img-wrap">
-            <img src="https://placehold.co/700x450/e8ddd3/666?text=Landscape+Image+2" alt="Gallery preview — landscape image of the interior" class="gallery-preview__img" loading="lazy" decoding="async" />
+            <img src="/images/drone.jpg" alt="Aerial view of Millie The Hut and surrounding countryside" class="gallery-preview__img" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
       <div class="gallery-preview__cta">
-        <a href="/gallery/" class="btn">View All &rarr;</a>
+        <a href="/gallery/" class="btn">View All <span class="btn__arrow">&rarr;</span></a>
       </div>
     </Container>
   </section>
 
-  <!-- Facilities -->
-  <section class="section" aria-labelledby="facilities-heading">
+  <!-- Animated Line Divider -->
+  <div class="section--cream">
     <Container>
-      <h2 class="section__heading" id="facilities-heading">Our Facilities</h2>
+      <div class="line-divider" data-line-divider></div>
+    </Container>
+  </div>
+
+  <!-- Facilities -->
+  <section class="section section--cream" aria-labelledby="facilities-heading">
+    <Container>
+      <h2 class="section__heading" id="facilities-heading">The Facilities</h2>
       <ul class="facilities" data-reveal-stagger>
         <li class="facilities__item">
-          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M64,236a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H56A8,8,0,0,1,64,236Zm152-8H200a8,8,0,0,0,0,16h16a8,8,0,0,0,0-16Zm24-100v40a8,8,0,0,1-16,0V176H32v-8a8,8,0,0,1-16,0v-40a8,8,0,0,1,16,0v8H88V112a32,32,0,0,1,32-32h16a32,32,0,0,1,32,32v24h56v-8a8,8,0,0,1,16,0ZM152,136V112a16,16,0,0,0-16-16H120a16,16,0,0,0-16,16v24Z"/></svg>
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M64,236a12,12,0,1,1-12-12A12,12,0,0,1,64,236Zm20-44a12,12,0,1,0,12,12A12,12,0,0,0,84,192Zm-64,0a12,12,0,1,0,12,12A12,12,0,0,0,20,192Zm32-32a12,12,0,1,0,12,12A12,12,0,0,0,52,160ZM248,32H216a8,8,0,0,0-5.66,2.34l-30.2,30.2L53.38,86.19a16,16,0,0,0-8.69,27.1l98,98a16,16,0,0,0,27.09-8.66L191.46,75.86,219.31,48H248a8,8,0,0,0,0-16Z"/></svg>
           <span>En suite shower &amp; flushing toilet</span>
         </li>
         <li class="facilities__item">
-          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M200,32H56A24,24,0,0,0,32,56V200a24,24,0,0,0,24,24H200a24,24,0,0,0,24-24V56A24,24,0,0,0,200,32Zm8,168a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8H200a8,8,0,0,1,8,8Zm-40-88a36,36,0,1,1-36-36A36,36,0,0,1,168,112Z"/></svg>
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48V152a8,8,0,0,1-8.53,8,8.17,8.17,0,0,1-7.47-8.25V48a8,8,0,0,0-8.55-8A8.19,8.19,0,0,0,192,48.28V180a4,4,0,0,1-4,4H52a4,4,0,0,1-4-4V48A24,24,0,0,1,72,24H200A24,24,0,0,1,224,48ZM188,200H52a4,4,0,0,0-4,4v12a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V204A4,4,0,0,0,188,200Z"/></svg>
           <span>Bedding, towels &amp; toiletries</span>
         </li>
         <li class="facilities__item">
-          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M224,104h-8.4a79.76,79.76,0,0,0-25.29-42.63l15.41-15.41a8,8,0,1,0-11.32-11.32L178.9,50.14A79.53,79.53,0,0,0,144,40.36V24a8,8,0,0,0-16,0V40.36A79.53,79.53,0,0,0,93.1,50.14L77.6,34.64a8,8,0,1,0-11.32,11.32l15.41,15.41A79.76,79.76,0,0,0,56.4,104H48a8,8,0,0,0,0,16h8v8a79.72,79.72,0,0,0,28.93,61.54l-16.65,16.65a8,8,0,0,0,11.32,11.32l18-18A79.4,79.4,0,0,0,128,208a79.4,79.4,0,0,0,30.4-18.49l18,18a8,8,0,0,0,11.32-11.32l-16.65-16.65A79.72,79.72,0,0,0,200,128v-8h8a8,8,0,0,0,0-16Z"/></svg>
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M208,80H32a8,8,0,0,0-8,8v48a96.3,96.3,0,0,0,32.54,72H32a8,8,0,0,0,0,16H208a8,8,0,0,0,0-16H183.46a96.59,96.59,0,0,0,27-40.09A40,40,0,0,0,248,128v-8A40,40,0,0,0,208,80Zm24,48a24,24,0,0,1-17.2,23,95.78,95.78,0,0,0,1.2-15V97.38A24,24,0,0,1,232,120ZM112,56V24a8,8,0,0,1,16,0V56a8,8,0,0,1-16,0Zm32,0V24a8,8,0,0,1,16,0V56a8,8,0,0,1-16,0ZM80,56V24a8,8,0,0,1,16,0V56a8,8,0,0,1-16,0Z"/></svg>
           <span>Eggs, milk, tea, coffee, oils etc</span>
         </li>
         <li class="facilities__item">
-          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M88,48V16a8,8,0,0,1,16,0V48a8,8,0,0,1-16,0Zm40,8a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,128,56Zm32,0a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,160,56Zm72,64v16a8,8,0,0,1-16,0V128a8,8,0,0,0-8-8H48a8,8,0,0,0-8,8v56a32,32,0,0,0,32,32H184a32,32,0,0,0,32-32,8,8,0,0,1,16,0,48.05,48.05,0,0,1-48,48H72a48.05,48.05,0,0,1-48-48V128a24,24,0,0,1,24-24h8V88a8,8,0,0,1,16,0v16H184V88a8,8,0,0,1,16,0v16h8a24,24,0,0,1,24,24Z"/></svg>
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM172,56a12,12,0,1,1-12,12A12,12,0,0,1,172,56Zm-44,0a12,12,0,1,1-12,12A12,12,0,0,1,128,56ZM84,56A12,12,0,1,1,72,68,12,12,0,0,1,84,56ZM192,192H64V104H192Z"/></svg>
           <span>Induction hob, microwave, toaster, kettle</span>
         </li>
         <li class="facilities__item">
-          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M208,40H48A16,16,0,0,0,32,56V200a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V56A16,16,0,0,0,208,40ZM48,56H208V96H48ZM48,200V112H208v88Z"/></svg>
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M192,24H64A24,24,0,0,0,40,48V208a24,24,0,0,0,24,24H192a24,24,0,0,0,24-24V48A24,24,0,0,0,192,24ZM160,72H96a8,8,0,0,1,0-16h64a8,8,0,0,1,0,16Z"/></svg>
           <span>Fridge with ice box</span>
         </li>
         <li class="facilities__item">
-          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-93.66a8,8,0,0,1,0,11.32l-32,32a8,8,0,0,1-11.32-11.32L148.69,136H88a8,8,0,0,1,0-16h60.69l-18.35-18.34a8,8,0,0,1,11.32-11.32Z"/></svg>
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M224,56H176V16a8,8,0,0,0-16,0V56H96V16a8,8,0,0,0-8-8c-3.21,0-8,2.27-8,8.54V56H32.55C26.28,56,24,60.78,24,64a8,8,0,0,0,8,8H48v88a40,40,0,0,0,40,40h32v40a8,8,0,0,0,16,0V200h32a40,40,0,0,0,40-40V72h16a8,8,0,0,0,0-16Zm-72.51,74.81-12,32a8,8,0,0,1-15-5.62l8-21.19H112a8,8,0,0,1-7.49-10.81l12-32a8,8,0,1,1,15,5.62l-8,21.19H144a8,8,0,0,1,7.49,10.81Z"/></svg>
           <span>USB points</span>
         </li>
         <li class="facilities__item">
-          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M168,128a40,40,0,1,1-40-40A40,40,0,0,1,168,128Zm-24-96H112a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm80,64V232a24,24,0,0,1-24,24H56a24,24,0,0,1-24-24V96A24,24,0,0,1,56,72H200A24,24,0,0,1,224,96Z"/></svg>
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M143.38,17.85a8,8,0,0,0-12.63,3.41l-22,60.41L84.59,58.26a8,8,0,0,0-11.93.89C51,87.53,40,116.08,40,144a88,88,0,0,0,176,0C216,84.55,165.21,36,143.38,17.85Zm40.51,135.49a57.6,57.6,0,0,1-46.56,46.55A7.65,7.65,0,0,1,136,200a8,8,0,0,1-1.32-15.89c16.57-2.79,30.63-16.85,33.44-33.45a8,8,0,0,1,15.78,2.68Z"/></svg>
           <span>Wood burner</span>
         </li>
         <li class="facilities__item">
-          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24C74.17,24,28,63.07,28,112c0,28.28,15.07,54.11,40,72V224a8,8,0,0,0,12.8,6.4L128,196l47.2,34.4A8,8,0,0,0,188,224V184c24.93-17.89,40-43.72,40-72C228,63.07,181.83,24,128,24Z"/></svg>
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M132.19,25.19a8,8,0,0,0-8.38,0A156,156,0,0,0,96.24,48C77.77,67.13,68,87.9,68,108a60,60,0,0,0,120,0C188,60.08,134.47,26.59,132.19,25.19ZM128,152a24,24,0,0,1-24-24c0-24,24-40,24-40s24,16,24,40A24,24,0,0,1,128,152Zm95.62,74.42a8,8,0,0,1-10.05,5.2L128,204.39,42.43,231.62a8,8,0,1,1-4.85-15.25l64-20.37-64-20.38a8,8,0,1,1,4.85-15.24L128,187.6l85.57-27.22a8,8,0,1,1,4.85,15.24l-64,20.38,64,20.37A8,8,0,0,1,223.62,226.42Z"/></svg>
           <span>Kadai fire pit &amp; barbecue</span>
         </li>
         <li class="facilities__item">
-          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM172.42,72.84l-64,32a8.05,8.05,0,0,0-3.58,3.58l-32,64A8,8,0,0,0,80,184a8.1,8.1,0,0,0,3.58-.84l64-32a8.05,8.05,0,0,0,3.58-3.58l32-64a8,8,0,0,0-10.74-10.74ZM138,138,97.89,158.11,118,118l40.15-20.07Z"/></svg>
+          <svg class="facilities__icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="currentColor"><path d="M200,176a8,8,0,0,1-3.2,6.4l-64,48A8,8,0,0,1,128,232a8,8,0,0,1-8-8V144L68.8,182.4a8,8,0,0,1-9.6-12.8L114.67,128,59.2,86.4a8,8,0,0,1,9.6-12.8L120,112V32a8,8,0,0,1,12.8-6.4l64,48a8,8,0,0,1,0,12.8L141.33,128l55.47,41.6A8,8,0,0,1,200,176Z"/></svg>
           <span>Bluetooth radio &amp; board games</span>
         </li>
       </ul>
     </Container>
   </section>
 
-  <!-- The Important Bits -->
-  <section class="section" aria-labelledby="important-heading">
+  <!-- Animated Line Divider -->
+  <div class="section--cream">
     <Container>
-      <h2 class="section__heading" id="important-heading">The Important Bits</h2>
-      <div class="important" data-reveal-stagger>
-        <div class="important__item">
-          <svg class="important__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.24,195.63a8,8,0,1,0,13.52,8.74,80,80,0,0,1,134.48,0,8,8,0,0,0,13.52-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.76,87.63a95.83,95.83,0,0,0-47.51-37.71A60,60,0,0,0,168,40a59.75,59.75,0,0,0-40,15.26,8,8,0,1,0,10.67,11.92A44,44,0,1,1,168,152a8,8,0,0,0-6.76,12.28,96,96,0,0,1,9.53,16.09,8,8,0,0,0,4.39,4.24A79.36,79.36,0,0,1,212.76,204a8,8,0,1,0,13.52-8.74,95.52,95.52,0,0,0-25.52-19.63,43.83,43.83,0,0,0,18-9.71Z"/></svg>
-          <p class="important__label">Sleeps Two</p>
-          <p class="important__sub">No babies or children</p>
+      <div class="line-divider" data-line-divider></div>
+    </Container>
+  </div>
+
+  <!-- The Essentials -->
+  <section class="section section--cream" aria-labelledby="essentials-heading">
+    <Container>
+      <h2 class="section__heading" id="essentials-heading">The Essentials</h2>
+      <div class="essentials" data-reveal-stagger>
+        <div class="essentials__item">
+          <svg class="essentials__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M164.47,195.63a8,8,0,0,1-6.7,12.37H10.23a8,8,0,0,1-6.7-12.37,95.83,95.83,0,0,1,47.22-37.71,60,60,0,1,1,66.5,0A95.83,95.83,0,0,1,164.47,195.63Zm87.91-.15a95.87,95.87,0,0,0-47.13-37.56A60,60,0,0,0,144.7,54.59a4,4,0,0,0-1.33,6A75.83,75.83,0,0,1,147,150.53a4,4,0,0,0,1.07,5.53,112.32,112.32,0,0,1,29.85,30.83,23.92,23.92,0,0,1,3.65,16.47,4,4,0,0,0,3.95,4.64h60.3a8,8,0,0,0,7.73-5.93A8.22,8.22,0,0,0,252.38,195.48Z"/></svg>
+          <p class="essentials__label"><strong>Sleeps Two</strong></p>
+          <p class="essentials__sub">No babies or children</p>
         </div>
-        <div class="important__item">
-          <svg class="important__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></svg>
-          <p class="important__label">Check-in 3pm / Check-out 10am</p>
+        <div class="essentials__item">
+          <svg class="essentials__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"/></svg>
+          <p class="essentials__label"><strong>Check in times:</strong></p>
+          <p class="essentials__sub">In: 3pm | Out: 10am</p>
         </div>
-        <div class="important__item">
-          <svg class="important__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M208,136H176a8,8,0,0,1-6.76-3.71L152,104.85,119.24,164.29a8,8,0,0,1-14.48,0L80,118.85l-9.24,13.43A8,8,0,0,1,64,136H24a8,8,0,0,1,0-16H58.75l15.49-22.57a8,8,0,0,1,13.53,0L112,143.15l32.76-59.44a8,8,0,0,1,14.48,0L181.25,120H208a8,8,0,0,1,0,16ZM128,216a88.11,88.11,0,0,1-79-49.07,8,8,0,0,1,14.36-7.07,72,72,0,0,0,129.36,0,8,8,0,0,1,14.36,7.07A88.11,88.11,0,0,1,128,216Z"/></svg>
-          <p class="important__label">No Pets</p>
+        <div class="essentials__item">
+          <svg class="essentials__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 256" fill="currentColor"><path d="M240,108a28,28,0,1,1-28-28A28,28,0,0,1,240,108ZM72,108a28,28,0,1,0-28,28A28,28,0,0,0,72,108ZM92,88A28,28,0,1,0,64,60,28,28,0,0,0,92,88Zm72,0a28,28,0,1,0-28-28A28,28,0,0,0,164,88Zm23.12,60.86a35.3,35.3,0,0,1-16.87-21.14,44,44,0,0,0-84.5,0A35.25,35.25,0,0,1,69,148.82,40,40,0,0,0,88,224a39.48,39.48,0,0,0,15.52-3.13,64.09,64.09,0,0,1,48.87,0,40,40,0,0,0,34.73-72Z"/></svg>
+          <p class="essentials__label"><strong>No Pets</strong></p>
+          <p class="essentials__sub">Sorry!</p>
         </div>
       </div>
     </Container>
   </section>
 
   <!-- Testimonials -->
-  <section class="section" aria-labelledby="testimonials-heading">
-    <Container narrow>
-      <h2 class="section__heading" id="testimonials-heading">Words From Our Guests</h2>
-      <div class="testimonials" id="testimonial-slider">
-        <div class="testimonials__track">
+  <section class="section section--white" aria-labelledby="testimonials-heading">
+    <Container>
+      <h2 class="section__heading" id="testimonials-heading">What Our Guests Say</h2>
+      <div class="testimonials-wrap">
+        <div class="testimonials-scroll" id="testimonials-scroll">
           {allTestimonials.length > 0 ? (
-            allTestimonials.map((t, i) => (
-              <blockquote class={`testimonials__slide ${i === 0 ? 'is-active' : ''}`} data-slide={i}>
-                <span class="testimonials__quote" aria-hidden="true">&ldquo;</span>
-                <div class="testimonials__body">
-                  <p class="testimonials__text" data-full-text={t.body}>{t.body}</p>
-                </div>
-                <footer class="testimonials__author">
-                  <span class="testimonials__name">{t.data.name}</span>
-                  <span class="testimonials__location">{t.data.location}</span>
+            allTestimonials.map((t) => (
+              <blockquote class="review-card">
+                <span class="review-card__quote" aria-hidden="true">&ldquo;</span>
+                <p class="review-card__text">{t.body}</p>
+                <button class="review-card__toggle" type="button" aria-expanded="false">Read more</button>
+                <footer class="review-card__footer">
+                  <span class="review-card__name">{t.data.name}</span>
+                  <span class="review-card__date">{t.data.date}</span>
                 </footer>
               </blockquote>
             ))
           ) : (
             <>
-              <blockquote class="testimonials__slide is-active" data-slide="0">
-                <span class="testimonials__quote" aria-hidden="true">&ldquo;</span>
-                <div class="testimonials__body">
-                  <p class="testimonials__text">The most magical place we've ever stayed. Waking up to the sound of the brook and the sheep grazing in the meadow was absolutely heavenly. The hut has everything you need and more. We didn't want to leave and are already planning our return trip.</p>
-                </div>
-                <footer class="testimonials__author">
-                  <span class="testimonials__name">Sarah &amp; James</span>
-                  <span class="testimonials__location">Bristol</span>
+              <blockquote class="review-card">
+                <span class="review-card__quote" aria-hidden="true">&ldquo;</span>
+                <p class="review-card__text">The most magical place we've ever stayed. Waking up to the sound of the brook and the sheep grazing in the meadow was absolutely heavenly. The hut has everything you need and more — we didn't want to leave.</p>
+                <button class="review-card__toggle" type="button" aria-expanded="false">Read more</button>
+                <footer class="review-card__footer">
+                  <span class="review-card__name">Sarah &amp; James</span>
+                  <span class="review-card__date">February 2026</span>
                 </footer>
               </blockquote>
-              <blockquote class="testimonials__slide" data-slide="1">
-                <span class="testimonials__quote" aria-hidden="true">&ldquo;</span>
-                <div class="testimonials__body">
-                  <p class="testimonials__text">A truly special retreat. The attention to detail is extraordinary — from the wood burner to the fire pit by the stream, every moment felt considered. The perfect escape from city life. Cannot recommend highly enough.</p>
-                </div>
-                <footer class="testimonials__author">
-                  <span class="testimonials__name">Emily</span>
-                  <span class="testimonials__location">London</span>
-                </footer>
-              </blockquote>
-              <blockquote class="testimonials__slide" data-slide="2">
-                <span class="testimonials__quote" aria-hidden="true">&ldquo;</span>
-                <div class="testimonials__body">
-                  <p class="testimonials__text">We celebrated our anniversary here and it was perfection. Sitting by the fire pit under a sky full of stars with the sound of the brook — pure magic. The hosts thought of everything. A real hidden gem on the Welsh border.</p>
-                </div>
-                <footer class="testimonials__author">
-                  <span class="testimonials__name">Tom &amp; Lucy</span>
-                  <span class="testimonials__location">Birmingham</span>
+              <blockquote class="review-card">
+                <span class="review-card__quote" aria-hidden="true">&ldquo;</span>
+                <p class="review-card__text">A truly special retreat. The attention to detail is extraordinary — from the wood burner to the fire pit by the stream, every moment felt considered. The perfect escape from city life.</p>
+                <button class="review-card__toggle" type="button" aria-expanded="false">Read more</button>
+                <footer class="review-card__footer">
+                  <span class="review-card__name">Emily</span>
+                  <span class="review-card__date">January 2026</span>
                 </footer>
               </blockquote>
             </>
           )}
         </div>
-        <div class="testimonials__controls">
-          <button class="testimonials__btn" type="button" aria-label="Previous testimonial" data-dir="prev">&larr;</button>
-          <div class="testimonials__dots" role="tablist" aria-label="Testimonial navigation">
-            {(allTestimonials.length > 0 ? allTestimonials : [0, 1, 2]).map((_, i) => (
-              <button
-                class={`testimonials__dot ${i === 0 ? 'is-active' : ''}`}
-                type="button"
-                role="tab"
-                aria-selected={i === 0 ? "true" : "false"}
-                aria-label={`Testimonial ${i + 1}`}
-                data-dot={i}
-              ></button>
-            ))}
-          </div>
-          <button class="testimonials__btn" type="button" aria-label="Next testimonial" data-dir="next">&rarr;</button>
-        </div>
+        <button class="testimonials-arrow" type="button" aria-label="Scroll to next review" id="testimonials-next">
+          &rarr;
+        </button>
       </div>
     </Container>
   </section>
 
   <!-- Location & Map -->
-  <section class="section" aria-labelledby="location-heading">
+  <section class="section section--white" aria-labelledby="location-heading">
     <Container>
       <h2 class="section__heading" id="location-heading">Where to Find Us</h2>
       <div class="location">
@@ -256,7 +255,7 @@ const site = siteSettingsCollection[0]?.data;
         </div>
         <div class="location__map">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2452.5!2d-3.0!3d52.27!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDE2JzEyLjAiTiAzwrAwMCcwMC4wIlc!5e0!3m2!1sen!2suk!4v1"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2500!2d-2.995298!3d52.261831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2suk"
             width="100%"
             height="400"
             style="border:0; border-radius: var(--radius-xl);"
@@ -271,7 +270,7 @@ const site = siteSettingsCollection[0]?.data;
   </section>
 
   <!-- FAQ -->
-  <section class="section" aria-labelledby="faq-heading">
+  <section class="section section--cream" aria-labelledby="faq-heading">
     <Container narrow>
       <h2 class="section__heading" id="faq-heading">Frequently Asked Questions</h2>
       <div class="faq">
@@ -279,7 +278,7 @@ const site = siteSettingsCollection[0]?.data;
           sortedFaqs.map((faq) => (
             <details class="faq__item">
               <summary class="faq__question">{faq.data.question}</summary>
-              <p class="faq__answer">{faq.data.answer}</p>
+              <p class="faq__answer" set:html={faq.data.answer}></p>
             </details>
           ))
         ) : (
@@ -317,6 +316,26 @@ const site = siteSettingsCollection[0]?.data;
 </PageLayout>
 
 <style>
+  /* ─── Section Backgrounds ─── */
+  .section--cream {
+    background-color: var(--color-bg);
+  }
+  .section--white {
+    background-color: var(--color-bg-white);
+  }
+
+  /* ─── Animated Line Divider ─── */
+  .line-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.15);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 1.2s var(--ease-out);
+  }
+  .line-divider.is-animating {
+    transform: scaleX(1);
+  }
+
   /* ─── Hero ─── */
   .hero {
     min-height: 100vh;
@@ -346,49 +365,54 @@ const site = siteSettingsCollection[0]?.data;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: var(--space-2xl);
+    justify-content: flex-end;
+    padding: var(--space-xl) var(--container-padding);
     min-height: calc(100vh - var(--hero-padding) * 2);
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.25) 0%,
       transparent 40%,
       transparent 60%,
       rgba(0, 0, 0, 0.3) 100%
     );
   }
 
-  .hero__title {
-    font-family: var(--font-serif);
-    font-size: var(--text-hero);
-    font-weight: var(--weight-black);
-    letter-spacing: var(--tracking-tighter);
-    line-height: 0.9;
-    color: var(--color-white);
-    margin-top: auto;
-    max-width: 8ch;
-  }
-
   .hero__tagline {
     font-family: var(--font-display);
-    font-size: var(--text-xl);
+    font-size: 48px;
     font-style: italic;
     color: var(--color-white);
     align-self: flex-end;
     text-align: right;
     max-width: 20ch;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.15;
+  }
+
+  /* Mobile: 16:11 image ratio with tagline overlay */
+  @media (max-width: 47.999rem) {
+    .hero {
+      min-height: auto;
+    }
+    .hero__frame {
+      aspect-ratio: 16 / 11;
+    }
+    .hero__overlay {
+      display: flex;
+      min-height: 0;
+      height: 100%;
+      padding: var(--space-md) var(--space-lg);
+      background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.35) 100%);
+    }
+    .hero__overlay-top {
+      display: none;
+    }
+    .hero__tagline {
+      font-size: 22px;
+    }
   }
 
   @media (min-width: 48rem) {
-    .hero__overlay {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-    }
-    .hero__title {
-      margin-top: 0;
-      align-self: flex-end;
-    }
     .hero__tagline {
       align-self: flex-end;
     }
@@ -400,8 +424,12 @@ const site = siteSettingsCollection[0]?.data;
   }
 
   .section__heading {
+    font-family: var(--font-display);
+    font-size: 50px;
+    font-weight: var(--weight-bold);
     text-align: center;
     margin-bottom: var(--space-3xl);
+    letter-spacing: var(--tracking-tight);
   }
 
   /* ─── Introduction ─── */
@@ -410,21 +438,31 @@ const site = siteSettingsCollection[0]?.data;
   }
 
   .intro__heading {
-    font-size: var(--text-3xl);
+    font-family: var(--font-display);
+    font-size: 50px;
+    font-weight: var(--weight-bold);
+    margin-top: 40px;
     margin-bottom: var(--space-2xl);
+    letter-spacing: var(--tracking-tight);
   }
 
   .intro__text p {
-    font-size: var(--text-lg);
+    font-family: var(--font-display);
+    font-size: 22px;
     line-height: var(--leading-relaxed);
     max-width: 60ch;
     margin-inline: auto;
     color: #cccccc;
     transition: color 0.1s linear;
+    letter-spacing: var(--tracking-tight);
   }
 
   .intro__text p.is-revealed {
     color: var(--color-text);
+  }
+
+  .section--tight-top {
+    padding-top: calc(var(--section-padding) / 3);
   }
 
   /* ─── Trust Indicators ─── */
@@ -444,14 +482,21 @@ const site = siteSettingsCollection[0]?.data;
     gap: var(--space-md);
   }
 
-  .trust__icon {
-    color: var(--color-primary);
+  .trust__img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+  }
+
+  .trust__img--bg-remove {
+    mix-blend-mode: multiply;
   }
 
   .trust__label {
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-semibold);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
   }
 
   @media (min-width: 48rem) {
@@ -507,22 +552,33 @@ const site = siteSettingsCollection[0]?.data;
 
   /* ─── Button ─── */
   .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     padding: 0.75rem 2rem;
     background: var(--color-cta);
     color: var(--color-black);
     font-family: var(--font-sans);
-    font-size: var(--text-sm);
+    font-size: 15px;
     font-weight: var(--weight-bold);
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-btn);
     transition: transform var(--duration-fast) var(--ease-out),
                 box-shadow var(--duration-fast) var(--ease-out);
-    letter-spacing: var(--tracking-wide);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .btn__arrow {
+    display: inline-block;
+    transition: transform var(--duration-fast) var(--ease-out);
   }
 
   .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .btn:hover .btn__arrow {
+    transform: translateX(4px);
   }
 
   /* ─── Facilities ─── */
@@ -548,8 +604,10 @@ const site = siteSettingsCollection[0]?.data;
   }
 
   .facilities__item span {
-    font-size: var(--text-sm);
+    font-family: var(--font-sans);
+    font-size: 17px;
     line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
   }
 
   @media (min-width: 48rem) {
@@ -558,8 +616,8 @@ const site = siteSettingsCollection[0]?.data;
     }
   }
 
-  /* ─── Important Bits ─── */
-  .important {
+  /* ─── The Essentials ─── */
+  .essentials {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
@@ -568,164 +626,165 @@ const site = siteSettingsCollection[0]?.data;
     margin-inline: auto;
   }
 
-  .important__item {
+  .essentials__item {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-md);
   }
 
-  .important__icon {
+  .essentials__icon {
     color: var(--color-primary);
   }
 
-  .important__label {
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
+  .essentials__label {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: var(--weight-normal);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .essentials__label strong {
     font-weight: var(--weight-bold);
   }
 
-  .important__sub {
-    font-size: var(--text-sm);
+  .essentials__sub {
+    font-family: var(--font-sans);
+    font-size: 17px;
     color: var(--color-text-muted);
+    letter-spacing: var(--tracking-tight);
   }
 
   @media (min-width: 48rem) {
-    .important {
+    .essentials {
       grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  /* ─── Testimonials ─── */
-  .testimonials {
+  /* ─── Testimonials — Horizontal Scroll Cards ─── */
+  .testimonials-wrap {
     position: relative;
-    text-align: center;
   }
 
-  .testimonials__track {
-    position: relative;
-    min-height: 16rem;
+  .testimonials-scroll {
+    display: flex;
+    gap: var(--space-lg);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-md);
+    scrollbar-width: none;
+    scroll-behavior: smooth;
   }
 
-  .testimonials__slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity var(--duration-normal) var(--ease-out);
+  .testimonials-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .review-card {
+    flex: 0 0 clamp(280px, 38vw, 400px);
+    scroll-snap-align: start;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
+    min-height: 220px;
   }
 
-  .testimonials__slide.is-active {
-    opacity: 1;
-    pointer-events: auto;
-    position: relative;
-  }
-
-  .testimonials__quote {
+  .review-card__quote {
     font-family: var(--font-display);
-    font-size: clamp(4rem, 8vw, 8rem);
+    font-size: 4rem;
     line-height: 1;
     color: var(--color-primary);
-    opacity: 0.3;
     display: block;
-    margin-bottom: calc(-1 * var(--space-xl));
+    margin-bottom: calc(-1 * var(--space-md));
   }
 
-  .testimonials__text {
-    font-size: var(--text-lg);
+  .review-card__text {
+    font-family: var(--font-sans);
+    font-size: 15px;
     line-height: var(--leading-relaxed);
-    max-width: 50ch;
-    margin-inline: auto;
-    font-style: italic;
+    flex: 1;
+    letter-spacing: var(--tracking-tight);
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  .testimonials__text.is-truncated::after {
-    content: "…";
+  .review-card__text--expanded {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
   }
 
-  .testimonials__view-more {
-    display: inline-block;
-    margin-top: var(--space-sm);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    color: var(--color-primary);
-    cursor: pointer;
+  .review-card__toggle {
     background: none;
     border: none;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+    padding: 0;
+    margin-top: var(--space-sm);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    cursor: pointer;
+    letter-spacing: var(--tracking-tight);
+    display: none;
   }
 
-  .testimonials__author {
-    margin-top: var(--space-lg);
+  .review-card__toggle:hover {
+    text-decoration: underline;
+  }
+
+  .review-card__footer {
+    margin-top: var(--space-xl);
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
+    border-top: 1px solid var(--color-border-light);
+    padding-top: var(--space-md);
   }
 
-  .testimonials__name {
-    font-family: var(--font-serif);
+  .review-card__name {
+    font-family: var(--font-sans);
     font-weight: var(--weight-bold);
-    font-size: var(--text-base);
+    font-size: 15px;
+    letter-spacing: var(--tracking-tight);
   }
 
-  .testimonials__location {
-    font-size: var(--text-sm);
+  .review-card__date {
+    font-family: var(--font-sans);
+    font-size: 13px;
     color: var(--color-text-muted);
+    letter-spacing: var(--tracking-tight);
   }
 
-  .testimonials__controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-lg);
-    margin-top: var(--space-xl);
-  }
-
-  .testimonials__btn {
-    width: 2.5rem;
-    height: 2.5rem;
+  .testimonials-arrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 3rem;
     border-radius: var(--radius-full);
     border: 1px solid var(--color-border);
     background: var(--color-white);
     cursor: pointer;
-    font-size: var(--text-base);
+    font-size: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background var(--duration-fast) var(--ease-out),
-                transform var(--duration-fast) var(--ease-out);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+    z-index: 2;
   }
 
-  .testimonials__btn:hover {
-    background: var(--color-surface);
-    transform: translateY(-1px);
-  }
-
-  .testimonials__dots {
-    display: flex;
-    gap: var(--space-sm);
-  }
-
-  .testimonials__dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: var(--radius-full);
-    border: none;
-    background: var(--color-border);
-    cursor: pointer;
-    padding: 0;
-    transition: background var(--duration-fast) var(--ease-out),
-                transform var(--duration-fast) var(--ease-out);
-  }
-
-  .testimonials__dot.is-active {
-    background: var(--color-primary);
-    transform: scale(1.3);
+  .testimonials-arrow:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: var(--shadow-lg);
   }
 
   /* ─── Location ─── */
@@ -736,30 +795,38 @@ const site = siteSettingsCollection[0]?.data;
   }
 
   .location__sub-heading {
-    font-size: var(--text-xl);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: var(--weight-bold);
     margin-bottom: var(--space-sm);
+    letter-spacing: var(--tracking-tight);
   }
 
   .location__words {
-    font-family: var(--font-mono);
-    font-size: var(--text-lg);
+    font-family: var(--font-sans);
+    font-size: 17px;
     font-weight: var(--weight-bold);
     color: var(--color-primary);
     margin-bottom: var(--space-md);
+    letter-spacing: var(--tracking-tight);
   }
 
   .location__w3w-explain {
-    font-size: var(--text-sm);
+    font-family: var(--font-sans);
+    font-size: 17px;
     color: var(--color-text-muted);
     line-height: var(--leading-relaxed);
     max-width: 45ch;
     margin-bottom: var(--space-2xl);
+    letter-spacing: var(--tracking-tight);
   }
 
   .location__address {
+    font-family: var(--font-sans);
     font-style: normal;
-    font-size: var(--text-base);
+    font-size: 17px;
     line-height: var(--leading-relaxed);
+    letter-spacing: var(--tracking-tight);
   }
 
   .location__map {
@@ -791,14 +858,15 @@ const site = siteSettingsCollection[0]?.data;
 
   .faq__question {
     cursor: pointer;
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-weight: var(--weight-semibold);
-    font-size: var(--text-lg);
+    font-size: 22px;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-md);
+    letter-spacing: var(--tracking-tight);
   }
 
   .faq__question::-webkit-details-marker {
@@ -819,71 +887,46 @@ const site = siteSettingsCollection[0]?.data;
 
   .faq__answer {
     margin-top: var(--space-md);
-    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    font-size: 17px;
     line-height: var(--leading-relaxed);
     color: var(--color-text-muted);
     max-width: 60ch;
+    letter-spacing: var(--tracking-tight);
   }
 </style>
 
 <script is:inline>
-  // ─── Testimonial Slider ───
+  // ─── Testimonial Arrow Scroll ───
   (function () {
-    var slider = document.getElementById("testimonial-slider");
-    if (!slider) return;
+    var scrollContainer = document.getElementById("testimonials-scroll");
+    var nextBtn = document.getElementById("testimonials-next");
+    if (!scrollContainer || !nextBtn) return;
 
-    var slides = slider.querySelectorAll(".testimonials__slide");
-    var dots = slider.querySelectorAll(".testimonials__dot");
-    var current = 0;
-    var total = slides.length;
-
-    function goTo(index) {
-      slides[current].classList.remove("is-active");
-      dots[current].classList.remove("is-active");
-      dots[current].setAttribute("aria-selected", "false");
-      current = (index + total) % total;
-      slides[current].classList.add("is-active");
-      dots[current].classList.add("is-active");
-      dots[current].setAttribute("aria-selected", "true");
-    }
-
-    slider.querySelector("[data-dir='prev']").addEventListener("click", function () {
-      goTo(current - 1);
+    nextBtn.addEventListener("click", function () {
+      var cards = scrollContainer.querySelectorAll(".review-card");
+      if (!cards.length) return;
+      var cardWidth = cards[0].offsetWidth + 24; // card width + gap
+      scrollContainer.scrollBy({ left: cardWidth, behavior: "smooth" });
     });
+  })();
 
-    slider.querySelector("[data-dir='next']").addEventListener("click", function () {
-      goTo(current + 1);
-    });
+  // ─── Review Card Read More Toggle ───
+  (function () {
+    document.querySelectorAll(".review-card").forEach(function (card) {
+      var textEl = card.querySelector(".review-card__text");
+      var btn = card.querySelector(".review-card__toggle");
+      if (!textEl || !btn) return;
 
-    dots.forEach(function (dot, i) {
-      dot.addEventListener("click", function () { goTo(i); });
-    });
-
-    // Truncation
-    var MAX_CHARS = 220;
-    slides.forEach(function (slide) {
-      var textEl = slide.querySelector(".testimonials__text");
-      if (!textEl) return;
-      var full = textEl.textContent;
-      if (full.length > MAX_CHARS) {
-        var truncated = full.substring(0, MAX_CHARS);
-        textEl.setAttribute("data-full", full);
-        textEl.textContent = truncated;
-        textEl.classList.add("is-truncated");
-
-        var btn = document.createElement("button");
-        btn.className = "testimonials__view-more";
-        btn.textContent = "View more";
-        btn.type = "button";
-        textEl.parentNode.appendChild(btn);
-
-        btn.addEventListener("click", function () {
-          var showing = btn.textContent === "View less";
-          textEl.textContent = showing ? truncated : full;
-          textEl.classList.toggle("is-truncated", showing);
-          btn.textContent = showing ? "View more" : "View less";
-        });
+      if (textEl.scrollHeight > textEl.clientHeight) {
+        btn.style.display = "block";
       }
+
+      btn.addEventListener("click", function () {
+        var expanded = textEl.classList.toggle("review-card__text--expanded");
+        btn.textContent = expanded ? "Show less" : "Read more";
+        btn.setAttribute("aria-expanded", String(expanded));
+      });
     });
   })();
 
@@ -918,10 +961,11 @@ const site = siteSettingsCollection[0]?.data;
       var rect = el.getBoundingClientRect();
       var windowH = window.innerHeight;
       var elTop = rect.top;
-      var elH = rect.height;
 
-      // Progress: 0 when element enters viewport, 1 when center of element reaches center of viewport
-      var progress = Math.max(0, Math.min(1, (windowH - elTop) / (windowH * 0.5 + elH * 0.5)));
+      // Animation triggers when text is 15% down the page
+      var triggerTop = windowH * 0.85;
+      var triggerEnd = windowH * 0.15;
+      var progress = Math.max(0, Math.min(1, (triggerTop - elTop) / (triggerTop - triggerEnd)));
 
       var revealCount = Math.floor(progress * spans.length);
       spans.forEach(function (span, i) {
@@ -941,5 +985,27 @@ const site = siteSettingsCollection[0]?.data;
     }, { passive: true });
 
     updateColors();
+  })();
+
+  // ─── Line Divider Animation ───
+  (function () {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var dividers = document.querySelectorAll("[data-line-divider]");
+    if (!dividers.length) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          observer.unobserve(el);
+          setTimeout(function () {
+            el.classList.add("is-animating");
+          }, 1500);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    dividers.forEach(function (d) { observer.observe(d); });
   })();
 </script>

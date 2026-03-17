@@ -4,7 +4,8 @@
 ───────────────────────────────────────────── */
 :root {
   /* Colors */
-  --color-bg: #FDC8E8;
+  --color-bg: #FAF7F2;
+  --color-bg-white: #ffffff;
   --color-surface: #f4efe8;
   --color-surface-alt: #ebebeb;
   --color-primary: #E3977B;
@@ -22,27 +23,29 @@
   --color-success: #16a34a;
 
   /* Typography */
-  --font-sans: 'Lato', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Schibsted Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Libre Baskerville', Georgia, serif;
   --font-display: 'Playfair Display', Georgia, serif;
+  --font-heading: 'Schibsted Grotesk', system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, monospace;
 
-  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw,  0.8125rem);
-  --text-sm:   clamp(0.8125rem,0.775rem + 0.25vw,  0.875rem);
-  --text-base: clamp(0.9375rem,0.875rem + 0.3125vw,1.0625rem);
-  --text-lg:   clamp(1.0625rem,0.975rem + 0.4375vw,1.25rem);
-  --text-xl:   clamp(1.25rem,  1.1rem  + 0.75vw,   1.5rem);
-  --text-2xl:  clamp(1.5rem,   1.25rem + 1.25vw,   2rem);
-  --text-3xl:  clamp(1.875rem, 1.5rem  + 1.875vw,  2.5rem);
-  --text-4xl:  clamp(2.25rem,  1.75rem + 2.5vw,    3.25rem);
-  --text-5xl:  clamp(2.75rem,  2rem    + 3.75vw,   4.25rem);
-  --text-hero: clamp(3.5rem,   2.5rem  + 5vw,      7rem);
+  /* Text sizes — 1.5× scaled */
+  --text-xs:   clamp(1.125rem,  1.05rem  + 0.375vw,  1.22rem);
+  --text-sm:   clamp(1.22rem,   1.16rem  + 0.375vw,  1.3125rem);
+  --text-base: clamp(1.4rem,    1.3rem   + 0.5vw,    1.6rem);
+  --text-lg:   clamp(1.6rem,    1.46rem  + 0.65vw,   1.875rem);
+  --text-xl:   clamp(1.875rem,  1.65rem  + 1.125vw,  2.25rem);
+  --text-2xl:  clamp(2.25rem,   1.875rem + 1.875vw,  3rem);
+  --text-3xl:  clamp(2.8rem,    2.25rem  + 2.8vw,    3.75rem);
+  --text-4xl:  clamp(3.375rem,  2.625rem + 3.75vw,   4.875rem);
+  --text-5xl:  clamp(4.125rem,  3rem     + 5.625vw,  6.375rem);
+  --text-hero: clamp(3.5rem,    2.5rem   + 5vw,      7rem);
 
   --leading-none:    1;
-  --leading-tight:   1.1;
+  --leading-tight:   1.15;
   --leading-snug:    1.25;
-  --leading-normal:  1.6;
-  --leading-relaxed: 1.75;
+  --leading-normal:  1.4;
+  --leading-relaxed: 1.5;
 
   --tracking-tighter: -0.04em;
   --tracking-tight:   -0.02em;
@@ -81,6 +84,7 @@
   --radius-lg:   0.75rem;
   --radius-xl:   1rem;
   --radius-2xl:  1.5rem;
+  --radius-btn:  0.5rem;
   --radius-full: 9999px;
   --radius-hero: clamp(1rem, 2vw, 2rem);
 

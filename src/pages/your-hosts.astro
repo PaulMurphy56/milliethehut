@@ -1,0 +1,144 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Container from "../components/ui/Container.astro";
+import { getCollection } from "astro:content";
+
+const pageCollection = await getCollection("pageYourHosts");
+const page = pageCollection[0]?.data;
+---
+
+<PageLayout
+  title={page?.metaTitle ?? "Your Hosts | Millie The Hut"}
+  description={page?.metaDescription}
+>
+  <!-- Inner Hero -->
+  <section class="inner-hero">
+    <Container>
+      <div class="inner-hero__grid">
+        <div class="inner-hero__text">
+          <h1 class="inner-hero__title">{page?.pageTitle ?? "Meet Your Hosts"}</h1>
+          <div class="inner-hero__bio" data-reveal="slide-up">
+            <p>Paul &amp; Glenys live 100 yards away from Millie, and are normally on hand at any time, day or night, for help and advice.</p>
+            <p>Paul is an award-winning travel writer and has experienced all levels of accommodations and hospitality around the world, from sipping mint tea by the camp fire outside a primitive straw hut in the Sahara to haute cuisine and Presidential Suites in world capitals. His aim now is to provide an experience that he as a professional would enjoy and recommend. Paul can offer guests detailed advice on many places to visit in the area and his latest publication, Destination HAY, features the nearby world-famous book town.</p>
+            <p>Glenys has a passion for arts and crafts in the widest sense, reflected in the hut interior with a mix of repurposed, recycled and upcycled furnishings.</p>
+          </div>
+        </div>
+        <div class="inner-hero__image">
+          <div class="inner-hero__image-placeholder" role="img" aria-label="Paul and Glenys, your hosts at Millie The Hut"></div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <Container>
+      <div class="cta-banner__inner" data-reveal="slide-up">
+        <h2 class="cta-banner__title">Find out why our guests love Millie</h2>
+        <a href="/book/" class="cta-banner__btn">Book Your Stay &rarr;</a>
+      </div>
+    </Container>
+  </section>
+</PageLayout>
+
+<style>
+  /* ─── Inner Hero ─── */
+  .inner-hero {
+    padding: var(--space-5xl) 0 var(--section-padding);
+    background: var(--color-bg-white);
+  }
+
+  .inner-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .inner-hero__eyebrow {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.15em;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    margin-bottom: var(--space-md);
+  }
+
+  .inner-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 70px);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
+    margin-bottom: var(--space-xl);
+  }
+
+  .inner-hero__bio p {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+    max-width: 60ch;
+  }
+
+  .inner-hero__bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  .inner-hero__image-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-xl);
+  }
+
+  @media (min-width: 48rem) {
+    .inner-hero__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  /* ─── CTA Banner ─── */
+  .cta-banner {
+    background: var(--color-text);
+    color: var(--color-text-inverse);
+    padding: var(--section-padding) 0;
+  }
+
+  .cta-banner__inner {
+    text-align: center;
+  }
+
+  .cta-banner__title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--color-text-inverse);
+    margin-bottom: var(--space-2xl);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .cta-banner__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: var(--space-md) var(--space-2xl);
+    background: var(--color-cta);
+    color: var(--color-black);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    border-radius: var(--radius-full);
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .cta-banner__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+</style>

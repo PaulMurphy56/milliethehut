@@ -56,7 +56,7 @@ const testimonials = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/testimonials" }),
   schema: z.object({
     name: z.string(),
-    location: z.string(),
+    date: z.string(),
     rating: z.number().min(1).max(5),
   }),
 });
@@ -143,6 +143,47 @@ const pageBook = defineCollection({
   }),
 });
 
+const pageGallery = defineCollection({
+  loader: glob({ pattern: "gallery.yaml", base: "./src/data/pages" }),
+  schema: z.object({
+    metaTitle: z.string(),
+    metaDescription: z.string(),
+    pageEyebrow: z.string(),
+    pageTitle: z.string(),
+    pageDescription: z.string(),
+  }),
+});
+
+const pageYourHosts = defineCollection({
+  loader: glob({ pattern: "your-hosts.yaml", base: "./src/data/pages" }),
+  schema: z.object({
+    metaTitle: z.string(),
+    metaDescription: z.string(),
+    pageEyebrow: z.string(),
+    pageTitle: z.string(),
+    pageDescription: z.string(),
+    storyHeading: z.string(),
+    storyParagraphs: z.array(z.string()),
+    valuesHeading: z.string(),
+    values: z.array(z.object({ title: z.string(), description: z.string() })),
+    ctaHeading: z.string(),
+    ctaDescription: z.string(),
+  }),
+});
+
+const pageContact = defineCollection({
+  loader: glob({ pattern: "contact.yaml", base: "./src/data/pages" }),
+  schema: z.object({
+    metaTitle: z.string(),
+    metaDescription: z.string(),
+    pageEyebrow: z.string(),
+    pageTitle: z.string(),
+    pageDescription: z.string(),
+    formHeading: z.string(),
+    formDescription: z.string(),
+  }),
+});
+
 export const collections = {
   siteSettings,
   homepageSettings,
@@ -154,4 +195,7 @@ export const collections = {
   pageTheHut,
   pageLocation,
   pageBook,
+  pageGallery,
+  pageYourHosts,
+  pageContact,
 };

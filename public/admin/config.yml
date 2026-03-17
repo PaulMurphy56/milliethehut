@@ -159,6 +159,68 @@ collections:
             hint: "Bullet points shown in the sidebar, e.g. 'Check-in from 3pm'."
             field: { label: "Item", name: "item", widget: "string" }
 
+  # ─── Gallery Page ────────────────────────────────────────────────────────────
+  - name: "page-gallery"
+    label: "Page — Gallery"
+    files:
+      - label: "Gallery Page Content"
+        name: "gallery"
+        file: "src/data/pages/gallery.yaml"
+        fields:
+          - { label: "Meta Title", name: "metaTitle", widget: "string", required: false }
+          - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
+          - { label: "Page Eyebrow", name: "pageEyebrow", widget: "string", required: false }
+          - { label: "Page Title", name: "pageTitle", widget: "string", required: false, default: "Gallery" }
+          - { label: "Page Intro Text", name: "pageDescription", widget: "text", required: false }
+
+  # ─── Your Hosts Page ────────────────────────────────────────────────────────
+  - name: "page-your-hosts"
+    label: "Page — Your Hosts"
+    files:
+      - label: "Your Hosts Page Content"
+        name: "your-hosts"
+        file: "src/data/pages/your-hosts.yaml"
+        fields:
+          - { label: "Meta Title", name: "metaTitle", widget: "string", required: false }
+          - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
+          - { label: "Page Eyebrow", name: "pageEyebrow", widget: "string", required: false }
+          - { label: "Page Title", name: "pageTitle", widget: "string", required: false, default: "Your Hosts" }
+          - { label: "Page Intro Text", name: "pageDescription", widget: "text", required: false }
+          - { label: "Story Section Heading", name: "storyHeading", widget: "string", required: false }
+          - label: "Story Paragraphs"
+            name: "storyParagraphs"
+            widget: "list"
+            required: false
+            hint: "Each item becomes its own paragraph."
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Values Section Heading", name: "valuesHeading", widget: "string", required: false }
+          - label: "Values"
+            name: "values"
+            widget: "list"
+            required: false
+            hint: "Philosophy / values cards."
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - { label: "CTA Heading", name: "ctaHeading", widget: "string", required: false }
+          - { label: "CTA Description", name: "ctaDescription", widget: "text", required: false }
+
+  # ─── Contact Page ───────────────────────────────────────────────────────────
+  - name: "page-contact"
+    label: "Page — Contact"
+    files:
+      - label: "Contact Page Content"
+        name: "contact"
+        file: "src/data/pages/contact.yaml"
+        fields:
+          - { label: "Meta Title", name: "metaTitle", widget: "string", required: false }
+          - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
+          - { label: "Page Eyebrow", name: "pageEyebrow", widget: "string", required: false }
+          - { label: "Page Title", name: "pageTitle", widget: "string", required: false, default: "Contact" }
+          - { label: "Page Intro Text", name: "pageDescription", widget: "text", required: false }
+          - { label: "Form Heading", name: "formHeading", widget: "string", required: false }
+          - { label: "Form Description", name: "formDescription", widget: "text", required: false }
+
   # ─── Gallery ──────────────────────────────────────────────────────────────────
   - name: "gallery"
     label: "Gallery"
