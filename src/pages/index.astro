@@ -10,11 +10,14 @@ const sortedFaqs = allFaqs.sort((a, b) => a.data.order - b.data.order);
 
 const siteSettingsCollection = await getCollection("siteSettings");
 const site = siteSettingsCollection[0]?.data;
+
+const homepageCollection = await getCollection("homepageSettings");
+const hp = homepageCollection[0]?.data;
 ---
 
 <PageLayout
-  title="Millie The Hut | Shepherd's Hut Glamping in the Welsh Marches, Herefordshire"
-  description="Escape to Millie The Hut — a beautifully appointed shepherd's hut nestled in the Welsh Marches near Presteigne. Luxury glamping for two with a wood burner, fire pit & stunning countryside views."
+  title={hp?.metaTitle ?? "Millie The Hut | Shepherd's Hut Glamping in the Welsh Marches, Herefordshire"}
+  description={hp?.metaDescription ?? "Escape to Millie The Hut — a beautifully appointed shepherd's hut nestled in the Welsh Marches near Presteigne. Luxury glamping for two with a wood burner, fire pit & stunning countryside views."}
 >
   <Fragment slot="head">
     <LocalBusinessSchema />
@@ -34,7 +37,7 @@ const site = siteSettingsCollection[0]?.data;
       />
       <div class="hero__overlay">
         <div class="hero__overlay-top"></div>
-        <p class="hero__tagline">Escape to the<br />Welsh Marches</p>
+        <p class="hero__tagline" set:html={(hp?.heroOverlayText ?? "Escape to the\nWelsh Marches").replace('\n', '<br />')}></p>
       </div>
     </div>
   </section>
@@ -43,9 +46,9 @@ const site = siteSettingsCollection[0]?.data;
   <section class="section section--white" aria-labelledby="intro-heading">
     <Container narrow>
       <div class="intro">
-        <h2 class="intro__heading" id="intro-heading">Millie The Hut, Presteigne, Herefordshire.</h2>
+        <h2 class="intro__heading" id="intro-heading">{hp?.introHeading ?? "Millie The Hut, Presteigne, Herefordshire."}</h2>
         <div class="intro__text" id="scroll-text">
-          <p>Down a leafy lane, where steam trains once ran, across a Victorian railway bridge that takes you from Wales to England, you'll find a meadow where sheep graze, and a traditional-style Shepherds Hut and Shack. On sunny days, the meadow is bathed in light from dawn to dusk, and the gin-clear Hindwell Brook that bounds it flashes silver. Whatever the weather, after dark is a special time to be here, when the log burner in the hut, the firepit by the stream and the lamps and candles in the Shack cast a magical golden glow.</p>
+          <p>{hp?.introParagraph ?? "Down a leafy lane, where steam trains once ran, across a Victorian railway bridge that takes you from Wales to England, you'll find a meadow where sheep graze, and a traditional-style Shepherds Hut and Shack. On sunny days, the meadow is bathed in light from dawn to dusk, and the gin-clear Hindwell Brook that bounds it flashes silver. Whatever the weather, after dark is a special time to be here, when the log burner in the hut, the firepit by the stream and the lamps and candles in the Shack cast a magical golden glow."}</p>
         </div>
       </div>
     </Container>

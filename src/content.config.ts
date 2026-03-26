@@ -28,17 +28,9 @@ const homepageSettings = defineCollection({
   schema: z.object({
     metaTitle: z.string().optional(),
     metaDescription: z.string().optional(),
-    heroImage: z.string().optional(),
-    heroImageAlt: z.string().optional(),
-    heroEyebrow: z.string().optional(),
-    headline: z.string().optional(),
-    subheadline: z.string().optional(),
-    facts: z.array(z.string()).optional(),
-    aboutHeading: z.string().optional(),
-    aboutDescription: z.string().optional(),
-    galleryHeading: z.string().optional(),
-    ctaHeading: z.string().optional(),
-    ctaDescription: z.string().optional(),
+    heroOverlayText: z.string().optional(),
+    introHeading: z.string().optional(),
+    introParagraph: z.string().optional(),
   }),
 });
 

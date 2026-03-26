@@ -41,22 +41,9 @@ collections:
         fields:
           - { label: "Meta Title", name: "metaTitle", widget: "string", required: false, hint: "Browser tab title. Leave blank for default." }
           - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
-          - { label: "Hero Image", name: "heroImage", widget: "image", required: false, hint: "Main hero photo of the hut." }
-          - { label: "Hero Image Alt Text", name: "heroImageAlt", widget: "string", required: false, default: "Millie The Hut shepherd's hut exterior" }
-          - { label: "Hero Eyebrow Text", name: "heroEyebrow", widget: "string", required: false, hint: "Small text above the headline, e.g. 'Presteigne, Powys'" }
-          - { label: "Hero Headline", name: "headline", widget: "string", required: false, default: "Your Countryside Escape Awaits" }
-          - { label: "Hero Subheadline", name: "subheadline", widget: "text", required: false }
-          - label: "Quick Facts"
-            name: "facts"
-            widget: "list"
-            required: false
-            hint: "Short facts shown in the hero strip, e.g. 'Sleeps 2', 'Dog Friendly'."
-            field: { label: "Fact", name: "fact", widget: "string" }
-          - { label: "About Section Heading", name: "aboutHeading", widget: "string", required: false }
-          - { label: "About Section Description", name: "aboutDescription", widget: "text", required: false }
-          - { label: "Gallery Section Heading", name: "galleryHeading", widget: "string", required: false }
-          - { label: "CTA Heading", name: "ctaHeading", widget: "string", required: false }
-          - { label: "CTA Description", name: "ctaDescription", widget: "text", required: false }
+          - { label: "Hero Overlay Text", name: "heroOverlayText", widget: "string", required: false, hint: "Text displayed over the hero image. Use a newline (\n) to split across two lines, e.g. 'Escape to the\nWelsh Marches'." }
+          - { label: "Intro Heading", name: "introHeading", widget: "string", required: false, hint: "Heading above the introduction paragraph." }
+          - { label: "Intro Paragraph", name: "introParagraph", widget: "text", required: false, hint: "The main introductory paragraph below the hero." }
 
   # ─── The Hut Page ─────────────────────────────────────────────────────────────
   - name: "page-the-hut"
