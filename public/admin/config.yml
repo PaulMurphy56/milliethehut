@@ -20,10 +20,7 @@ collections:
           - { label: "Phone Number", name: "phone", widget: "string", hint: "e.g. 01234 567890" }
           - { label: "Email Address", name: "email", widget: "string" }
           - { label: "Booking URL", name: "bookingUrl", widget: "string", required: false, hint: "External booking platform URL. Leave blank to use the contact form." }
-          - label: "Address"
-            name: "addressLocality"
-            widget: "string"
-            hint: "Town/city, e.g. Presteigne"
+          - { label: "Address (Town)", name: "addressLocality", widget: "string", hint: "Town/city, e.g. Presteigne" }
           - { label: "County / Region", name: "addressRegion", widget: "string", hint: "e.g. Powys" }
           - { label: "Postcode", name: "addressPostalCode", widget: "string" }
           - { label: "Country Code", name: "addressCountry", widget: "string", default: "GB" }
@@ -226,9 +223,9 @@ collections:
     label: "Gallery"
     folder: "src/data/gallery"
     create: true
-    slug: "{{fields.order}}-{{fields.title | slugify}}"
+    slug: "{{fields.order}}-{{fields.alt | slugify}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Title (internal reference)", name: "title", widget: "string", required: false }
       - { label: "Alt Text", name: "alt", widget: "text" }
       - { label: "Image", name: "image", widget: "image" }
       - { label: "Display Order", name: "order", widget: "number", value_type: "int" }
@@ -240,8 +237,8 @@ collections:
     create: true
     slug: "{{fields.name | slugify}}"
     fields:
-      - { label: "Guest Name", name: "name", widget: "string" }
-      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Guest Name(s)", name: "name", widget: "string" }
+      - { label: "Date of Stay", name: "date", widget: "string", hint: "e.g. Jan 2026" }
       - { label: "Rating (1–5)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 5 }
       - { label: "Review", name: "body", widget: "markdown" }
 
@@ -254,7 +251,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Icon Name", name: "icon", widget: "string", required: false, hint: "e.g. flame, bed, shower" }
+      - { label: "Icon Name", name: "icon", widget: "string", hint: "e.g. flame, bed, shower" }
       - { label: "Display Order", name: "order", widget: "number", value_type: "int" }
 
   # ─── Nearby Attractions ───────────────────────────────────────────────────────
@@ -277,5 +274,5 @@ collections:
     slug: "{{fields.order}}-{{fields.question | slugify}}"
     fields:
       - { label: "Question", name: "question", widget: "string" }
-      - { label: "Answer", name: "answer", widget: "text" }
+      - { label: "Answer", name: "answer", widget: "text", hint: "Plain text. Basic HTML links are supported." }
       - { label: "Display Order", name: "order", widget: "number", value_type: "int" }
