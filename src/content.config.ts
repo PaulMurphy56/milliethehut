@@ -37,7 +37,7 @@ const homepageSettings = defineCollection({
 const gallery = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/gallery" }),
   schema: z.object({
-    title: z.string(),
+    title: z.string().optional(),
     alt: z.string(),
     image: z.string(),
     order: z.number(),
@@ -72,107 +72,74 @@ const faqs = defineCollection({
   }),
 });
 
-const attractions = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/data/attractions" }),
-  schema: z.object({
-    name: z.string(),
-    distance: z.string(),
-    description: z.string(),
-    order: z.number(),
-  }),
-});
-
+// pageTheHut — fields actually read by the-hut.astro
 const pageTheHut = defineCollection({
   loader: glob({ pattern: "the-hut.yaml", base: "./src/data/pages" }),
   schema: z.object({
-    metaTitle: z.string(),
-    metaDescription: z.string(),
-    pageEyebrow: z.string(),
-    pageTitle: z.string(),
-    pageDescription: z.string(),
-    descriptionHeading: z.string(),
-    descriptionParagraphs: z.array(z.string()),
-    atAGlance: z.array(z.string()),
-    nearby: z.array(z.string()),
-    amenitiesSectionHeading: z.string(),
-    gallerySectionHeading: z.string(),
-    ctaHeading: z.string(),
-    ctaDescription: z.string(),
+    metaTitle: z.string().optional(),
+    metaDescription: z.string().optional(),
+    pageEyebrow: z.string().optional(),
+    pageTitle: z.string().optional(),
+    pageDescription: z.string().optional(),
+    descriptionHeading: z.string().optional(),
+    atAGlance: z.array(z.string()).optional(),
+    nearby: z.array(z.string()).optional(),
+    ctaHeading: z.string().optional(),
+    ctaDescription: z.string().optional(),
   }),
 });
 
+// pageLocation — fields actually read by location.astro
 const pageLocation = defineCollection({
   loader: glob({ pattern: "location.yaml", base: "./src/data/pages" }),
   schema: z.object({
-    metaTitle: z.string(),
-    metaDescription: z.string(),
-    pageEyebrow: z.string(),
-    pageTitle: z.string(),
-    pageDescription: z.string(),
-    gettingThereHeading: z.string(),
-    gettingThereParagraphs: z.array(z.string()),
-    journeyTimes: z.array(z.object({ place: z.string(), time: z.string() })),
-    attractionsSectionHeading: z.string(),
-    attractionsSectionDescription: z.string(),
-    landscapeHeading: z.string(),
-    landscapeParagraphs: z.array(z.string()),
-    ctaHeading: z.string(),
-    ctaDescription: z.string(),
+    metaTitle: z.string().optional(),
+    metaDescription: z.string().optional(),
+    pageTitle: z.string().optional(),
+    pageDescription: z.string().optional(),
   }),
 });
 
+// pageBook — fields actually read by book.astro
 const pageBook = defineCollection({
   loader: glob({ pattern: "book.yaml", base: "./src/data/pages" }),
   schema: z.object({
-    metaTitle: z.string(),
-    metaDescription: z.string(),
-    pageEyebrow: z.string(),
-    pageTitle: z.string(),
-    pageDescription: z.string(),
-    formHeading: z.string(),
-    formDescription: z.string(),
-    infoItems: z.array(z.string()),
+    metaTitle: z.string().optional(),
+    metaDescription: z.string().optional(),
+    pageTitle: z.string().optional(),
+    pageDescription: z.string().optional(),
   }),
 });
 
+// pageGallery — fields actually read by gallery.astro
 const pageGallery = defineCollection({
   loader: glob({ pattern: "gallery.yaml", base: "./src/data/pages" }),
   schema: z.object({
-    metaTitle: z.string(),
-    metaDescription: z.string(),
-    pageEyebrow: z.string(),
-    pageTitle: z.string(),
-    pageDescription: z.string(),
+    metaTitle: z.string().optional(),
+    metaDescription: z.string().optional(),
+    pageTitle: z.string().optional(),
+    pageDescription: z.string().optional(),
   }),
 });
 
+// pageYourHosts — fields actually read by your-hosts.astro
 const pageYourHosts = defineCollection({
   loader: glob({ pattern: "your-hosts.yaml", base: "./src/data/pages" }),
   schema: z.object({
-    metaTitle: z.string(),
-    metaDescription: z.string(),
-    pageEyebrow: z.string(),
-    pageTitle: z.string(),
-    pageDescription: z.string(),
-    storyHeading: z.string(),
-    storyParagraphs: z.array(z.string()),
-    valuesHeading: z.string(),
-    values: z.array(z.object({ title: z.string(), description: z.string() })),
-    ctaHeading: z.string(),
-    ctaDescription: z.string(),
+    metaTitle: z.string().optional(),
+    metaDescription: z.string().optional(),
+    pageTitle: z.string().optional(),
   }),
 });
 
+// pageContact — fields actually read by contact.astro
 const pageContact = defineCollection({
   loader: glob({ pattern: "contact.yaml", base: "./src/data/pages" }),
   schema: z.object({
-    metaTitle: z.string(),
-    metaDescription: z.string(),
-    pageEyebrow: z.string(),
-    pageTitle: z.string(),
-    pageDescription: z.string(),
-    formHeading: z.string(),
-    formDescription: z.string(),
+    metaTitle: z.string().optional(),
+    metaDescription: z.string().optional(),
+    pageTitle: z.string().optional(),
+    pageDescription: z.string().optional(),
   }),
 });
 
@@ -183,7 +150,6 @@ export const collections = {
   testimonials,
   amenities,
   faqs,
-  attractions,
   pageTheHut,
   pageLocation,
   pageBook,
