@@ -73,12 +73,12 @@ const site = siteSettingsCollection[0]?.data;
         <aside class="contact-sidebar" data-reveal="fade">
           {site && (
             <div class="contact-card">
-              <h3 class="contact-card__title">Get in touch directly</h3>
+              <h3 class="contact-card__title">{page?.contactCardHeading ?? "Get in touch directly"}</h3>
               <ul class="contact-card__list" role="list">
                 {site.phone && (
                   <li class="contact-card__item">
                     <span class="contact-card__label">Phone</span>
-                    <a href={`tel:${site.phone.replace(/\s+/g, "")}`} class="contact-card__value">{site.phone}</a>
+                    <a href={`tel:${site.phone.replace(/\s+/g, "")}`} class="contact-card__value">{site.phone} (please text first)</a>
                   </li>
                 )}
                 {site.email && (
@@ -98,22 +98,17 @@ const site = siteSettingsCollection[0]?.data;
           )}
 
           <div class="contact-card">
-            <h3 class="contact-card__title">Find Us</h3>
-            <address class="find-us__address">
-              Wegnall's Mill<br />
-              Presteigne<br />
-              Powys<br />
-              LD8 2LD
-            </address>
+            <h3 class="contact-card__title">{page?.findUsHeading ?? "Find Us"}</h3>
+            <address class="find-us__address" set:html={(page?.displayAddress ?? "Wegnall's Mill\nPresteigne\nPowys\nLD8 2LD").replace(/\n/g, '<br />')}></address>
             <div class="find-us__w3w">
               <span class="find-us__w3w-label">What3Words</span>
-              <span class="find-us__w3w-value">///unwanted.passports.among</span>
+              <span class="find-us__w3w-value">{page?.w3wAddress ?? "///unwanted.passports.among"}</span>
             </div>
           </div>
 
           {site && (site.instagramUrl || site.facebookUrl) && (
             <div class="contact-card">
-              <h3 class="contact-card__title">Follow Millie</h3>
+              <h3 class="contact-card__title">{page?.followHeading ?? "Follow Millie"}</h3>
               <div class="contact-socials">
                 {site.instagramUrl && (
                   <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="contact-social-link">Instagram</a>
@@ -126,8 +121,8 @@ const site = siteSettingsCollection[0]?.data;
           )}
 
           <div class="contact-card">
-            <h3 class="contact-card__title">Looking to book?</h3>
-            <p class="contact-card__note">If you'd like to check availability or make a booking enquiry, head to our booking page.</p>
+            <h3 class="contact-card__title">{page?.bookingCardHeading ?? "Looking to book?"}</h3>
+            <p class="contact-card__note">{page?.bookingCardText ?? "If you'd like to check availability or make a booking enquiry, head to our booking page."}</p>
             <a href="/book/" class="contact-card__book-link">Book Your Stay &rarr;</a>
           </div>
         </aside>

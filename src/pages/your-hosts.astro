@@ -18,13 +18,14 @@ const page = pageCollection[0]?.data;
         <div class="inner-hero__text">
           <h1 class="inner-hero__title">{page?.pageTitle ?? "Meet Your Hosts"}</h1>
           <div class="inner-hero__bio" data-reveal="slide-up">
-            <p>Paul &amp; Glenys live 100 yards away from Millie, and are normally on hand at any time, day or night, for help and advice.</p>
-            <p>Paul is an award-winning travel writer and has experienced all levels of accommodations and hospitality around the world, from sipping mint tea by the camp fire outside a primitive straw hut in the Sahara to haute cuisine and Presidential Suites in world capitals. His aim now is to provide an experience that he as a professional would enjoy and recommend. Paul can offer guests detailed advice on many places to visit in the area and his latest publication, Destination HAY, features the nearby world-famous book town.</p>
-            <p>Glenys has a passion for arts and crafts in the widest sense, reflected in the hut interior with a mix of repurposed, recycled and upcycled furnishings.</p>
+            {(page?.bioParagraphs ?? []).map((p) => <p>{p}</p>)}
           </div>
         </div>
         <div class="inner-hero__image">
-          <div class="inner-hero__image-placeholder" role="img" aria-label="Paul and Glenys, your hosts at Millie The Hut"></div>
+          <figure class="inner-hero__figure">
+            <img src="/images/hosts.JPG" alt="Paul and Glenys, your hosts at Millie The Hut" class="inner-hero__img" loading="eager" decoding="async" />
+            <figcaption class="inner-hero__caption">You can be assured of a warm welcome at Millie, whatever the weather</figcaption>
+          </figure>
         </div>
       </div>
     </Container>
@@ -34,7 +35,7 @@ const page = pageCollection[0]?.data;
   <section class="cta-banner">
     <Container>
       <div class="cta-banner__inner" data-reveal="slide-up">
-        <h2 class="cta-banner__title">Find out why our guests love Millie</h2>
+        <h2 class="cta-banner__title">{page?.ctaHeading ?? "Find out why our guests love Millie"}</h2>
         <a href="/book/" class="cta-banner__btn">Book Your Stay &rarr;</a>
       </div>
     </Container>
@@ -87,12 +88,28 @@ const page = pageCollection[0]?.data;
     margin-bottom: 0;
   }
 
-  .inner-hero__image-placeholder {
+  .inner-hero__figure {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .inner-hero__img {
     width: 100%;
     aspect-ratio: 4 / 3;
-    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);
-    border: 1px solid var(--color-border-light);
+    object-fit: cover;
+    display: block;
     border-radius: var(--radius-xl);
+  }
+
+  .inner-hero__caption {
+    display: block;
+    margin-top: var(--space-sm);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--color-text-muted);
+    text-align: center;
   }
 
   @media (min-width: 48rem) {

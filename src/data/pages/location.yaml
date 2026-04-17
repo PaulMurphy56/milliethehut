@@ -1,52 +1,74 @@
-landscapeParagraphs:
-  - The Welsh Marches is the borderland where England blurs into Wales — a
-    region of deep valleys, ancient hills, and scattered settlements that has
-    remained largely unchanged for centuries. It's the kind of place where you
-    might walk all day and see no one, where the light shifts across the hills
-    in ways that make you reach for your phone to photograph it, then put it
-    away and just watch instead.
-  - Presteigne is at the heart of it — a market town that has retained its
-    independent character, with a weekly market, independent bookshops,
-    galleries, and several excellent pubs. It was once the county town of
-    Radnorshire, and a certain quiet pride persists in its streets.
-  - Walking directly from the hut, you can join Offa's Dyke Path — the
-    long-distance route that traces the ancient earthwork built by King Offa of
-    Mercia in the 8th century to mark the boundary between England and Wales. Or
-    simply wander the country lanes, through farmland and woodland, following
-    your nose.
-gettingThereHeading: Finding your way to Millie
-attractionsSectionDescription: The Welsh Marches is one of Britain's best-kept
-  secrets — rich in history, landscape, and local character.
-gettingThereParagraphs:
-  - The hut is located near Presteigne on the England/Wales border in Powys.
-    It's a beautiful drive from most of the UK, through the rolling hills of the
-    Marches.
-  - We're about 2.5 hours from London, 1.5 hours from Birmingham, and 1 hour
-    from Cardiff. Full directions — including a what3words location — are sent
-    with your booking confirmation.
-  - We recommend travelling by car. The nearest train stations are at Knighton
-    (Cambrian Line) and Leominster (Hereford/Shrewsbury line), both about 10–15
-    miles away.
-journeyTimes:
-  - place: London
-    time: ~2.5 hrs
-  - place: Birmingham
-    time: ~1.5 hrs
-  - place: Cardiff
-    time: ~1 hr
-  - place: Bristol
-    time: ~1.5 hrs
-  - place: Manchester
-    time: ~2.5 hrs
-landscapeHeading: The Welsh Marches
-attractionsSectionHeading: What's nearby
-pageTitle: Local Area
-ctaDescription: Book your stay at Millie The Hut and discover the Welsh Marches for yourself.
-pageDescription: Millie The Hut sits quietly on the England/Wales border, amidst
-  wild countryside, small historic market towns, and open skies.
-ctaHeading: Ready to explore?
-metaTitle: Location | Millie The Hut
-metaDescription: Millie The Hut is nestled on the England/Wales border near
-  Presteigne, Powys. Discover the Welsh Marches — walks, towns, and countryside
-  in every direction.
-pageEyebrow: Location
+metaTitle: "Local Area | Millie The Hut"
+metaDescription: "Millie The Hut is nestled on the England/Wales border near Presteigne, Powys. Discover the Welsh Marches — walks, towns, and countryside in every direction."
+pageTitle: "Local Area"
+pageDescription: "Millie The Hut sits quietly on the England/Wales border, amidst wild countryside, cute towns, and open skies."
+theAreaHeading: "The Area"
+localAttractionsHeading: "Local Attractions"
+localAttractions:
+  - "Presteigne's award-winning gas-lit Judge's Lodgings is a large atmospheric elegant upstairs-downstairs house, complete with court room and cells, that will show you what life was like locally 150 years ago (open end March- end Oct). Excellent gift shop."
+  - "Nearby Kington hosts Hergest Croft Gardens, famed for its rare plants shrubs and huge 'champion trees'. Close by is the charming Small Breeds Farm Park and Owl Centre and also Westonbury Mill Water Gardens."
+  - "The Black-and-White Trail links a series of picture-postcard Herefordshire village. Particularly recommended is an easy round trip from Presteigne taking in Pembridge, Weobley ('webley'), and Eardisland ('ur-disland'), all of which boast 15th to 17th century half-timbered houses, ancient churches, fine old pubs and other recommended places to eat and drink."
+furtherAfieldHeading: "Slightly Further Afield"
+furtherAfield:
+  - "Hereford boasts a beautiful cathedral, home to the acclaimed Mappa Mundi, and has most of the facilities you'd expect in a small city."
+  - "The world-famous book town of Hay-on-Wye attracts visitors from all over the world in late May at Festival time, but is well worth a visit at any time of year for its artisan shops, and places to eat and drink, whether or not you're a bibliophile. (Many shops close Mon-Tues)."
+  - "Ludlow, famous for its food, is a gem of Georgian architecture with a romantic ruined castle. The town stages almost daily markets, hosts several festivals a year and has some good vintage and antique shopping."
+  - "Leominster ('lemster') is also chock-a-block with good value vintage and antique shops. Close by are two fine National Trust properties, Berrington Hall and Croft Castle."
+  - "Due west, into Wales and the Cambrian Mountains, lie the stupendous Elan reservoirs. These marvels of Victorian engineering were built to supply drinking water to Birmingham and still do so today. Elan Valley features some easily accessible panoramic walks and is a haven for wildlife with The Red Kite Feeding Station at Rhayader offering spectacular close-ups of hundreds of these giant birds at a time."
+localWildlifeHeading: "Local Wildlife"
+localWildlifeParagraphs:
+  - "The Marches are full of wildlife, and our fields, trees and sky above are home to woodpeckers, red kites, buzzards, pheasants, grey herons, swifts, rabbits, squirrels and foxes. Depending on the time of year you'll hear majestic red kites and buzzards 'mewing' high overhead, the staccato tones of a male pheasant staking out his patch (cock fights are common!), plus the eerie towhit-towhoo of tawny owls."
+whatsOnHeading: "What's On"
+whatsOnItems:
+  - "The internationally acclaimed Presteigne Festival of modern classical music is staged annually in several venues around town over six days spanning the August Bank Holiday. The elegant Italianate Assembly Rooms is a main venue and year-round stages live music of all kinds. It is also home to a cinema club."
+  - "In July, Sheep Music Festival, featuring mostly local bands, is usually staged on the idyllic pastures of Wents Meadows, a five-minute stroll from town."
+  - "Contemporary art lovers should check out the Sidney Nolan Trust arts centre (a 5-minute walk along the railway line from Millie), which stages regular exhibitions and live events."
+  - "In and around Presteigne, there's something going on all year round, from unusual (even arcane!) entertaining local events such as Wassailing in January (cider celebrations) and Hill Climbs in October (veteran cars straining every cylinder, slipping, sliding and splattering mud, ascending steep grassy inclines) to grand fairs and markets of all kind in Ludlow, and the internationally famous Hay Festival in May."
+  - "Our neighbouring market town, Kington stages vibrant food festivals in June and December with up to 100 stalls showcasing the best of the Marches food producers."
+activitiesHeading: "Activities"
+walkingHeading: "Walking"
+walkingParagraphs:
+  - "The Marches is a wonderful place for walking and the old railway line footpath leading directly from Millie's field, makes it easy to stride straight out without the need for a car."
+  - "Offa's Dyke, a long-distance waymarked footpath which traditionally marks the border between England and Wales, runs close by Presteigne and is easily accessed via the neighbouring small towns of Knighton, where you'll find the Offa's Dyke Information Centre, and Kington where several long-distance paths converge to make this a regional walking hub, hosting walking festivals in April and September."
+  - "A favourite easy, if quite steep, walk ascends from Hergest ('har-guest') Croft Gardens to Hergest Ridge - made famous by musician Mike Oldfield - offering a wonderful 360-degree panorama taking in several neighbouring counties. Once up here, past the landmark clump of monkey puzzle trees, you can continue on to the village of Gladestry where you'll find the welcoming Royal Oak with a lovely garden for a pub lunch (check for opening times before you set off)."
+activityCards:
+  - title: "Wild Swimming"
+    description: "You're very welcome to 'go wild' in the Hindwell, which borders Millie's field. In summer it's quite small and shallow but will certainly cool you off in a heatwave."
+  - title: "Golf"
+    description: "Kington, a 10-minute drive away, boasts England's highest, and surely one of its most panoramic golf clubs, set within wild National Trust land. It's well worth a walk round here, with or without clubs (open to non-members)."
+  - title: "Canoeing"
+    description: "The River Wye is a picturesque place to either learn to canoe or practice your skills. The nearest centre is at Hay-on-Wye."
+  - title: "Stargazing"
+    description: "With so little light pollution, stargazing from your hut (clear weather permitting) may well be a highlight of your visit. If you want to learn more, on the edge of Presteigne is The Spaceguard Centre, an observatory that monitors asteroids and comets near the earth, and is open to the public."
+foodDrinkHeading: "Food & Drink"
+foodDrinkIntro: "There's plenty on offer on Presteigne High Street to satisfy most tastes, whether you're shopping for ingredients, looking for a takeaway, or a place to eat out. DO please note however that most restaurants in Presteigne close Monday to Wednesday. You'll find top quality and varied produce at The Salty Dog greengrocers/fishmongers, at the local butchers shop and Deli-Tinto. Presteigne Farmers Market is held on the first Saturday of each month. Spar and Premier Stores offer a good range of groceries and both open daily, early morning to late evening."
+takeawayHeading: "Takeaway"
+takeawayDescription: "Fancy a takeaway, then back to The Shack to dine under the stars? There's perfect pizza from Daphne's, generous portions of fish and chips from the Victoria Fish Bar and Chinese fayre from The Cabin."
+eatingOutHeading: "Eating Out in Town"
+townVenues:
+  - name: "Daphne's"
+    description: "Charred thin-crust pizzas, home-made cider and perry, weekend buzz."
+  - name: "Crocketts"
+    description: "Creative tapas-style dishes from around the world plus special one-off menus."
+  - name: "Wild Thyme"
+    description: "Italian cucina in a rustic-modern setting."
+coffeeTeaHeading: "Coffee & Tea"
+coffeeTeaDescription: "For a simple tea or coffee there are several choices on The High Street; all are good though The Workhouse Gallery and Wild Thyme are our favourites."
+justADrinkHeading: "Just a Drink"
+justADrinkDescription: "There are three pubs in Presteigne (we particularly like the Dukes Arms - note, cash only) plus the black-and-white landmark 400-year old Radnorshire Arms Hotel with an attractive beer garden (carvery Sunday lunch and Wednesday early evening)."
+eatingOutFurtherHeading: "Eating Out Further Afield"
+furtherVenues:
+  - name: "The Stagg Inn, Titley"
+    distance: "10 mins"
+    description: "Highly recommended."
+  - name: "The Harp Inn, Old Radnor"
+    distance: "15 mins"
+    description: "Guests say great for Sunday lunch, food variable at other times."
+  - name: "The Riverside Inn, Aymestry"
+    distance: "20 mins"
+    description: "Highly recommenn at Leintwardine. Beautiful riverside setting, food OK (try also The Sun at Leintwardine, a two-minute walk away, for a drink)."
+  - name: "The Cider Barn, near Pembridge"
+    distance: "20 mins"
+    description: "Highly recommended."
+ctaHeading: "Ready to explore?"
+ctaDescription: "Book your stay at Millie The Hut and discover the Welsh Marches for yourself."

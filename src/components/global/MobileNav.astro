@@ -26,7 +26,7 @@ const site = siteSettingsCollection[0]?.data;
     <a href={site?.bookingUrl ?? "/book/"} class="mobile-nav__cta">Book Now &rarr;</a>
     {site?.phone && (
       <a href={`tel:${site.phone.replace(/\s+/g, "")}`} class="mobile-nav__phone">
-        {site.phone}
+        {site.phone} (please text first)
       </a>
     )}
   </div>
