@@ -1,23 +1,19 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import Container from "../components/ui/Container.astro";
-import { getCollection } from "astro:content";
-
-const pageCollection = await getCollection("pageLocation");
-const page = pageCollection[0]?.data;
 ---
 
 <PageLayout
-  title={page?.metaTitle ?? "Local Area | Millie The Hut"}
-  description={page?.metaDescription}
+  title="Local Area | Millie The Hut"
+  description="Millie The Hut is nestled on the England/Wales border near Presteigne, Powys. Discover the Welsh Marches — walks, towns, and countryside in every direction."
 >
   <!-- Inner Hero -->
   <section class="inner-hero">
     <Container>
       <div class="inner-hero__grid">
         <div class="inner-hero__text">
-          <h1 class="inner-hero__title">{page?.pageTitle ?? "Local Area"}</h1>
-          <p class="inner-hero__subtitle">{page?.pageDescription ?? "Millie The Hut sits quietly on the England/Wales border, amidst wild countryside, cute towns, and open skies."}</p>
+          <h1 class="inner-hero__title">Local Area</h1>
+          <p class="inner-hero__subtitle">Millie The Hut sits quietly on the England/Wales border, amidst wild countryside, cute towns, and open skies.</p>
           <p class="inner-hero__jump">Jump to:</p>
           <nav class="inner-hero__links" aria-label="Page sections">
             <a href="#the-area" class="inner-hero__link">The Area</a>
@@ -40,14 +36,16 @@ const page = pageCollection[0]?.data;
        ═══════════════════════════════════════════════════════════════════════════ -->
   <section class="content-section" id="the-area" aria-labelledby="the-area-heading">
     <Container>
-      <h2 class="content-section__heading" id="the-area-heading">{page?.theAreaHeading ?? "The Area"}</h2>
+      <h2 class="content-section__heading" id="the-area-heading">The Area</h2>
 
       <!-- Local Attractions -->
       <div class="subsection" data-reveal="slide-up">
-        <h3 class="subsection__heading">{page?.localAttractionsHeading ?? "Local Attractions"}</h3>
+        <h3 class="subsection__heading">Local Attractions</h3>
         <div class="subsection__body">
           <ul class="attraction-list">
-            {(page?.localAttractions ?? []).map((item) => <li>{item}</li>)}
+            <li>Presteigne's award-winning gas-lit Judge's Lodgings is a large atmospheric elegant upstairs-downstairs house, complete with court room and cells, that will show you what life was like locally 150 years ago (open end March–end Oct). Excellent gift shop.</li>
+            <li>Nearby Kington hosts Hergest Croft Gardens, famed for its rare plants shrubs and huge 'champion trees'. Close by is the charming Small Breeds Farm Park and Owl Centre and also Westonbury Mill Water Gardens.</li>
+            <li>The Black-and-White Trail links a series of picture-postcard Herefordshire village. Particularly recommended is an easy round trip from Presteigne taking in Pembridge, Weobley ('webley'), and Eardisland ('ur-disland'), all of which boast 15th to 17th century half-timbered houses, ancient churches, fine old pubs and other recommended places to eat and drink.</li>
           </ul>
         </div>
       </div>
@@ -59,10 +57,14 @@ const page = pageCollection[0]?.data;
 
       <!-- Slightly Further Afield -->
       <div class="subsection" data-reveal="slide-up">
-        <h3 class="subsection__heading">{page?.furtherAfieldHeading ?? "Slightly Further Afield"}</h3>
+        <h3 class="subsection__heading">Slightly Further Afield</h3>
         <div class="subsection__body">
           <ul class="attraction-list">
-            {(page?.furtherAfield ?? []).map((item) => <li>{item}</li>)}
+            <li>Hereford boasts a beautiful cathedral, home to the acclaimed Mappa Mundi, and has most of the facilities you'd expect in a small city.</li>
+            <li>The world-famous book town of Hay-on-Wye attracts visitors from all over the world in late May at Festival time, but is well worth a visit at any time of year for its artisan shops, and places to eat and drink, whether or not you're a bibliophile. (Many shops close Mon–Tues).</li>
+            <li>Ludlow, famous for its food, is a gem of Georgian architecture with a romantic ruined castle. The town stages almost daily markets, hosts several festivals a year and has some good vintage and antique shopping.</li>
+            <li>Leominster ('lemster') is also chock-a-block with good value vintage and antique shops. Close by are two fine National Trust properties, Berrington Hall and Croft Castle.</li>
+            <li>Due west, into Wales and the Cambrian Mountains, lie the stupendous Elan reservoirs. These marvels of Victorian engineering were built to supply drinking water to Birmingham and still do so today. Elan Valley features some easily accessible panoramic walks and is a haven for wildlife with The Red Kite Feeding Station at Rhayader offering spectacular close-ups of hundreds of these giant birds at a time.</li>
           </ul>
         </div>
       </div>
@@ -74,18 +76,22 @@ const page = pageCollection[0]?.data;
 
       <!-- Local Wildlife -->
       <div class="subsection" data-reveal="slide-up">
-        <h3 class="subsection__heading">{page?.localWildlifeHeading ?? "Local Wildlife"}</h3>
+        <h3 class="subsection__heading">Local Wildlife</h3>
         <div class="subsection__prose">
-          {(page?.localWildlifeParagraphs ?? []).map((p) => <p>{p}</p>)}
+          <p>The Marches are full of wildlife, and our fields, trees and sky above are home to woodpeckers, red kites, buzzards, pheasants, grey herons, swifts, rabbits, squirrels and foxes. Depending on the time of year you'll hear majestic red kites and buzzards 'mewing' high overhead, the staccato tones of a male pheasant staking out his patch (cock fights are common!), plus the eerie towhit-towhoo of tawny owls.</p>
         </div>
       </div>
 
       <!-- What's On -->
       <div class="subsection" data-reveal="slide-up">
-        <h3 class="subsection__heading">{page?.whatsOnHeading ?? "What's On"}</h3>
+        <h3 class="subsection__heading">What's On</h3>
         <div class="subsection__body">
           <ul class="attraction-list">
-            {(page?.whatsOnItems ?? []).map((item) => <li>{item}</li>)}
+            <li>The internationally acclaimed Presteigne Festival of modern classical music is staged annually in several venues around town over six days spanning the August Bank Holiday. The elegant Italianate Assembly Rooms is a main venue and year-round stages live music of all kinds. It is also home to a cinema club.</li>
+            <li>In July, Sheep Music Festival, featuring mostly local bands, is usually staged on the idyllic pastures of Wents Meadows, a five-minute stroll from town.</li>
+            <li>Contemporary art lovers should check out the Sidney Nolan Trust arts centre (a 5-minute walk along the railway line from Millie), which stages regular exhibitions and live events.</li>
+            <li>In and around Presteigne, there's something going on all year round, from unusual (even arcane!) entertaining local events such as Wassailing in January (cider celebrations) and Hill Climbs in October (veteran cars straining every cylinder, slipping, sliding and splattering mud, ascending steep grassy inclines) to grand fairs and markets of all kind in Ludlow, and the internationally famous Hay Festival in May.</li>
+            <li>Our neighbouring market town, Kington stages vibrant food festivals in June and December with up to 100 stalls showcasing the best of the Marches food producers.</li>
           </ul>
         </div>
       </div>
@@ -101,13 +107,15 @@ const page = pageCollection[0]?.data;
        ═══════════════════════════════════════════════════════════════════════════ -->
   <section class="content-section content-section--alt" id="activities" aria-labelledby="activities-heading">
     <Container>
-      <h2 class="content-section__heading" id="activities-heading">{page?.activitiesHeading ?? "Activities"}</h2>
+      <h2 class="content-section__heading" id="activities-heading">Activities</h2>
 
       <!-- Walking (featured) -->
       <div class="subsection" data-reveal="slide-up">
-        <h3 class="subsection__heading">{page?.walkingHeading ?? "Walking"}</h3>
+        <h3 class="subsection__heading">Walking</h3>
         <div class="subsection__prose">
-          {(page?.walkingParagraphs ?? []).map((p) => <p>{p}</p>)}
+          <p>The Marches is a wonderful place for walking and the old railway line footpath leading directly from Millie's field, makes it easy to stride straight out without the need for a car.</p>
+          <p>Offa's Dyke, a long-distance waymarked footpath which traditionally marks the border between England and Wales, runs close by Presteigne and is easily accessed via the neighbouring small towns of Knighton, where you'll find the Offa's Dyke Information Centre, and Kington where several long-distance paths converge to make this a regional walking hub, hosting walking festivals in April and September.</p>
+          <p>A favourite easy, if quite steep, walk ascends from Hergest ('har-guest') Croft Gardens to Hergest Ridge — made famous by musician Mike Oldfield — offering a wonderful 360-degree panorama taking in several neighbouring counties. Once up here, past the landmark clump of monkey puzzle trees, you can continue on to the village of Gladestry where you'll find the welcoming Royal Oak with a lovely garden for a pub lunch (check for opening times before you set off).</p>
         </div>
       </div>
 
@@ -118,12 +126,22 @@ const page = pageCollection[0]?.data;
 
       <!-- Activity cards -->
       <div class="activity-grid" data-reveal-stagger>
-        {(page?.activityCards ?? []).map((card) => (
-          <div class="activity-card">
-            <h3 class="activity-card__title">{card.title}</h3>
-            <p class="activity-card__desc">{card.description}</p>
-          </div>
-        ))}
+        <div class="activity-card">
+          <h3 class="activity-card__title">Wild Swimming</h3>
+          <p class="activity-card__desc">You're very welcome to 'go wild' in the Hindwell, which borders Millie's field. In summer it's quite small and shallow but will certainly cool you off in a heatwave.</p>
+        </div>
+        <div class="activity-card">
+          <h3 class="activity-card__title">Golf</h3>
+          <p class="activity-card__desc">Kington, a 10-minute drive away, boasts England's highest, and surely one of its most panoramic golf clubs, set within wild National Trust land. It's well worth a walk round here, with or without clubs (open to non-members).</p>
+        </div>
+        <div class="activity-card">
+          <h3 class="activity-card__title">Canoeing</h3>
+          <p class="activity-card__desc">The River Wye is a picturesque place to either learn to canoe or practice your skills. The nearest centre is at Hay-on-Wye.</p>
+        </div>
+        <div class="activity-card">
+          <h3 class="activity-card__title">Stargazing</h3>
+          <p class="activity-card__desc">With so little light pollution, stargazing from your hut (clear weather permitting) may well be a highlight of your visit. If you want to learn more, on the edge of Presteigne is The Spaceguard Centre, an observatory that monitors asteroids and comets near the earth, and is open to the public.</p>
+        </div>
       </div>
     </Container>
   </section>
@@ -133,34 +151,40 @@ const page = pageCollection[0]?.data;
        ═══════════════════════════════════════════════════════════════════════════ -->
   <section class="content-section" id="food-drink" aria-labelledby="food-drink-heading">
     <Container>
-      <h2 class="content-section__heading" id="food-drink-heading">{page?.foodDrinkHeading ?? "Food & Drink"}</h2>
+      <h2 class="content-section__heading" id="food-drink-heading">Food &amp; Drink</h2>
 
       <!-- Overview -->
       <div class="subsection" data-reveal="slide-up">
         <div class="subsection__prose">
-          <p>{page?.foodDrinkIntro}</p>
+          <p>There's plenty on offer on Presteigne High Street to satisfy most tastes, whether you're shopping for ingredients, looking for a takeaway, or a place to eat out. DO please note however that most restaurants in Presteigne close Monday to Wednesday. You'll find top quality and varied produce at The Salty Dog greengrocers/fishmongers, at the local butchers shop and Deli-Tinto. Presteigne Farmers Market is held on the first Saturday of each month. Spar and Premier Stores offer a good range of groceries and both open daily, early morning to late evening.</p>
         </div>
       </div>
 
       <!-- Takeaway -->
       <div class="subsection" data-reveal="slide-up">
-        <h3 class="subsection__heading">{page?.takeawayHeading ?? "Takeaway"}</h3>
+        <h3 class="subsection__heading">Takeaway</h3>
         <div class="subsection__prose">
-          <p>{page?.takeawayDescription}</p>
+          <p>Fancy a takeaway, then back to The Shack to dine under the stars? There's perfect pizza from Daphne's, generous portions of fish and chips from the Victoria Fish Bar and Chinese fayre from The Cabin.</p>
         </div>
       </div>
 
       <!-- Eating out in Town -->
       <div class="portrait-section portrait-section--reverse" data-reveal="fade">
         <div class="subsection subsection--no-margin">
-          <h3 class="subsection__heading">{page?.eatingOutHeading ?? "Eating Out in Town"}</h3>
+          <h3 class="subsection__heading">Eating Out in Town</h3>
           <div class="venue-grid" data-reveal-stagger>
-            {(page?.townVenues ?? []).map((v) => (
-              <div class="venue-card">
-                <h4 class="venue-card__name">{v.name}</h4>
-                <p class="venue-card__desc">{v.description}</p>
-              </div>
-            ))}
+            <div class="venue-card">
+              <h4 class="venue-card__name">Daphne's</h4>
+              <p class="venue-card__desc">Charred thin-crust pizzas, home-made cider and perry, weekend buzz.</p>
+            </div>
+            <div class="venue-card">
+              <h4 class="venue-card__name">Crocketts</h4>
+              <p class="venue-card__desc">Creative tapas-style dishes from around the world plus special one-off menus.</p>
+            </div>
+            <div class="venue-card">
+              <h4 class="venue-card__name">Wild Thyme</h4>
+              <p class="venue-card__desc">Italian cucina in a rustic-modern setting.</p>
+            </div>
           </div>
         </div>
         <figure class="portrait-section__img">
@@ -171,31 +195,44 @@ const page = pageCollection[0]?.data;
 
       <!-- Coffee & Tea -->
       <div class="subsection" data-reveal="slide-up">
-        <h3 class="subsection__heading">{page?.coffeeTeaHeading ?? "Coffee & Tea"}</h3>
+        <h3 class="subsection__heading">Coffee &amp; Tea</h3>
         <div class="subsection__prose">
-          <p>{page?.coffeeTeaDescription}</p>
+          <p>For a simple tea or coffee there are several choices on The High Street; all are good though The Workhouse Gallery and Wild Thyme are our favourites.</p>
         </div>
       </div>
 
       <!-- Just a Drink -->
       <div class="subsection" data-reveal="slide-up">
-        <h3 class="subsection__heading">{page?.justADrinkHeading ?? "Just a Drink"}</h3>
+        <h3 class="subsection__heading">Just a Drink</h3>
         <div class="subsection__prose">
-          <p>{page?.justADrinkDescription}</p>
+          <p>There are three pubs in Presteigne (we particularly like the Dukes Arms — note, cash only) plus the black-and-white landmark 400-year old Radnorshire Arms Hotel with an attractive beer garden (carvery Sunday lunch and Wednesday early evening).</p>
         </div>
       </div>
 
       <!-- Eating out further afield -->
       <div class="subsection" data-reveal="slide-up">
-        <h3 class="subsection__heading">{page?.eatingOutFurtherHeading ?? "Eating Out Further Afield"}</h3>
+        <h3 class="subsection__heading">Eating Out Further Afield</h3>
         <div class="venue-grid" data-reveal-stagger>
-          {(page?.furtherVenues ?? []).map((v) => (
-            <div class="venue-card">
-              <h4 class="venue-card__name">{v.name}</h4>
-              {v.distance && <span class="venue-card__distance">{v.distance}</span>}
-              <p class="venue-card__desc">{v.description}</p>
-            </div>
-          ))}
+          <div class="venue-card">
+            <h4 class="venue-card__name">The Stagg Inn, Titley</h4>
+            <span class="venue-card__distance">10 mins</span>
+            <p class="venue-card__desc">Highly recommended.</p>
+          </div>
+          <div class="venue-card">
+            <h4 class="venue-card__name">The Harp Inn, Old Radnor</h4>
+            <span class="venue-card__distance">15 mins</span>
+            <p class="venue-card__desc">Guests say great for Sunday lunch, food variable at other times.</p>
+          </div>
+          <div class="venue-card">
+            <h4 class="venue-card__name">The Riverside Inn, Aymestry</h4>
+            <span class="venue-card__distance">20 mins</span>
+            <p class="venue-card__desc">Highly recommended. Beautiful riverside setting, food OK (try also The Sun at Leintwardine, a two-minute walk away, for a drink).</p>
+          </div>
+          <div class="venue-card">
+            <h4 class="venue-card__name">The Cider Barn, near Pembridge</h4>
+            <span class="venue-card__distance">20 mins</span>
+            <p class="venue-card__desc">Highly recommended.</p>
+          </div>
         </div>
       </div>
     </Container>
@@ -205,8 +242,8 @@ const page = pageCollection[0]?.data;
   <section class="cta-banner">
     <Container>
       <div class="cta-banner__inner" data-reveal="slide-up">
-        <h2 class="cta-banner__title">{page?.ctaHeading ?? "Ready to explore?"}</h2>
-        <p class="cta-banner__desc">{page?.ctaDescription ?? "Book your stay at Millie The Hut and discover the Welsh Marches for yourself."}</p>
+        <h2 class="cta-banner__title">Ready to explore?</h2>
+        <p class="cta-banner__desc">Book your stay at Millie The Hut and discover the Welsh Marches for yourself.</p>
         <a href="/book/" class="cta-banner__btn">Book Your Stay &rarr;</a>
       </div>
     </Container>

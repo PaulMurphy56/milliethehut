@@ -1,24 +1,22 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import Container from "../components/ui/Container.astro";
-import { getCollection } from "astro:content";
-
-const pageCollection = await getCollection("pageYourHosts");
-const page = pageCollection[0]?.data;
 ---
 
 <PageLayout
-  title={page?.metaTitle ?? "Your Hosts | Millie The Hut"}
-  description={page?.metaDescription}
+  title="Your Hosts | Millie The Hut"
+  description="Meet the hosts behind Millie The Hut — learn the story of how a shepherd's hut on the England/Wales border became a much-loved countryside retreat."
 >
   <!-- Inner Hero -->
   <section class="inner-hero">
     <Container>
       <div class="inner-hero__grid">
         <div class="inner-hero__text">
-          <h1 class="inner-hero__title">{page?.pageTitle ?? "Meet Your Hosts"}</h1>
+          <h1 class="inner-hero__title">Meet Your Hosts</h1>
           <div class="inner-hero__bio" data-reveal="slide-up">
-            {(page?.bioParagraphs ?? []).map((p) => <p>{p}</p>)}
+            <p>Paul & Glenys live 100 yards away from Millie, and are normally on hand at any time, day or night, for help and advice.</p>
+            <p>Paul is an award-winning travel writer and has experienced all levels of accommodations and hospitality around the world, from sipping mint tea by the camp fire outside a primitive straw hut in the Sahara to haute cuisine and Presidential Suites in world capitals. His aim now is to provide an experience that he as a professional would enjoy and recommend. Paul can offer guests detailed advice on many places to visit in the area and his latest publication, Destination HAY, features the nearby world-famous book town.</p>
+            <p>Glenys has a passion for arts and crafts in the widest sense, reflected in the hut interior with a mix of repurposed, recycled and upcycled furnishings.</p>
           </div>
         </div>
         <div class="inner-hero__image">
@@ -35,7 +33,7 @@ const page = pageCollection[0]?.data;
   <section class="cta-banner">
     <Container>
       <div class="cta-banner__inner" data-reveal="slide-up">
-        <h2 class="cta-banner__title">{page?.ctaHeading ?? "Find out why our guests love Millie"}</h2>
+        <h2 class="cta-banner__title">We'd love to host you</h2>
         <a href="/book/" class="cta-banner__btn">Book Your Stay &rarr;</a>
       </div>
     </Container>
@@ -54,16 +52,6 @@ const page = pageCollection[0]?.data;
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
     align-items: center;
-  }
-
-  .inner-hero__eyebrow {
-    font-family: var(--font-heading);
-    font-size: 13px;
-    font-weight: var(--weight-bold);
-    letter-spacing: 0.15em;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    margin-bottom: var(--space-md);
   }
 
   .inner-hero__title {
