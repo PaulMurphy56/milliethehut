@@ -91,8 +91,8 @@ const sortedGallery = allGallery.sort((a, b) => a.data.order - b.data.order);
   <section class="cta-banner">
     <Container>
       <div class="cta-banner__inner" data-reveal="slide-up">
-        <h2 class="cta-banner__title">Like what you see?</h2>
-        <p class="cta-banner__desc">Book your stay at Millie The Hut and experience it for yourself.</p>
+        <h2 class="cta-banner__title">{page?.ctaHeading ?? "Like what you see?"}</h2>
+        <p class="cta-banner__desc">{page?.ctaDescription ?? "Book your stay at Millie The Hut and experience it for yourself."}</p>
         <a href="/book/" class="cta-banner__btn">Book Your Stay &rarr;</a>
       </div>
     </Container>

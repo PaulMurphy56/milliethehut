@@ -4,8 +4,9 @@
 export const siteConfig = {
   url: "https://milliethehut.co.uk",
   nav: [
-    { label: "The Hut", href: "/the-hut/" },
-    { label: "Location", href: "/location/" },
-    { label: "Book", href: "/book/" },
+    { label: "Gallery", href: "/gallery/" },
+    { label: "Local Area", href: "/location/" },
+    { label: "Your Hosts", href: "/your-hosts/" },
+    { label: "Contact", href: "/contact/" },
   ],
 } as const;

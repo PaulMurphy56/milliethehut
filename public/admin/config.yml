@@ -2,6 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
+publish_mode: editorial_workflow
+
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
@@ -41,38 +43,32 @@ collections:
         fields:
           - { label: "Meta Title", name: "metaTitle", widget: "string", required: false }
           - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
-          - { label: "Hero Overlay Text", name: "heroOverlayText", widget: "string", required: false, hint: "Text over the hero image. Use \\n to break the line, e.g. 'Escape to the\\nWelsh Marches'." }
+          - { label: "Hero Overlay Text", name: "heroOverlayText", widget: "string", required: false, hint: "Text over the hero image. Use \\n to break the line." }
           - { label: "Intro Heading", name: "introHeading", widget: "string", required: false }
           - { label: "Intro Paragraph", name: "introParagraph", widget: "text", required: false }
-
-  # ─── Page — The Hut ──────────────────────────────────────────────────────────
-  - name: "page-the-hut"
-    label: "Page — The Hut"
-    files:
-      - label: "The Hut Page Content"
-        name: "the-hut"
-        file: "src/data/pages/the-hut.yaml"
-        fields:
-          - { label: "Meta Title", name: "metaTitle", widget: "string", required: false }
-          - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
-          - { label: "Page Eyebrow", name: "pageEyebrow", widget: "string", required: false }
-          - { label: "Page Title (H1)", name: "pageTitle", widget: "string", required: false }
-          - { label: "Page Intro Text", name: "pageDescription", widget: "text", required: false }
-          - { label: "Description Heading", name: "descriptionHeading", widget: "string", required: false }
-          - label: "At a Glance"
-            name: "atAGlance"
+          - { label: "Gallery Section Heading", name: "galleryPreviewHeading", widget: "string", required: false }
+          - { label: "Facilities Section Heading", name: "facilitiesHeading", widget: "string", required: false }
+          - label: "Facilities List"
+            name: "facilities"
             widget: "list"
             required: false
-            hint: "Key facts shown in the sidebar, e.g. 'Sleeps 2 guests'."
+            hint: "Items shown in the facilities section."
             field: { label: "Item", name: "item", widget: "string" }
-          - label: "Nearby"
-            name: "nearby"
+          - { label: "Essentials Section Heading", name: "essentialsHeading", widget: "string", required: false }
+          - label: "Essentials"
+            name: "essentials"
             widget: "list"
             required: false
-            hint: "Nearby places shown in the sidebar."
-            field: { label: "Item", name: "item", widget: "string" }
-          - { label: "CTA Heading", name: "ctaHeading", widget: "string", required: false }
-          - { label: "CTA Description", name: "ctaDescription", widget: "text", required: false }
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Sub-text", name: "sub", widget: "string" }
+          - { label: "Testimonials Section Heading", name: "testimonialsHeading", widget: "string", required: false }
+          - { label: "Location Section Heading", name: "locationHeading", widget: "string", required: false }
+          - { label: "What3Words Heading", name: "w3wHeading", widget: "string", required: false }
+          - { label: "What3Words Address", name: "w3wAddress", widget: "string", required: false }
+          - { label: "What3Words Description", name: "w3wDescription", widget: "text", required: false }
+          - { label: "Display Address", name: "displayAddress", widget: "text", required: false, hint: "Use line breaks to separate address lines." }
+          - { label: "FAQ Section Heading", name: "faqHeading", widget: "string", required: false }
 
   # ─── Page — Local Area ────────────────────────────────────────────────────────
   - name: "page-location"
@@ -86,6 +82,72 @@ collections:
           - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
           - { label: "Page Title (H1)", name: "pageTitle", widget: "string", required: false }
           - { label: "Page Intro Text", name: "pageDescription", widget: "text", required: false }
+          - { label: "The Area Heading", name: "theAreaHeading", widget: "string", required: false }
+          - { label: "Local Attractions Heading", name: "localAttractionsHeading", widget: "string", required: false }
+          - label: "Local Attractions"
+            name: "localAttractions"
+            widget: "list"
+            required: false
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Further Afield Heading", name: "furtherAfieldHeading", widget: "string", required: false }
+          - label: "Further Afield"
+            name: "furtherAfield"
+            widget: "list"
+            required: false
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Local Wildlife Heading", name: "localWildlifeHeading", widget: "string", required: false }
+          - label: "Local Wildlife Paragraphs"
+            name: "localWildlifeParagraphs"
+            widget: "list"
+            required: false
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "What's On Heading", name: "whatsOnHeading", widget: "string", required: false }
+          - label: "What's On Items"
+            name: "whatsOnItems"
+            widget: "list"
+            required: false
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Activities Heading", name: "activitiesHeading", widget: "string", required: false }
+          - { label: "Walking Heading", name: "walkingHeading", widget: "string", required: false }
+          - label: "Walking Paragraphs"
+            name: "walkingParagraphs"
+            widget: "list"
+            required: false
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - label: "Activity Cards"
+            name: "activityCards"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - { label: "Food & Drink Heading", name: "foodDrinkHeading", widget: "string", required: false }
+          - { label: "Food & Drink Intro", name: "foodDrinkIntro", widget: "text", required: false }
+          - { label: "Takeaway Heading", name: "takeawayHeading", widget: "string", required: false }
+          - { label: "Takeaway Description", name: "takeawayDescription", widget: "text", required: false }
+          - { label: "Eating Out Heading", name: "eatingOutHeading", widget: "string", required: false }
+          - label: "Town Venues"
+            name: "townVenues"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - { label: "Coffee & Tea Heading", name: "coffeeTeaHeading", widget: "string", required: false }
+          - { label: "Coffee & Tea Description", name: "coffeeTeaDescription", widget: "text", required: false }
+          - { label: "Just a Drink Heading", name: "justADrinkHeading", widget: "string", required: false }
+          - { label: "Just a Drink Description", name: "justADrinkDescription", widget: "text", required: false }
+          - { label: "Eating Out Further Afield Heading", name: "eatingOutFurtherHeading", widget: "string", required: false }
+          - label: "Further Afield Venues"
+            name: "furtherVenues"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Distance", name: "distance", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - { label: "CTA Heading", name: "ctaHeading", widget: "string", required: false }
+          - { label: "CTA Description", name: "ctaDescription", widget: "text", required: false }
 
   # ─── Page — Gallery ──────────────────────────────────────────────────────────
   - name: "page-gallery"
@@ -99,6 +161,8 @@ collections:
           - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
           - { label: "Page Title (H1)", name: "pageTitle", widget: "string", required: false }
           - { label: "Page Intro Text", name: "pageDescription", widget: "text", required: false }
+          - { label: "CTA Heading", name: "ctaHeading", widget: "string", required: false }
+          - { label: "CTA Description", name: "ctaDescription", widget: "text", required: false }
 
   # ─── Page — Your Hosts ───────────────────────────────────────────────────────
   - name: "page-your-hosts"
@@ -111,6 +175,12 @@ collections:
           - { label: "Meta Title", name: "metaTitle", widget: "string", required: false }
           - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
           - { label: "Page Title (H1)", name: "pageTitle", widget: "string", required: false }
+          - label: "Bio Paragraphs"
+            name: "bioParagraphs"
+            widget: "list"
+            required: false
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "CTA Heading", name: "ctaHeading", widget: "string", required: false }
 
   # ─── Page — Book ─────────────────────────────────────────────────────────────
   - name: "page-book"
@@ -124,6 +194,22 @@ collections:
           - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
           - { label: "Page Title (H1)", name: "pageTitle", widget: "string", required: false }
           - { label: "Page Intro Text", name: "pageDescription", widget: "text", required: false }
+          - { label: "Rate Card Heading", name: "rateCardHeading", widget: "string", required: false }
+          - { label: "Rate Card Sub-heading", name: "rateCardSub", widget: "string", required: false, hint: "e.g. 'per night'" }
+          - label: "Rates"
+            name: "rates"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Season Name", name: "season", widget: "string" }
+              - { label: "Dates", name: "dates", widget: "string" }
+              - { label: "Weekday Price", name: "weekday", widget: "string" }
+              - { label: "Weekend Price", name: "weekend", widget: "string" }
+          - label: "Rate Notes"
+            name: "rateNotes"
+            widget: "list"
+            required: false
+            field: { label: "Note", name: "note", widget: "text" }
 
   # ─── Page — Contact ──────────────────────────────────────────────────────────
   - name: "page-contact"
@@ -137,6 +223,13 @@ collections:
           - { label: "Meta Description", name: "metaDescription", widget: "text", required: false }
           - { label: "Page Title (H1)", name: "pageTitle", widget: "string", required: false }
           - { label: "Page Intro Text", name: "pageDescription", widget: "text", required: false }
+          - { label: "Contact Card Heading", name: "contactCardHeading", widget: "string", required: false }
+          - { label: "Find Us Heading", name: "findUsHeading", widget: "string", required: false }
+          - { label: "Display Address", name: "displayAddress", widget: "text", required: false, hint: "Use line breaks to separate address lines." }
+          - { label: "What3Words Address", name: "w3wAddress", widget: "string", required: false }
+          - { label: "Follow Heading", name: "followHeading", widget: "string", required: false }
+          - { label: "Booking Card Heading", name: "bookingCardHeading", widget: "string", required: false }
+          - { label: "Booking Card Text", name: "bookingCardText", widget: "text", required: false }
 
   # ─── Gallery Images ───────────────────────────────────────────────────────────
   - name: "gallery"
@@ -150,7 +243,7 @@ collections:
       - { label: "Image", name: "image", widget: "image" }
       - { label: "Display Order", name: "order", widget: "number", value_type: "int" }
 
-  # ─── Guest Reviews ────────────────────────────────────────────────────────────
+  # ─── Guest Reviews ──────────────────────────────────────────────────────────
   - name: "testimonials"
     label: "Guest Reviews"
     folder: "src/data/testimonials"
@@ -162,7 +255,7 @@ collections:
       - { label: "Rating (1–5)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 5 }
       - { label: "Review", name: "body", widget: "markdown" }
 
-  # ─── Amenities ────────────────────────────────────────────────────────────────
+  # ─── Amenities ──────────────────────────────────────────────────────────────
   - name: "amenities"
     label: "Amenities (The Hut page)"
     folder: "src/data/amenities"
@@ -174,7 +267,7 @@ collections:
       - { label: "Icon Name", name: "icon", widget: "string", hint: "e.g. flame, bed, shower" }
       - { label: "Display Order", name: "order", widget: "number", value_type: "int" }
 
-  # ─── FAQs ─────────────────────────────────────────────────────────────────────
+  # ─── FAQs ───────────────────────────────────────────────────────────────────
   - name: "faqs"
     label: "FAQs (Homepage)"
     folder: "src/data/faqs"

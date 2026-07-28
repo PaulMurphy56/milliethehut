@@ -69,6 +69,15 @@ import Container from "../components/ui/Container.astro";
         </div>
       </div>
 
+      <!-- Visit Herefordshire local listings -->
+      <div class="subsection" data-reveal="slide-up">
+        <h2 class="subsection__heading">Other Attractions in Herefordshire</h2>
+        <div class="vh-embed-wrap">
+          <script src="https://embed.visitherefordshire.co.uk/loader.js" async is:inline></script>
+          <vh-embed type="local-listings" ref="019fa482-dcc3-73c8-987e-4ef3f07b7f8b"></vh-embed>
+        </div>
+      </div>
+
       <figure class="section-img" data-reveal="fade">
         <img src="/images/local-area/elan.jpeg" alt="Elan Valley Reservoir" loading="lazy" decoding="async" />
         <figcaption class="section-img__caption">Elan Valley Reservoir</figcaption>
@@ -180,10 +189,6 @@ import Container from "../components/ui/Container.astro";
             <div class="venue-card">
               <h4 class="venue-card__name">Crocketts</h4>
               <p class="venue-card__desc">Creative tapas-style dishes from around the world plus special one-off menus.</p>
-            </div>
-            <div class="venue-card">
-              <h4 class="venue-card__name">Wild Thyme</h4>
-              <p class="venue-card__desc">Italian cucina in a rustic-modern setting.</p>
             </div>
           </div>
         </div>
@@ -366,6 +371,17 @@ import Container from "../components/ui/Container.astro";
 
   .subsection:last-child {
     margin-bottom: 0;
+  }
+
+  /* Third-party embed — keep it inside the column on small screens */
+  .vh-embed-wrap {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .vh-embed-wrap :global(img),
+  .vh-embed-wrap :global(iframe) {
+    max-width: 100%;
   }
 
   .subsection__heading {

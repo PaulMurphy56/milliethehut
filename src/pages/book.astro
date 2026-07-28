@@ -73,7 +73,7 @@ const page = pageCollection[0]?.data;
   <!-- Rate Card -->
   <section class="section section--rate-card" aria-labelledby="rates-heading">
     <Container>
-      <h2 class="section__heading" id="rates-heading">Rate Card <span class="section__heading-sub">(per night)</span></h2>
+      <h2 class="section__heading" id="rates-heading">{page?.rateCardHeading ?? "Rate Card"} <span class="section__heading-sub">({page?.rateCardSub ?? "per night"})</span></h2>
 
       <div class="rate-table-wrap" data-reveal="slide-up">
         <table class="rate-table">
@@ -85,46 +85,24 @@ const page = pageCollection[0]?.data;
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="rate-table__season">
-                <strong>Low Season</strong>
-                <span>5 Jan – 29 Mar &amp; 30 Oct – 20 Dec*</span>
-              </td>
-              <td class="rate-table__price">&pound;120</td>
-              <td class="rate-table__price">&pound;145</td>
-            </tr>
-            <tr>
-              <td class="rate-table__season">
-                <strong>Mid Season</strong>
-                <span>30 Mar – 30 Jun &amp; 7 Sept – 29 Oct*</span>
-              </td>
-              <td class="rate-table__price">&pound;130</td>
-              <td class="rate-table__price">&pound;160</td>
-            </tr>
-            <tr>
-              <td class="rate-table__season">
-                <strong>High Season</strong>
-                <span>1 July – 6 Sept*</span>
-              </td>
-              <td class="rate-table__price">&pound;150</td>
-              <td class="rate-table__price">&pound;175</td>
-            </tr>
-            <tr>
-              <td class="rate-table__season">
-                <strong>Peak Season</strong>
-                <span>Val Day, Easter 3–6 Apr, Bank Hol w/ends &amp; 21 Dec 2026 – 3 Jan 2027</span>
-              </td>
-              <td class="rate-table__price">&pound;160**</td>
-              <td class="rate-table__price">&pound;190</td>
-            </tr>
+            {(page?.rates ?? []).map((rate) => (
+              <tr>
+                <td class="rate-table__season">
+                  <strong>{rate.season}</strong>
+                  <span>{rate.dates}</span>
+                </td>
+                <td class="rate-table__price">{rate.weekday}</td>
+                <td class="rate-table__price">{rate.weekend}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
       <div class="rate-notes" data-reveal="fade">
-        <p>*Excl Peak Season Dates inc Bank Hols.</p>
-        <p>** Bank Hol Sundays &pound;180</p>
-        <p>Min stay – 2 nights midweek, 3 nights weekends (except low season, 2 nights). Booking start days Mon, Wed, Fri (may be some flexibility, please enquire).</p>
+        {(page?.rateNotes ?? []).map((note) => (
+          <p>{note}</p>
+        ))}
       </div>
     </Container>
   </section>
